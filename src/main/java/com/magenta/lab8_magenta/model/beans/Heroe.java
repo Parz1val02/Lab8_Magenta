@@ -5,7 +5,7 @@ public class Heroe {
     private int idHeroe;
     private String nombre;
     private int edad;
-    private int puntosExperiencia;
+    private float puntosExperiencia;
     private int nivelInicial;
     private int ataque;
     private Heroe pareja;
@@ -36,11 +36,11 @@ public class Heroe {
         this.edad = edad;
     }
 
-    public int getPuntosExperiencia() {
+    public float getPuntosExperiencia() {
         return puntosExperiencia;
     }
 
-    public void setPuntosExperiencia(int puntosExperiencia) {
+    public void setPuntosExperiencia(float puntosExperiencia) {
         this.puntosExperiencia = puntosExperiencia;
     }
 
