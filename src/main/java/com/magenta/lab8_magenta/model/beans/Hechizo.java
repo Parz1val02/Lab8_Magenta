@@ -9,7 +9,7 @@ public class Hechizo {
     private boolean desbloqueado;
     private Elemento elemento;
     private Hechizo hechizoBase;
-
+    private int BorradoLogico;
 
     public int getIdHechizo() {
         return idHechizo;
@@ -73,5 +73,13 @@ public class Hechizo {
 
     public void setHechizoBase(Hechizo hechizoBase) {
         this.hechizoBase = hechizoBase;
+    }
+
+    public int getBorradoLogico() {
+        return BorradoLogico;
+    }
+
+    public void setBorradoLogico(int borradoLogico) {
+        BorradoLogico = borradoLogico;
     }
 }

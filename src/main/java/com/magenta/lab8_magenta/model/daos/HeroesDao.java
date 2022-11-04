@@ -33,6 +33,7 @@ public class HeroesDao extends BaseDao{
                 heroe.setGenero(genero);
                 claseHeroes.setIdClase(rs.getInt(9));
                 heroe.setClaseHeroes(claseHeroes);
+                heroe.setBorradoLogico(rs.getInt(10));
                 listaHeroes.add(heroe);
 
             }
@@ -53,7 +54,6 @@ public class HeroesDao extends BaseDao{
 
             ResultSet rs = pstm.executeQuery();
             if(rs.next()){
-                heroe = new Heroe();
                 Heroe pareja = new Heroe();
                 Genero genero = new Genero();
                 ClaseHeroes claseHeroes = new ClaseHeroes();
@@ -70,6 +70,7 @@ public class HeroesDao extends BaseDao{
                 heroe.setGenero(genero);
                 claseHeroes.setIdClase(rs.getInt(9));
                 heroe.setClaseHeroes(claseHeroes);
+                heroe.setBorradoLogico(rs.getInt(10));
 
             }
 
@@ -79,5 +80,23 @@ public class HeroesDao extends BaseDao{
         }
         return heroe;
     }
+
+    public boolean ValidarExiste(4){
+        try(Connection conn = getConnection();
+            PreparedStatement pstm = conn.prepareStatement("select * from heroes where idHeroe = ?")){
+            pstm.setInt(1,idPareja);
+            ResultSet rs = pstm.executeQuery();
+            if(rs.next()){
+
+
+
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+
 
 }

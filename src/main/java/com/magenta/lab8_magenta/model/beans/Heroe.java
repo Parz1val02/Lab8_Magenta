@@ -5,16 +5,13 @@ public class Heroe {
     private int idHeroe;
     private String nombre;
     private int edad;
-<<<<<<< HEAD
     private float puntosExperiencia;
-=======
-    private Float puntosExperiencia;
->>>>>>> 0c6156b0e9655892193b5ecba4c58f1cafbc230d
     private int nivelInicial;
     private int ataque;
     private Heroe pareja;
     private Genero genero;
     private ClaseHeroes claseHeroes;
+    private int BorradoLogico;
 
     public int getIdHeroe() {
         return idHeroe;
@@ -87,5 +84,13 @@ public class Heroe {
 
     public void setClaseHeroes(ClaseHeroes claseHeroes) {
         this.claseHeroes = claseHeroes;
+    }
+
+    public int getBorradoLogico() {
+        return BorradoLogico;
+    }
+
+    public void setBorradoLogico(int borradoLogico) {
+        BorradoLogico = borradoLogico;
     }
 }

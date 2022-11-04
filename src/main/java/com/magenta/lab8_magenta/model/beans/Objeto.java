@@ -6,6 +6,7 @@ public class Objeto {
     private String nombreObjeto;
     private String efecto;
     private String peso;
+    private int BorradoLogico;
 
     public int getIdObjeto() {
         return idObjeto;
@@ -37,5 +38,13 @@ public class Objeto {
 
     public void setPeso(String peso) {
         this.peso = peso;
+    }
+
+    public int getBorradoLogico() {
+        return BorradoLogico;
+    }
+
+    public void setBorradoLogico(int borradoLogico) {
+        BorradoLogico = borradoLogico;
     }
 }

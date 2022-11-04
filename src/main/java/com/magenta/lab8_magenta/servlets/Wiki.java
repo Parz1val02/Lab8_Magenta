@@ -48,63 +48,6 @@ public class Wiki extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action") == null ? "Principal" : request.getParameter("action");
 
-        HeroesDao hDao = new HeroesDao();
 
-        switch (action) {
-            case "guardar":
-                Heroe heroe = new Heroe();
-                if(request.getParameter("nombre").length()>10){
-                    heroe.setNombre(request.getParameter("nombre"));
-                }else{
-
-                }
-                try {
-                    if(Integer.parseInt(request.getParameter("edad"))>8 & Integer.parseInt(request.getParameter("edad"))<999){
-                        heroe.setEdad(Integer.parseInt(request.getParameter("edad")));
-                    }else{
-
-                    }
-                }catch(NumberFormatException e){
-
-                }
-                Genero genero = new Genero();
-                switch(request.getParameter("genero")){
-                    case "Masculino":
-                        genero.setIdGenero(1);
-                        genero.setInicial("M");
-                        heroe.setGenero(genero);
-                        break;
-                    case "Femenino":
-                        genero.setIdGenero(2);
-                        genero.setInicial("F");
-                        heroe.setGenero(genero);
-                        break;
-                    case "Otro":
-                        genero.setIdGenero(3);
-                        genero.setInicial("O");
-                        heroe.setGenero(genero);
-                        break;
-                    default:
-
-                }
-                //Validar que la clase sea
-                try{
-                    heroe.setNivelInicial(Integer.parseInt(request.getParameter("nivelInicial")));
-
-                }catch(NumberFormatException e){
-
-                }
-                try{
-                    heroe.setAtaque(Integer.parseInt(request.getParameter("ataque")));
-                }catch(NumberFormatException e){
-
-                }
-
-
-
-                response.sendRedirect("EmployeeServlet");
-                break;
-
-        }
     }
 }

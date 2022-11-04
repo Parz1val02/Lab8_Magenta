@@ -9,7 +9,7 @@ public class Enemigo {
     private Genero genero;
     private Objeto objeto;
     private ClaseEnemigo claseEnemigo;
-
+    private int BorradoLogico;
 
     public int getIdEnemigo() {
         return idEnemigo;
@@ -73,5 +73,13 @@ public class Enemigo {
 
     public void setClaseEnemigo(ClaseEnemigo claseEnemigo) {
         this.claseEnemigo = claseEnemigo;
+    }
+
+    public int getBorradoLogico() {
+        return BorradoLogico;
+    }
+
+    public void setBorradoLogico(int borradoLogico) {
+        BorradoLogico = borradoLogico;
     }
 }
