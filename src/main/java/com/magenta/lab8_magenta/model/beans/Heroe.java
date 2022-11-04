@@ -5,7 +5,11 @@ public class Heroe {
     private int idHeroe;
     private String nombre;
     private int edad;
+<<<<<<< HEAD
+    private float puntosExperiencia;
+=======
     private Float puntosExperiencia;
+>>>>>>> 0c6156b0e9655892193b5ecba4c58f1cafbc230d
     private int nivelInicial;
     private int ataque;
     private Heroe pareja;
