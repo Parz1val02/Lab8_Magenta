@@ -14,12 +14,12 @@ import java.math.BigDecimal;
 public class Wiki extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getParameter("action") == null ? "Principal" : request.getParameter("action");
+        String action = request.getParameter("action") == null ? "MenuPrincipal" : request.getParameter("action");
         RequestDispatcher view;
         HeroesDao hDao = new HeroesDao();
         switch (action) {
             case "MenuPrincipal":
-                view = request.getRequestDispatcher("MenuPrincipal.jsp");
+                view = request.getRequestDispatcher("index.jsp");
                 view.forward(request, response);
                 break;
             case "MenuHeroes":

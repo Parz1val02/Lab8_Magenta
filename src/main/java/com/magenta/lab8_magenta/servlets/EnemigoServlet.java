@@ -1,13 +1,14 @@
-package Servlets;
+package com.magenta.lab8_magenta.servlets;
 
-import Beans.ClaseEnemigo;
-import Beans.Enemigo;
-import Beans.Genero;
-import Beans.Objeto;
-import Daos.ClaseEnemigosDao;
-import Daos.EnemigoDao;
-import Daos.GeneroDao;
-import Daos.ObjetoDao;
+
+import com.magenta.lab8_magenta.model.beans.ClaseEnemigo;
+import com.magenta.lab8_magenta.model.beans.Genero;
+import com.magenta.lab8_magenta.model.beans.Objeto;
+import com.magenta.lab8_magenta.model.daos.ClasesEnemigosDao;
+import com.magenta.lab8_magenta.model.daos.GeneroDao;
+
+
+import com.magenta.lab8_magenta.model.beans.Enemigo;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -23,10 +24,10 @@ public class EnemigoServlet extends HttpServlet {
         String action = request.getParameter("action") == null ? "listaEnemigos" : request.getParameter("action");
 
         RequestDispatcher view;
-        EnemigoDao enemigoDao = new EnemigoDao();
+        com.magenta.lab8_magenta.model.daos.EnemigoDao enemigoDao = new com.magenta.lab8_magenta.model.daos.EnemigoDao();
         GeneroDao generoDao = new GeneroDao();
-        ObjetoDao objetoDao = new ObjetoDao();
-        ClaseEnemigosDao claseEnemigoDao = new ClaseEnemigosDao();
+        com.magenta.lab8_magenta.model.daos.ObjetoDao objetoDao = new com.magenta.lab8_magenta.model.daos.ObjetoDao();
+        ClasesEnemigosDao claseEnemigoDao = new ClasesEnemigosDao();
 
 
         switch (action) {
@@ -99,7 +100,7 @@ public class EnemigoServlet extends HttpServlet {
         String action = request.getParameter("action") == null ? "lista" : request.getParameter("action");
 
         Enemigo enemigo;
-        EnemigoDao enemigoDao = new EnemigoDao();
+        com.magenta.lab8_magenta.model.daos.EnemigoDao enemigoDao = new com.magenta.lab8_magenta.model.daos.EnemigoDao();
 
         switch (action) {
             case "guardarEnemigo":

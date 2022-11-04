@@ -13,23 +13,22 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link <%=request.getParameter("page").equals("tours")? "active": "" %>" href="<%=request.getContextPath()%>/listaTours" style="font-size: 17px">Heroes</a>
+                <a class="nav-link <%=request.getParameter("page").equals("inicio")? "active": "" %>" href="<%=request.getContextPath()%>/Wiki" style="font-size: 17px">Inicio</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <%=request.getParameter("page").equals("listaHeroes")? "active": "" %>" href="<%=request.getContextPath()%>/HeroeServlet" style="font-size: 17px">Heroes</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link <%=request.getParameter("page").equals("listaEnemigos")? "active": "" %>" href="<%=request.getContextPath()%>/EnemigoServlet" style="font-size: 17px">Enemigos</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <%=request.getParameter("page").equals("tpc")? "active": "" %>" href="<%=request.getContextPath()%>/listaToursporCiudad" style="font-size: 17px">Hechizos</a>
+                <a class="nav-link <%=request.getParameter("page").equals("tpc")? "active": "" %>" href="<%=request.getContextPath()%>/HechizoServlet" style="font-size: 17px">Hechizos</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <%=request.getParameter("page").equals("canciones")? "active": "" %>" href="<%=request.getContextPath()%>/listaCanciones" style="font-size: 17px">Objetos</a>
+                <a class="nav-link <%=request.getParameter("page").equals("canciones")? "active": "" %>" href="<%=request.getContextPath()%>/ObjetoServlet" style="font-size: 17px">Objetos</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link <%=request.getParameter("page").equals("artistas")? "active": "" %>" href="<%=request.getContextPath()%>/listaArtistas" style="font-size: 17px">Artistas</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link <%=request.getParameter("page").equals("recomendados")? "active": "" %>" href="<%=request.getContextPath()%>/listaRecomendados" style="font-size: 17px">Recomendados</a>
-            </li>
+
+
 
         </ul>
     </div>

@@ -1,4 +1,4 @@
-<%@ page import="Beans.Enemigo" %>
+<%@ page import="com.magenta.lab8_magenta.model.beans.Enemigo" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <!--Colocar como value: nombre de la presente página -->
@@ -6,7 +6,7 @@
     <jsp:param name="title" value="listaEnemigos"/>
 </jsp:include>
 
-<jsp:useBean type="java.util.ArrayList<Beans.Enemigo>" scope="request" id="listaEnemigos"/>
+<jsp:useBean type="java.util.ArrayList<com.magenta.lab8_magenta.model.beans.Enemigo>" scope="request" id="listaEnemigos"/>
 
 <%
     String searchText = (String) request.getAttribute("searchText");

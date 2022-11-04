@@ -1,7 +1,8 @@
-package Daos;
+package com.magenta.lab8_magenta.model.daos;
 
-import Beans.Genero;
-import Beans.Objeto;
+
+import com.magenta.lab8_magenta.model.beans.Objeto;
+import com.magenta.lab8_magenta.model.daos.BaseDao;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

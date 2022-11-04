@@ -2,10 +2,8 @@ package com.magenta.lab8_magenta.model.daos;
 
 import com.magenta.lab8_magenta.model.beans.Genero;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 
 
 public class GeneroDao extends BaseDao{

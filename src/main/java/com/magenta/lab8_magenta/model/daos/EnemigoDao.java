@@ -1,9 +1,11 @@
-package Daos;
+package com.magenta.lab8_magenta.model.daos;
 
-import Beans.ClaseEnemigo;
-import Beans.Enemigo;
-import Beans.Genero;
-import Beans.Objeto;
+
+import com.magenta.lab8_magenta.model.beans.ClaseEnemigo;
+import com.magenta.lab8_magenta.model.beans.Enemigo;
+import com.magenta.lab8_magenta.model.beans.Genero;
+import com.magenta.lab8_magenta.model.beans.Objeto;
+import com.magenta.lab8_magenta.model.daos.BaseDao;
 
 import java.sql.*;
 import java.util.ArrayList;

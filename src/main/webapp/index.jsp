@@ -19,7 +19,7 @@
             <div class = "container-fluid" style="background-color:#c40aa8  !important;">    <!--rgb(232 17 187 / 94%) -->
                 <div class="container" >
                     <jsp:include page="/includes/navbar.jsp">
-                        <jsp:param name="page" value="tours"/>
+                        <jsp:param name="page" value="inicio"/>
                     </jsp:include>
                 </div>
             </div>
