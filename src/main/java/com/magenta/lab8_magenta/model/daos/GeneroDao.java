@@ -32,6 +32,27 @@ public class GeneroDao extends BaseDao{
         }
         return genero;
     }
+    
+    public ArrayList<Genero> obtenerListaGeneros() {
+
+        ArrayList<Genero> listaGeneros = new ArrayList<>();
+        try (Connection conn = getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("select * from genero")) {
+
+            while (rs.next()) {
+                Genero genero = new Genero();
+                genero.setIdGenero(rs.getInt(1));
+                genero.setInicial(rs.getString(2));
+                listaGeneros.add(genero);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+
+        }
+        return listaGeneros;
+    }
 
 
 }
