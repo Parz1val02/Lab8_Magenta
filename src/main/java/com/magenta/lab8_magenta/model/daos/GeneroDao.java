@@ -2,10 +2,8 @@ package com.magenta.lab8_magenta.model.daos;
 
 import com.magenta.lab8_magenta.model.beans.Genero;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 
 
 public class GeneroDao extends BaseDao{
@@ -31,6 +29,27 @@ public class GeneroDao extends BaseDao{
             throw new RuntimeException(e);
         }
         return genero;
+    }
+    
+    public ArrayList<Genero> obtenerListaGeneros() {
+
+        ArrayList<Genero> listaGeneros = new ArrayList<>();
+        try (Connection conn = getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("select * from genero")) {
+
+            while (rs.next()) {
+                Genero genero = new Genero();
+                genero.setIdGenero(rs.getInt(1));
+                genero.setInicial(rs.getString(2));
+                listaGeneros.add(genero);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+
+        }
+        return listaGeneros;
     }
 
 
