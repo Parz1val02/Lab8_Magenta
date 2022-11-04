@@ -24,7 +24,7 @@ public class HeroesDao extends BaseDao{
                 heroe.setIdHeroe(rs.getInt(1));
                 heroe.setNombre(rs.getString(2));
                 heroe.setEdad(rs.getInt(3));
-                heroe.setPuntosExperiencia(rs.getInt(4));
+                heroe.setPuntosExperiencia(rs.getFloat(4));
                 heroe.setNivelInicial(rs.getInt(5));
                 heroe.setAtaque(rs.getInt(6));
                 pareja.setIdHeroe(rs.getInt(7));
@@ -61,7 +61,7 @@ public class HeroesDao extends BaseDao{
                 heroe.setIdHeroe(rs.getInt(1));
                 heroe.setNombre(rs.getString(2));
                 heroe.setEdad(rs.getInt(3));
-                heroe.setPuntosExperiencia(rs.getInt(4));
+                heroe.setPuntosExperiencia(rs.getFloat(4));
                 heroe.setNivelInicial(rs.getInt(5));
                 heroe.setAtaque(rs.getInt(6));
                 pareja.setIdHeroe(rs.getInt(7));
