@@ -5,7 +5,7 @@ public class Objeto {
     private int idObjeto;
     private String nombreObjeto;
     private String efecto;
-    private String peso;
+    private double peso;
     private int BorradoLogico;
 
     public int getIdObjeto() {
@@ -32,11 +32,11 @@ public class Objeto {
         this.efecto = efecto;
     }
 
-    public String getPeso() {
+    public double getPeso() {
         return peso;
     }
 
-    public void setPeso(String peso) {
+    public void setPeso(double peso) {
         this.peso = peso;
     }
 

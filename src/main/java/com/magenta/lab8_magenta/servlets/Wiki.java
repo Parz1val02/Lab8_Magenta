@@ -24,7 +24,7 @@ public class Wiki extends HttpServlet {
                 break;
             case "MenuHeroes":
                 request.setAttribute("listaHeroes", hDao.obtenerListaHeroes());
-                view = request.getRequestDispatcher("heroes/");
+                view = request.getRequestDispatcher("heroes/listaHeroes.jsp");
                 view.forward(request, response);
                 break;
             case "MenuEnemigos":

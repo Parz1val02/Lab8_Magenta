@@ -17,9 +17,9 @@
   <link rel="shortcut icon" href="<%=request.getContextPath()%>/static/favicon2.ico" type="image/x-icon">
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-  <link rel="stylesheet" href=css/style.min.css>
+  <link rel="stylesheet" href=../css/style.min.css>
   <!-- CSS de registrar-flujo-usuarioo -->
-  <link rel="stylesheet" href="css/form1.css">
+  <link rel="stylesheet" href="../css/form1.css">
   <style>
     body {
       /*background-color: white;*/

@@ -23,3 +23,7 @@ values ("Mold", 30, 0, 50, 50, null, 1, 2,0),
         ("Percival", 18, 0, 10, 25, null, 1, 1,0);
 -- Inventario objetos
 insert into inventario (idHeroe, idObjeto, cantidadOBjeto) values (3,1,1), (2,2,2);
+
+
+update heroes set idPareja=3 where idHeroe=2;
+update heroes set idPareja=2 where idHeroe=3;

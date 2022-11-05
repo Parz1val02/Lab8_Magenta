@@ -19,11 +19,10 @@ public class EnemigoDao extends BaseDao {
             ResultSet rs = st.executeQuery("SELECT * FROM magenta.enemigos e\n" +
                     "inner join clases_enemigos clase on e.idClaseEnemigo = clase.idClaseEnemigo\n" +
                     "left join genero g on e.idGenero = g.idGenero\n" +
-                    "left join objetos o on e.idObjeto = o.idObjeto;")) {
+                    "left join objetos o on e.idObjeto = o.idObjeto where e.borradoLogico=0 order by e.idEnemigo;")) {
 
             while(rs.next()){
                 Enemigo enemigo = new Enemigo();
-
 
                 enemigo.setIdEnemigo(rs.getInt(1));
                 enemigo.setNombreEnemigo(rs.getString(2));
@@ -40,15 +39,17 @@ public class EnemigoDao extends BaseDao {
                 objeto.setIdObjeto(rs.getInt("o.idObjeto"));
                 objeto.setNombreObjeto(rs.getString("nombreObjeto"));
                 objeto.setEfecto(rs.getString("efecto"));
-                objeto.setPeso(rs.getString("peso"));
+                objeto.setPeso(rs.getDouble("peso"));
                 enemigo.setObjeto(objeto);
 
                 ClaseEnemigo claseEnemigo = new ClaseEnemigo();
                 claseEnemigo.setIdClaseEnemigo(rs.getInt("clase.idClaseEnemigo"));
                 claseEnemigo.setNombreClase(rs.getString("nombreClase"));
                 enemigo.setClaseEnemigo(claseEnemigo);
+                enemigo.setBorradoLogico(rs.getInt("borradoLogico"));
 
                 listaEnemigos.add(enemigo);
+
             }
 
         } catch (SQLException e) {
@@ -63,7 +64,7 @@ public class EnemigoDao extends BaseDao {
 
     public Enemigo obtenerEnemigo (int idEnemigo){
 
-        Enemigo enemigo = null;
+        Enemigo enemigo = new Enemigo();;
 
 
         try(Connection conn = getConnection();
@@ -71,17 +72,11 @@ public class EnemigoDao extends BaseDao {
                     "inner join clases_enemigos clase on e.idClaseEnemigo = clase.idClaseEnemigo\n" +
                     "left join genero g on e.idGenero = g.idGenero\n" +
                     "left join objetos o on e.idObjeto = o.idObjeto\n" +
-                    "where e.idEnemigo = ?\n" +
-                    "order by e.idEnemigo;")){
+                    "where e.idEnemigo = ? and e.borradoLogico=0\n")){
 
             pstm.setInt(1,idEnemigo);
-
-
             try (ResultSet rs = pstm.executeQuery();){
                 if(rs.next()){
-
-
-                    enemigo = new Enemigo();
                     enemigo.setIdEnemigo(rs.getInt(1));
                     enemigo.setNombreEnemigo(rs.getString(2));
                     enemigo.setAtaque(rs.getInt(3));
@@ -97,13 +92,14 @@ public class EnemigoDao extends BaseDao {
                     objeto.setIdObjeto(rs.getInt("o.idObjeto"));
                     objeto.setNombreObjeto(rs.getString("nombreObjeto"));
                     objeto.setEfecto(rs.getString("efecto"));
-                    objeto.setPeso(rs.getString("peso"));
+                    objeto.setPeso(rs.getDouble("peso"));
                     enemigo.setObjeto(objeto);
 
                     ClaseEnemigo claseEnemigo = new ClaseEnemigo();
                     claseEnemigo.setIdClaseEnemigo(rs.getInt("clase.idClaseEnemigo"));
                     claseEnemigo.setNombreClase(rs.getString("nombreClase"));
                     enemigo.setClaseEnemigo(claseEnemigo);
+                    enemigo.setBorradoLogico(rs.getInt("borradoLogico"));
 
                 }
             }
@@ -126,7 +122,7 @@ public class EnemigoDao extends BaseDao {
             pstmt.setString(1, enemigo.getNombreEnemigo());
             pstmt.setInt(2, enemigo.getAtaque());
             pstmt.setInt(3, enemigo.getExperienciaDerrotado());
-            pstmt.setFloat(4, enemigo.getProbDejarObjeto());
+            pstmt.setDouble(4, enemigo.getProbDejarObjeto());
             pstmt.setInt(6, enemigo.getObjeto().getIdObjeto());
 
             pstmt.setInt(7, enemigo.getClaseEnemigo().getIdClaseEnemigo());
@@ -167,7 +163,7 @@ public class EnemigoDao extends BaseDao {
             pstmt.setString(1, enemigo.getNombreEnemigo());
             pstmt.setInt(2, enemigo.getAtaque());
             pstmt.setInt(3, enemigo.getExperienciaDerrotado());
-            pstmt.setFloat(4, enemigo.getProbDejarObjeto());
+            pstmt.setDouble(4, enemigo.getProbDejarObjeto());
             pstmt.setInt(6, enemigo.getObjeto().getIdObjeto());
             pstmt.setInt(7, enemigo.getClaseEnemigo().getIdClaseEnemigo());
             pstmt.setInt(8, enemigo.getIdEnemigo());
@@ -188,7 +184,7 @@ public class EnemigoDao extends BaseDao {
 
     public void borrarEnemigo(int idEnemigo) {    /*verificar dependencias para el borrado*/
         try (Connection conn = getConnection();
-             PreparedStatement pstmt = conn.prepareStatement("DELETE FROM enemigos WHERE idEnemigo = ?")) {
+             PreparedStatement pstmt = conn.prepareStatement("UPDATE enemigos SET borradoLogico = 1 WHERE idEnemigo = ?")) {
 
             pstmt.setInt(1, idEnemigo);
             pstmt.executeUpdate();
@@ -210,7 +206,7 @@ public class EnemigoDao extends BaseDao {
                      "inner join clases_enemigos clase on e.idClaseEnemigo = clase.idClaseEnemigo\n" +
                      "left join genero g on e.idGenero = g.idGenero\n" +
                      "left join objetos o on e.idObjeto = o.idObjeto\n" +
-                     "where e.nombreEnemigo = ? \n" +
+                     "where e.nombreEnemigo = ? and e.borradoLogico=0\n" +
                      "order by e.nombreEnemigo;")) {
 
             pstmt.setString(1, nombreEnemigo);
@@ -218,7 +214,6 @@ public class EnemigoDao extends BaseDao {
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
                     Enemigo enemigo = new Enemigo();
-
 
                     enemigo.setIdEnemigo(rs.getInt(1));
                     enemigo.setNombreEnemigo(rs.getString(2));
@@ -235,15 +230,17 @@ public class EnemigoDao extends BaseDao {
                     objeto.setIdObjeto(rs.getInt("o.idObjeto"));
                     objeto.setNombreObjeto(rs.getString("nombreObjeto"));
                     objeto.setEfecto(rs.getString("efecto"));
-                    objeto.setPeso(rs.getString("peso"));
+                    objeto.setPeso(rs.getDouble("peso"));
                     enemigo.setObjeto(objeto);
 
                     ClaseEnemigo claseEnemigo = new ClaseEnemigo();
                     claseEnemigo.setIdClaseEnemigo(rs.getInt("clase.idClaseEnemigo"));
                     claseEnemigo.setNombreClase(rs.getString("nombreClase"));
                     enemigo.setClaseEnemigo(claseEnemigo);
+                    enemigo.setBorradoLogico(rs.getInt("borradoLogico"));
 
                     listaEnemigosPorNombre.add(enemigo);
+
                 }
             }
         } catch (SQLException e) {

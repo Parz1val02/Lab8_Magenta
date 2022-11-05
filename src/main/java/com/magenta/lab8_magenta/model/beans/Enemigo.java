@@ -5,7 +5,7 @@ public class Enemigo {
     private String nombreEnemigo;
     private int ataque;
     private int experienciaDerrotado;
-    private float probDejarObjeto;
+    private double probDejarObjeto;
     private Genero genero;
     private Objeto objeto;
     private ClaseEnemigo claseEnemigo;
@@ -43,11 +43,11 @@ public class Enemigo {
         this.experienciaDerrotado = experienciaDerrotado;
     }
 
-    public float getProbDejarObjeto() {
+    public double getProbDejarObjeto() {
         return probDejarObjeto;
     }
 
-    public void setProbDejarObjeto(float probDejarObjeto) {
+    public void setProbDejarObjeto(double probDejarObjeto) {
         this.probDejarObjeto = probDejarObjeto;
     }
 

@@ -24,7 +24,7 @@ public class ObjetoDao  extends BaseDao {
                 objeto.setIdObjeto(rs.getInt(1));
                 objeto.setNombreObjeto(rs.getString(2));
                 objeto.setEfecto(rs.getString(3));
-                objeto.setPeso(rs.getString(4));
+                objeto.setPeso(rs.getDouble(4));
                 listaObjetos.add(objeto);
             }
 

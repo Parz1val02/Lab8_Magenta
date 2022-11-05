@@ -4,7 +4,7 @@ public class DebFort {
 
     private ClaseEnemigo claseEnemigo;
     private Elemento elemento;
-    private float porcentajeDanio;
+    private double porcentajeDanio;
 
     public ClaseEnemigo getClaseEnemigo() {
         return claseEnemigo;
@@ -22,11 +22,11 @@ public class DebFort {
         this.elemento = elemento;
     }
 
-    public float getPorcentajeDanio() {
+    public double getPorcentajeDanio() {
         return porcentajeDanio;
     }
 
-    public void setPorcentajeDanio(float porcentajeDanio) {
+    public void setPorcentajeDanio(double porcentajeDanio) {
         this.porcentajeDanio = porcentajeDanio;
     }
 }
