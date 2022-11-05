@@ -125,7 +125,7 @@ public class EnemigoServlet extends HttpServlet {
                 ClaseEnemigo claseEnemigo = new ClaseEnemigo();
                 claseEnemigo.setIdClaseEnemigo(Integer.parseInt(request.getParameter("idClaseEnemigo")));
                 enemigo.setClaseEnemigo(claseEnemigo);
-
+                enemigo.setBorradoLogico(0);
                 enemigoDao.guardarEnemigo(enemigo);
 
                 response.sendRedirect(request.getContextPath() + "/EnemigoServlet?action=listaEnemigos");

@@ -1,6 +1,7 @@
 package com.magenta.lab8_magenta.model.daos;
 
 import com.magenta.lab8_magenta.model.beans.ClaseHeroes;
+import com.magenta.lab8_magenta.model.beans.Enemigo;
 import com.magenta.lab8_magenta.model.beans.Genero;
 import com.magenta.lab8_magenta.model.beans.Heroe;
 
@@ -81,20 +82,51 @@ public class HeroesDao extends BaseDao{
         return heroe;
     }
 
-    public boolean ValidarExiste(4){
-        try(Connection conn = getConnection();
-            PreparedStatement pstm = conn.prepareStatement("select * from heroes where idHeroe = ?")){
-            pstm.setInt(1,idPareja);
-            ResultSet rs = pstm.executeQuery();
-            if(rs.next()){
+
+    public void guardarHeroe(Heroe heroe) {
 
 
+        String sql = "INSERT INTO enemigos (nombreHeroe, edad, puntosExperiencia, nivelInicial, ataque, idPareja, idGenero, idClase, borradoLogico)"
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, heroe.getNombre());
+            pstmt.setInt(2, heroe.getEdad());
+            pstmt.setDouble(3, heroe.getPuntosExperiencia());
+            pstmt.setInt(4, heroe.getNivelInicial());
+            pstmt.setInt(5, heroe.getAtaque());
+            pstmt.setInt(6, heroe.getPareja().getIdHeroe());
+            pstmt.setInt(7, heroe.getGenero().getIdGenero());
+            pstmt.setInt(8, heroe.getClaseHeroes().getIdClase());
+            pstmt.setInt(9, heroe.getBorradoLogico());
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public ArrayList<Heroe> parejasDisponibles() {
+
+        ArrayList<Heroe> listaParejas= new ArrayList<>();
+        Heroe pareja = new Heroe();
+        try (Connection conn = getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("select idHeroe, nombreHeroe from heroes where idPareja is null")) {
+
+            while (rs.next()){
+                pareja.setIdHeroe(rs.getInt(1));
+                pareja.setNombre(rs.getString(2));
             }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }
 
+        }
+        return listaParejas;
     }
 
 

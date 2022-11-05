@@ -3,17 +3,42 @@ package com.magenta.lab8_magenta.servlets;
 import com.magenta.lab8_magenta.model.beans.ClaseHeroes;
 import com.magenta.lab8_magenta.model.beans.Genero;
 import com.magenta.lab8_magenta.model.beans.Heroe;
-import com.magenta.lab8_magenta.model.daos.HeroesDao;
+import com.magenta.lab8_magenta.model.daos.*;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet(name = "Heroes", value = "/Heroes")
-public class Heroes extends HttpServlet {
+@WebServlet(name = "HeroeServlet", value = "/HeroeServlet")
+public class HeroeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action") == null ? "listaHeroes" : request.getParameter("action");
+
+        RequestDispatcher view;
+        com.magenta.lab8_magenta.model.daos.HeroesDao heroesDao = new com.magenta.lab8_magenta.model.daos.HeroesDao();
+        GeneroDao generoDao = new GeneroDao();
+        com.magenta.lab8_magenta.model.daos.ObjetoDao objetoDao = new com.magenta.lab8_magenta.model.daos.ObjetoDao();
+        ClasesHeroesDao claseHeroesDao = new ClasesHeroesDao();
+        HeroesDao hDao = new HeroesDao();
+
+        switch(action){
+            case "listaHeroes":
+                request.setAttribute("listaHeroes", heroesDao.obtenerListaHeroes());
+                view = request.getRequestDispatcher("heroes/listaHeroes.jsp");
+                view.forward(request, response);
+                break;
+            case "agregarHeroes":
+                request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
+                request.setAttribute("listaClases", claseHeroesDao.obtenerListaClases());
+                request.setAttribute("parejasDisponibles", hDao.parejasDisponibles());
+                view = request.getRequestDispatcher("heroes/agregarHeroes.jsp");
+                view.forward(request, response);
+                break;
+
+        }
+
 
     }
 
@@ -23,7 +48,7 @@ public class Heroes extends HttpServlet {
         HeroesDao hDao = new HeroesDao();
 
         switch (action) {
-            case "guardar":
+            case "guardarHeroe":
                 Heroe heroe = new Heroe();
                 heroe.setNombre(request.getParameter("nombre"));
                 try{
@@ -60,18 +85,27 @@ public class Heroes extends HttpServlet {
                 Heroe pareja = new Heroe();
                 try{
                     pareja.setIdHeroe(Integer.parseInt(request.getParameter("pareja_id")));
-                    boolean parejaExiste = false;
-                    for()
-                        hDao.ParejaExiste(pareja.getIdHeroe());
+                    heroe.setPareja(pareja);
                 }catch(NumberFormatException e){
                     response.sendRedirect(request.getContextPath()+"/Wiki?action=MenuHeroes");
                 }
+                ExperienciaDao expDao = new ExperienciaDao();
+                heroe.setPuntosExperiencia(expDao.calcularExperiencia(heroe.getNivelInicial()));
+                heroe.setBorradoLogico(0);
 
-
-
-                response.sendRedirect("");
+                hDao.guardarHeroe(heroe);
+                response.sendRedirect(request.getContextPath() + "/HeroeServlet?action=listaHeroes");
                 break;
+            case("actualizarHeroe"):
 
+                break;
+            case("buscarHeroe"):
+                break;
         }
     }
 }
+
+
+
+
+

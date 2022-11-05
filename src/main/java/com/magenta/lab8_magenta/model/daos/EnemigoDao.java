@@ -117,8 +117,8 @@ public class EnemigoDao extends BaseDao {
     public void guardarEnemigo(Enemigo enemigo) {
 
 
-        String sql = "INSERT INTO enemigos (nombreEnemigo, ataque, experienciaDerrotado, probabilidadDejarObjeto, idGenero,idObjeto, idClaseEnemigo) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO enemigos (nombreEnemigo, ataque, experienciaDerrotado, probabilidadDejarObjeto, idGenero,idObjeto, idClaseEnemigo, borradoLogico) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -137,7 +137,7 @@ public class EnemigoDao extends BaseDao {
             }else{
                 pstmt.setInt(6, enemigo.getGenero().getIdGenero());
             }
-
+            pstmt.setInt(8, enemigo.getBorradoLogico());
 
             pstmt.executeUpdate();
 

@@ -24,30 +24,26 @@ public class Wiki extends HttpServlet {
                 break;
             case "MenuHeroes":
                 request.setAttribute("listaHeroes", hDao.obtenerListaHeroes());
-                view = request.getRequestDispatcher("Heroes/MenuHeroes.jsp");
+                view = request.getRequestDispatcher("heroes/");
                 view.forward(request, response);
                 break;
             case "MenuEnemigos":
-                view = request.getRequestDispatcher("Enemigos/MenuEnemigos.jsp");
+                view = request.getRequestDispatcher("enemigos/listaEnemigos.jsp");
                 view.forward(request, response);
                 break;
             case "MenuHechizos":
-                view = request.getRequestDispatcher("Hechizos/MenuHechizos.jsp");
+                view = request.getRequestDispatcher("hechizos/");
                 view.forward(request, response);
                 break;
             case "CatalogoObjetos":
-                view = request.getRequestDispatcher("Objetos/MenuObjetos.jsp");
+                view = request.getRequestDispatcher("objetos/");
                 view.forward(request, response);
                 break;
         }
 
 
     }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getParameter("action") == null ? "Principal" : request.getParameter("action");
-
-
     }
 }
