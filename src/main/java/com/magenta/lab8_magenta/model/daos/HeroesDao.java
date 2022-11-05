@@ -2,6 +2,7 @@ package com.magenta.lab8_magenta.model.daos;
 
 import com.magenta.lab8_magenta.model.beans.*;
 
+import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -74,12 +75,19 @@ public class HeroesDao extends BaseDao{
                 heroe.setPuntosExperiencia(rs.getDouble(4));
                 heroe.setNivelInicial(rs.getInt(5));
                 heroe.setAtaque(rs.getInt(6));
+
                 pareja.setIdHeroe(rs.getInt(7));
+                pareja.setNombre(rs.getString("p.nombreHeroe"));
                 heroe.setPareja(pareja);
+
                 genero.setIdGenero(rs.getInt(8));
+                genero.setInicial(rs.getString("g.inicial"));
                 heroe.setGenero(genero);
+
                 claseHeroes.setIdClase(rs.getInt(9));
+                claseHeroes.setNombreClase(rs.getString("clase.nombreClase"));
                 heroe.setClaseHeroes(claseHeroes);
+
                 heroe.setBorradoLogico(rs.getInt(10));
 
             }
@@ -147,6 +155,29 @@ public class HeroesDao extends BaseDao{
         return listaParejas;
     }
 
+    public ArrayList<Heroe> parejasDisponibles1(int idHeroe) {
+
+        ArrayList<Heroe> listaParejas= new ArrayList<>();
+        try (Connection conn = getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("select idHeroe, nombreHeroe from heroes where idPareja is null and borradoLogico = 0;")) {
+
+            while (rs.next()){
+                Heroe pareja = new Heroe();
+                pareja.setIdHeroe(rs.getInt(1));
+                pareja.setNombre(rs.getString(2));
+                if(idHeroe!= pareja.getIdHeroe()){
+                    listaParejas.add(pareja);
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+
+        }
+        return listaParejas;
+    }
+
     public void actualizarHeroe(Heroe heroe) {
 
 
@@ -163,6 +194,8 @@ public class HeroesDao extends BaseDao{
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
+            updatePareja(heroe.getPareja().getIdHeroe(), heroe.getIdHeroe());
+
             pstmt.setString(1, heroe.getNombre());
             pstmt.setInt(2, heroe.getEdad());
             pstmt.setDouble(3, heroe.getPuntosExperiencia());
@@ -170,23 +203,33 @@ public class HeroesDao extends BaseDao{
             pstmt.setInt(5, heroe.getAtaque());
             pstmt.setInt(7, heroe.getGenero().getIdGenero());
             pstmt.setInt(8, heroe.getClaseHeroes().getIdClase());
-
+            pstmt.setInt(9, heroe.getIdHeroe());
             if(heroe.getPareja().getIdHeroe() == 0){
                 pstmt.setNull(6,Types.INTEGER);
             }else{
                 pstmt.setInt(6, heroe.getPareja().getIdHeroe());
-
             }
 
             pstmt.executeUpdate();
-
-
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
 
     public void borrarHeroe(int idHeroe, int idPareja) {    /*verificar dependencias para el borrado*/
+        if (idPareja!=0){
+            String sql = "UPDATE heroes SET idPareja = ? where idHeroe = ?";
+
+            try (Connection conn = getConnection();
+                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setNull(1,Types.INTEGER);
+                pstmt.setInt(2, idPareja);
+                pstmt.executeUpdate();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement("UPDATE heroes SET borradoLogico = 1 WHERE idHeroe = ?")) {
 
@@ -226,12 +269,19 @@ public class HeroesDao extends BaseDao{
                     heroe.setPuntosExperiencia(rs.getDouble(4));
                     heroe.setNivelInicial(rs.getInt(5));
                     heroe.setAtaque(rs.getInt(6));
+
                     pareja.setIdHeroe(rs.getInt(7));
+                    pareja.setNombre(rs.getString("p.nombreHeroe"));
                     heroe.setPareja(pareja);
+
                     genero.setIdGenero(rs.getInt(8));
+                    genero.setInicial(rs.getString("g.inicial"));
                     heroe.setGenero(genero);
+
                     claseHeroes.setIdClase(rs.getInt(9));
+                    claseHeroes.setNombreClase(rs.getString("clase.nombreClase"));
                     heroe.setClaseHeroes(claseHeroes);
+
                     heroe.setBorradoLogico(rs.getInt(10));
                     listaHeroesPorNombre.add(heroe);
 
@@ -259,5 +309,54 @@ public class HeroesDao extends BaseDao{
             ex.printStackTrace();
         }
     }
+    public void updatePareja(int Heroe, int Pareja){
+        int idParejaOriginal=0;
+        String sql = "SELECT idPareja from heroes where idHeroe = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
+            pstmt.setInt(1, Pareja);
+            try(ResultSet rs = pstmt.executeQuery()){
+                if(rs.next()){
+                    idParejaOriginal= rs.getInt(1);
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        if(Heroe!=idParejaOriginal){
+            if(idParejaOriginal!=0){
+                sql = "UPDATE heroes SET idPareja = ? where idHeroe = ?";
+
+                try (Connection conn = getConnection();
+                     PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                    pstmt.setNull(1,Types.INTEGER);
+                    pstmt.setInt(2, idParejaOriginal);
+                    pstmt.executeUpdate();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
+            if(Heroe!=0){
+                sql = "UPDATE heroes SET idPareja = ? where idHeroe = ?";
+
+                try (Connection conn = getConnection();
+                     PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+                    pstmt.setInt(1, Pareja);
+                    pstmt.setInt(2, Heroe);
+                    pstmt.executeUpdate();
+
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+
+        }
+
+    }
 }
+
+

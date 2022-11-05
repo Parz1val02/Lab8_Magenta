@@ -149,13 +149,13 @@ public class EnemigoDao extends BaseDao {
 
 
         String sql = "UPDATE enemigos SET nombreEnemigo = ?, \n" +
-                "               ataque = ?, \n" +
-                "                experienciaDerrotado =?,\n" +
-                "                 probabilidadDejarObjeto = ?,\n" +
-                "                idGenero = ?, \n" +
-                "                 idObjeto = ?, \n" +
-                "                idClaseEnemigo = ?\n" +
-                "                WHERE idEnemigo = ?;";
+                "ataque = ?, \n" +
+                "experienciaDerrotado =?,\n" +
+                "probabilidadDejarObjeto = ?,\n" +
+                "idGenero = ?, \n" +
+                "idObjeto = ?, \n" +
+                "idClaseEnemigo = ?\n" +
+                "WHERE idEnemigo = ?;";
 
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -167,7 +167,6 @@ public class EnemigoDao extends BaseDao {
             pstmt.setInt(6, enemigo.getObjeto().getIdObjeto());
             pstmt.setInt(7, enemigo.getClaseEnemigo().getIdClaseEnemigo());
             pstmt.setInt(8, enemigo.getIdEnemigo());
-
             if(enemigo.getGenero().getIdGenero() == 0){
                 pstmt.setNull(5,Types.INTEGER);
             }else{

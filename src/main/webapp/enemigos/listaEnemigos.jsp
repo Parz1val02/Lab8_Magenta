@@ -74,6 +74,7 @@
                 <th>Clase</th>
                 <th>Ataque</th>
                 <th>Experiencia </th>
+                <th>Objeto drop</th>
                 <th>Probabilidad Objeto</th>
                 <th>Genero</th>
                 <th></th>
@@ -88,6 +89,7 @@
                 <td><%=enemigo.getClaseEnemigo().getNombreClase()%></td>
                 <td><%=enemigo.getAtaque()%></td>
                 <td><%=enemigo.getExperienciaDerrotado()%></td>
+                <td><%=enemigo.getObjeto().getNombreObjeto()%></td>
                 <td><%=enemigo.getProbDejarObjeto()%></td>
 
                 <% if (enemigo.getGenero().getInicial() == null) { %>

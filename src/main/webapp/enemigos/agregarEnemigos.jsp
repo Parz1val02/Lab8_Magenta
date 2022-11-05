@@ -213,7 +213,7 @@
 
                       <select style="background-color: #4d4545;color: white" class="form-select" id="floatingSelectGrid3" name="idClaseEnemigo">
                         <% for (ClaseEnemigo claseEnemigo : listaClases) { %>
-                        <option value="<%=claseEnemigo.getIdClaseEnemigo()%>"><%=claseEnemigo.getNombreClase()%></option>
+                        <option value="<%=claseEnemigo.getIdClaseEnemigo()%>" ><%=claseEnemigo.getNombreClase()%></option>
                         <% } %>
                       </select>
                       <label style="color: white" for="floatingSelectGrid3" class="label-form-flujousuario">Clase</label>
@@ -233,10 +233,21 @@
                   <div class="col-md">
                     <div class="form-floating " style="margin-bottom: 15px;">
                       <select style="background-color: #4d4545;color: white" class="form-select" id="floatingSelectGrid2" name="idGenero">
-                        <option value="0"> -- </option>
-                        <% for (Genero genero : listaGeneros) { %>
-                        <option value="<%=genero.getIdGenero()%>"><%=genero.getInicial()%>
-                        </option>
+                        <% String gender="";
+                          for (Genero genero : listaGeneros) {
+                            switch(genero.getInicial()){
+                              case "M":
+                                gender = "Masculino";
+                                break;
+                              case "F":
+                                gender = "Femenino";
+                                break;
+                              case "O":
+                                gender = "Otro";
+                                break;
+                            }
+                        %>
+                        <option value="<%=genero.getIdGenero()%>" ><%=gender%></option>
                         <% } %>
                       </select>
                       <label style="color: white" for="floatingSelectGrid2" class="label-form-flujousuario">Genero</label>
@@ -254,7 +265,7 @@
                     <div class="form-floating" style="margin-bottom: 15px;">
                       <select style="background-color: #4d4545;color: white" class="form-select" id="floatingSelectGrid1" name="idObjeto">
                         <% for (Objeto objeto : listaObjetos) { %>
-                        <option value="<%=objeto.getIdObjeto()%>"><%=objeto.getNombreObjeto()%>
+                        <option value="<%=objeto.getIdObjeto()%>" ><%=objeto.getNombreObjeto()%>
                         </option>
                         <% } %>
                       </select>

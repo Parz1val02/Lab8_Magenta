@@ -53,7 +53,7 @@ public class EnemigoServlet extends HttpServlet {
                     try {
                         enemigoId = Integer.parseInt(enemigoIdString);
                     } catch (NumberFormatException ex) {
-                        response.sendRedirect(request.getContextPath() + "EnemigoServlet");
+                        response.sendRedirect(request.getContextPath() + "/EnemigoServlet");
                     }
 
                     Enemigo enemigo = enemigoDao.obtenerEnemigo(enemigoId);

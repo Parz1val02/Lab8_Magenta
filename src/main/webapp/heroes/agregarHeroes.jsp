@@ -169,7 +169,7 @@
                                         <!-- 2da fila -->
                                         <div class="row g-2">
                                             <div class="col-md-3" style="display: flex; justify-content: center;  flex-direction: column">
-                                                <p class="campos-registrar-usuario">Edad</p>
+                                                <p class="campos-registrar-usuario">Edad:</p>
                                             </div>
                                             <div class="col-md">
                                                 <div class="form-floating" style="margin-bottom: 15px;">
@@ -187,9 +187,21 @@
                                             <div class="col-md">
                                                 <div class="form-floating " style="margin-bottom: 15px;">
                                                     <select style="background-color: #4d4545;color: white" class="form-select" id="floatingSelectGrid2" name="idGenero">
-                                                        <% for (Genero genero : listaGeneros) { %>
-                                                        <option value="<%=genero.getIdGenero()%>"><%=genero.getInicial()%>
-                                                        </option>
+                                                        <% String gender="";
+                                                            for (Genero genero : listaGeneros) {
+                                                                switch(genero.getInicial()){
+                                                                    case "M":
+                                                                        gender = "Masculino";
+                                                                        break;
+                                                                    case "F":
+                                                                        gender = "Femenino";
+                                                                        break;
+                                                                    case "O":
+                                                                        gender = "Otro";
+                                                                        break;
+                                                                }
+                                                        %>
+                                                        <option value="<%=genero.getIdGenero()%>"><%=gender%></option>
                                                         <% } %>
                                                     </select>
                                                     <label style="color: white" for="floatingSelectGrid2" class="label-form-flujousuario">Genero</label>
@@ -207,7 +219,7 @@
 
                                                     <select style="background-color: #4d4545;color: white" class="form-select" id="floatingSelectGrid3" name="idClaseHeroe">
                                                         <% for (ClaseHeroes claseHeroes : listaClases) { %>
-                                                        <option value="<%=claseHeroes.getIdClase()%>"><%=claseHeroes.getNombreClase()%></option>
+                                                        <option value="<%=claseHeroes.getIdClase()%>" ><%=claseHeroes.getNombreClase()%></option>
                                                         <% } %>
                                                     </select>
                                                     <label style="color: white" for="floatingSelectGrid3" class="label-form-flujousuario">Clase</label>
@@ -255,7 +267,7 @@
                                                     <select style="background-color: #4d4545;color: white" class="form-select" id="floatingSelectGrid1" name="idPareja">
                                                         <option value="0"> -- </option>
                                                         <% for (Heroe pareja : parejasDisponibles) { %>
-                                                        <option value="<%=pareja.getIdHeroe()%>"><%=pareja.getNombre()%>
+                                                        <option value="<%=pareja.getIdHeroe()%>" ><%=pareja.getNombre()%>
                                                         </option>
                                                         <% } %>
                                                     </select>

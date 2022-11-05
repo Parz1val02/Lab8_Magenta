@@ -236,8 +236,20 @@
                                         <div class="form-floating " style="margin-bottom: 15px;">
                                             <select style="background-color: #4d4545;color: white" class="form-select" id="floatingSelectGrid2" name="idGenero">
                                                 <option value="0"> -- </option>
-                                                <% for (Genero genero : listaGeneros) { %>
-                                                <option value="<%=genero.getIdGenero()%>"  <%=enemigo.getGenero().getIdGenero() == genero.getIdGenero() ? "selected" : ""%>    >   <%=genero.getInicial()%>
+                                                <% String gender="";
+                                                for (Genero genero : listaGeneros) {
+                                                    switch(genero.getInicial()) {
+                                                        case "M":
+                                                            gender = "Masculino";
+                                                            break;
+                                                        case "F":
+                                                            gender = "Femenino";
+                                                            break;
+                                                        case "O":
+                                                            gender = "Otro";
+                                                            break;
+                                                    }%>
+                                                <option value="<%=genero.getIdGenero()%>"  <%=enemigo.getGenero().getIdGenero() == genero.getIdGenero() ? "selected" : ""%>><%=gender%>
                                                 </option>
                                                 <% } %>
                                             </select>
