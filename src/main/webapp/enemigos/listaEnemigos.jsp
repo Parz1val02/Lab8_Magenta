@@ -1,17 +1,18 @@
 <%@ page import="com.magenta.lab8_magenta.model.beans.Enemigo" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<!--Colocar como value: nombre de la presente página -->
-<jsp:include page="/static/head.jsp">
-    <jsp:param name="title" value="listaEnemigos"/>
-</jsp:include>
-
 <jsp:useBean type="java.util.ArrayList<com.magenta.lab8_magenta.model.beans.Enemigo>" scope="request" id="listaEnemigos"/>
 
 <%
     String searchText = (String) request.getAttribute("searchText");
 %>
 
+
+
+<html>
+<!--Colocar como value: nombre de la presente página -->
+<jsp:include page="/static/head.jsp">
+    <jsp:param name="title" value="listaEnemigos"/>
+</jsp:include>
 
 <body>
 <!--MENU-->
@@ -88,9 +89,26 @@
                 <td><%=enemigo.getAtaque()%></td>
                 <td><%=enemigo.getExperienciaDerrotado()%></td>
                 <td><%=enemigo.getProbDejarObjeto()%></td>
-                <td><%=enemigo.getGenero().getInicial()%></td>
-                <td>
 
+                <% if (enemigo.getGenero().getInicial() == null) { %>
+                    <td>--</td>
+                <% } else { %>
+                <% String genero = enemigo.getGenero().getInicial();
+                    switch (genero) {
+                        case "M": %>
+                            <td>Masculino</td> <%
+                            break;
+                        case "F": %>
+                            <td>Femenino</td> <%
+                            break;
+                        case "O":%>
+                            <td>Otro</td> <%
+                            break;
+                    }%>
+                <% }  %>
+
+
+                <td>
                     <a type="button" class="btn btn-primary"
                        href="<%=request.getContextPath()%>/EnemigoServlet?action=editarEnemigos&id=<%=enemigo.getIdEnemigo()%>">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -99,6 +117,7 @@
                         </svg>
                     </a>
                 </td>
+
                 <td>
                     <a type="button" class="btn btn-danger"
                        onclick="return confirm('¿Estas seguro(a) que deseas borrar?')"
