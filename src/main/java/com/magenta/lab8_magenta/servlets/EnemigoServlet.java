@@ -25,9 +25,9 @@ public class EnemigoServlet extends HttpServlet {
         String action = request.getParameter("action") == null ? "listaEnemigos" : request.getParameter("action");
 
         RequestDispatcher view;
-        com.magenta.lab8_magenta.model.daos.EnemigoDao enemigoDao = new com.magenta.lab8_magenta.model.daos.EnemigoDao();
+        EnemigoDao enemigoDao = new EnemigoDao();
         GeneroDao generoDao = new GeneroDao();
-        com.magenta.lab8_magenta.model.daos.ObjetoDao objetoDao = new com.magenta.lab8_magenta.model.daos.ObjetoDao();
+        ObjetoDao objetoDao = new ObjetoDao();
         ClasesEnemigosDao claseEnemigoDao = new ClasesEnemigosDao();
 
 
