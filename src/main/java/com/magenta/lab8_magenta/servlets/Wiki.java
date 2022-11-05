@@ -28,7 +28,7 @@ public class Wiki extends HttpServlet {
                 view.forward(request, response);
                 break;
             case "MenuEnemigos":
-                view = request.getRequestDispatcher("Enemigos/MenuEnemigos.jsp");
+                view = request.getRequestDispatcher("enemigos/listaEnemigos.jsp");
                 view.forward(request, response);
                 break;
             case "MenuHechizos":
