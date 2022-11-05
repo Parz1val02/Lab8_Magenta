@@ -6,7 +6,8 @@
 <jsp:useBean type="java.util.ArrayList<com.magenta.lab8_magenta.model.beans.Objeto>" scope="request" id="listaObjetos"/>
 <jsp:useBean type="java.util.ArrayList<com.magenta.lab8_magenta.model.beans.Genero>" scope="request" id="listaGeneros"/>
 <jsp:useBean type="java.util.ArrayList<com.magenta.lab8_magenta.model.beans.ClaseEnemigo>" scope="request" id="listaClases"/>
-
+<%String error1 = (String) request.getAttribute("error1");%>
+<%String error2 = (String) request.getAttribute("error2");%>
 
 <html>
 
@@ -146,7 +147,7 @@
             <div class="ibox-body" style="padding-top: 35px" >
 
 
-              <form method="post" action="<%=request.getContextPath()%>/EnemigoServlet?action=guardarEnemigo">
+              <form method="post" action="<%=request.getContextPath()%>/EnemigoServlet?action=guardarEnemigo" class="was">
                 <!-- 1era fila -->
 
                 <div class="row g-2">
@@ -155,7 +156,7 @@
                   </div>
                   <div class="col-md">
                     <div class="form-floating" style="margin-bottom: 15px">
-                      <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid2" placeholder="Nombre Enemigo" name="nombreEnemigo">
+                      <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid2" placeholder="Nombre Enemigo" name="nombreEnemigo" required>
                       <label style="color: white" for="floatingInputGrid2" class="label-form-flujousuario">Nombre Enemigo</label>
                     </div>
                   </div>
@@ -167,8 +168,13 @@
                   </div>
                   <div class="col-md">
                     <div class="form-floating" style="margin-bottom: 15px;">
-                      <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid4" placeholder="Ataque" name="ataque">
+                      <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error1!=null?"is-invalid":""%>" id="floatingInputGrid4" placeholder="Ataque" name="ataque" required>
                       <label style="color: white" for="floatingInputGrid4" class="label-form-flujousuario">Ataque</label>
+                      <%if(error1!=null){%>
+                      <div id="validationServer" class="invalid-tooltip">
+                        <%=error1%>
+                      </div>
+                      <%}%>
                     </div>
                   </div>
                 </div>
@@ -181,8 +187,13 @@
                   <div class="col-md">
                     <div class="form-floating" style="margin-bottom: 15px;">
                       <div class="form-floating" style="margin-bottom: 15px;">
-                        <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid12" placeholder="Experiencia al ser Derrotado" name="experienciaDerrotado">
+                        <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error1!=null?"is-invalid":""%>" id="floatingInputGrid12" placeholder="Experiencia al ser Derrotado" name="experienciaDerrotado" required>
                         <label style="color: white" for="floatingInputGrid12" class="label-form-flujousuario">Experiencia al ser Derrotado</label>
+                        <%if(error1!=null){%>
+                        <div id="validationServer" class="invalid-tooltip">
+                          <%=error1%>
+                        </div>
+                        <%}%>
                       </div>
                     </div>
                   </div>
@@ -196,8 +207,13 @@
                   </div>
                   <div class="col-md">
                     <div class="form-floating" style="margin-bottom: 15px;">
-                      <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid20" placeholder="Probabilidad de dejar Objeto" name="probabilidadDejarObjeto">
+                      <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error2!=null?"is-invalid":""%>" id="floatingInputGrid20" placeholder="Probabilidad de dejar Objeto" name="probabilidadDejarObjeto" required>
                       <label style="color: white" for="floatingInputGrid20" class="label-form-flujousuario">Probabilidad de dejar Objeto</label>
+                      <%if(error2!=null){%>
+                      <div id="validationServer" class="invalid-tooltip">
+                        <%=error2%>
+                      </div>
+                      <%}%>
                     </div>
                   </div>
                 </div>

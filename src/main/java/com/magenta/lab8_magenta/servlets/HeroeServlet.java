@@ -99,43 +99,93 @@ public class HeroeServlet extends HttpServlet {
         switch (action) {
             case "guardarHeroe":
                 Heroe heroe = new Heroe();
-                //Validar una longitud maxima de 10 caracteres para el nombre
+                //Validar una longitud maxima de 10 caracteres para el nombre client-side
                 heroe.setNombre(request.getParameter("nombreHeroe"));
                 try{
                     //Validar el rango de edad entre 8 a 999
                     heroe.setEdad(Integer.parseInt(request.getParameter("edad")));
-
+                    if(heroe.getEdad()<=8 | heroe.getEdad()>=999){
+                        GeneroDao generoDao = new GeneroDao();
+                        request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
+                        ClasesHeroesDao claseHeroesDao = new ClasesHeroesDao();
+                        request.setAttribute("listaClases", claseHeroesDao.obtenerListaClases());
+                        request.setAttribute("parejasDisponibles", hDao.parejasDisponibles());
+                        request.setAttribute("error1", "La edad debe ser un numero entre 8 y 999");
+                        RequestDispatcher view = request.getRequestDispatcher("heroes/agregarHeroes.jsp");
+                        view.forward(request, response);
+                        break;
+                    }
                 }catch(NumberFormatException e){
+                    GeneroDao generoDao = new GeneroDao();
+                    request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
+                    ClasesHeroesDao claseHeroesDao = new ClasesHeroesDao();
+                    request.setAttribute("listaClases", claseHeroesDao.obtenerListaClases());
+                    request.setAttribute("parejasDisponibles", hDao.parejasDisponibles());
+                    request.setAttribute("error4", "El campo ingresado debe ser un numero");
+                    RequestDispatcher view = request.getRequestDispatcher("heroes/agregarHeroes.jsp");
+                    view.forward(request, response);
+                    break;
                 }
                 Genero genero = new Genero();
-                try{
-                    genero.setIdGenero(Integer.parseInt(request.getParameter("idGenero")));
-                    heroe.setGenero(genero);
-                }catch(NumberFormatException e){
-                }
+                genero.setIdGenero(Integer.parseInt(request.getParameter("idGenero")));
+                heroe.setGenero(genero);
                 try{
                     //Validar rango de nivel entre 1 al 100
                     heroe.setNivelInicial(Integer.parseInt(request.getParameter("nivelInicial")));
-
+                    if(heroe.getNivelInicial()==0 | heroe.getNivelInicial()>=100){
+                        GeneroDao generoDao = new GeneroDao();
+                        request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
+                        ClasesHeroesDao claseHeroesDao = new ClasesHeroesDao();
+                        request.setAttribute("listaClases", claseHeroesDao.obtenerListaClases());
+                        request.setAttribute("parejasDisponibles", hDao.parejasDisponibles());
+                        request.setAttribute("error2", "El nivel inicial debe ser un numero entre 1 y 100");
+                        RequestDispatcher view = request.getRequestDispatcher("heroes/agregarHeroes.jsp");
+                        view.forward(request, response);
+                        break;
+                    }
                 }catch(NumberFormatException e){
+                    GeneroDao generoDao = new GeneroDao();
+                    request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
+                    ClasesHeroesDao claseHeroesDao = new ClasesHeroesDao();
+                    request.setAttribute("listaClases", claseHeroesDao.obtenerListaClases());
+                    request.setAttribute("parejasDisponibles", hDao.parejasDisponibles());
+                    request.setAttribute("error4", "El campo ingresado debe ser un numero");
+                    RequestDispatcher view = request.getRequestDispatcher("heroes/agregarHeroes.jsp");
+                    view.forward(request, response);
+                    break;
                 }
                 try{
                     //Validar ataque mayor a 0
                     heroe.setAtaque(Integer.parseInt(request.getParameter("ataque")));
+                    if(heroe.getAtaque()==0) {
+                        GeneroDao generoDao = new GeneroDao();
+                        request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
+                        ClasesHeroesDao claseHeroesDao = new ClasesHeroesDao();
+                        request.setAttribute("listaClases", claseHeroesDao.obtenerListaClases());
+                        request.setAttribute("parejasDisponibles", hDao.parejasDisponibles());
+                        request.setAttribute("error3", "El ataque debe ser un numero mayor a 0");
+                        RequestDispatcher view = request.getRequestDispatcher("heroes/agregarHeroes.jsp");
+                        view.forward(request, response);
+                        break;
+                    }
                 }catch(NumberFormatException e){
+                    GeneroDao generoDao = new GeneroDao();
+                    request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
+                    ClasesHeroesDao claseHeroesDao = new ClasesHeroesDao();
+                    request.setAttribute("listaClases", claseHeroesDao.obtenerListaClases());
+                    request.setAttribute("parejasDisponibles", hDao.parejasDisponibles());
+                    request.setAttribute("error4", "El campo ingresado debe ser un numero");
+                    RequestDispatcher view = request.getRequestDispatcher("heroes/agregarHeroes.jsp");
+                    view.forward(request, response);
+                    break;
                 }
                 ClaseHeroes claseHeroes = new ClaseHeroes();
-                try{
-                    claseHeroes.setIdClase(Integer.parseInt(request.getParameter("idClaseHeroe")));
-                    heroe.setClaseHeroes(claseHeroes);
-                }catch(NumberFormatException e){
-                }
+                claseHeroes.setIdClase(Integer.parseInt(request.getParameter("idClaseHeroe")));
+                heroe.setClaseHeroes(claseHeroes);
+
                 Heroe pareja = new Heroe();
-                try{
-                    pareja.setIdHeroe(Integer.parseInt(request.getParameter("idPareja")));
-                    heroe.setPareja(pareja);
-                }catch(NumberFormatException e){
-                }
+                pareja.setIdHeroe(Integer.parseInt(request.getParameter("idPareja")));
+                heroe.setPareja(pareja);
                 ExperienciaDao expDao = new ExperienciaDao();
                 heroe.setPuntosExperiencia(expDao.calcularExperiencia(heroe.getNivelInicial()));
                 heroe.setBorradoLogico(0);
@@ -146,45 +196,104 @@ public class HeroeServlet extends HttpServlet {
             case("actualizarHeroe"):
                 heroe = new Heroe();
                 heroe.setIdHeroe(Integer.parseInt(request.getParameter("idHeroe"))); //debo enviar el id del heroe especifico para poder realizar el update.
-                heroe.setNombre(request.getParameter("nombreHeroe"));
 
-                //Validar una longitud maxima de 10 caracteres para el nombre
+                //Validar una longitud maxima de 10 caracteres para el nombre client-side
                 heroe.setNombre(request.getParameter("nombreHeroe"));
                 try{
                     //Validar el rango de edad entre 8 a 999
                     heroe.setEdad(Integer.parseInt(request.getParameter("edad")));
-
+                    if(heroe.getEdad()<=8 | heroe.getEdad()>=999){
+                        Heroe heroe2 = hDao.obtenerHeroe(heroe.getIdHeroe());
+                        request.setAttribute("heroe", heroe2);
+                        GeneroDao generoDao = new GeneroDao();
+                        request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
+                        ClasesHeroesDao claseHeroesDao = new ClasesHeroesDao();
+                        request.setAttribute("listaClases", claseHeroesDao.obtenerListaClases());
+                        request.setAttribute("parejasDisponibles", hDao.parejasDisponibles1(heroe.getIdHeroe()));
+                        request.setAttribute("error1", "La edad debe ser un numero entre 8 y 999");
+                        RequestDispatcher view = request.getRequestDispatcher("heroes/editarHeroe.jsp");
+                        view.forward(request, response);
+                        break;
+                    }
                 }catch(NumberFormatException e){
+                    Heroe heroe2 = hDao.obtenerHeroe(heroe.getIdHeroe());
+                    request.setAttribute("heroe", heroe2);
+                    GeneroDao generoDao = new GeneroDao();
+                    request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
+                    ClasesHeroesDao claseHeroesDao = new ClasesHeroesDao();
+                    request.setAttribute("listaClases", claseHeroesDao.obtenerListaClases());
+                    request.setAttribute("parejasDisponibles", hDao.parejasDisponibles1(heroe.getIdHeroe()));
+                    request.setAttribute("error4", "El campo ingresado debe ser un numero");
+                    RequestDispatcher view = request.getRequestDispatcher("heroes/editarHeroe.jsp");
+                    view.forward(request, response);
+                    break;
                 }
                 Genero genero2 = new Genero();
-                try{
-                    genero2.setIdGenero(Integer.parseInt(request.getParameter("idGenero")));
-                    heroe.setGenero(genero2);
-                }catch(NumberFormatException e){
-                }
+                genero2.setIdGenero(Integer.parseInt(request.getParameter("idGenero")));
+                heroe.setGenero(genero2);
+
                 try{
                     //Validar rango de nivel entre 1 al 100
                     heroe.setNivelInicial(Integer.parseInt(request.getParameter("nivelInicial")));
-
+                    if(heroe.getNivelInicial()==0 | heroe.getNivelInicial()>=100) {
+                        Heroe heroe2 = hDao.obtenerHeroe(heroe.getIdHeroe());
+                        request.setAttribute("heroe", heroe2);
+                        GeneroDao generoDao = new GeneroDao();
+                        request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
+                        ClasesHeroesDao claseHeroesDao = new ClasesHeroesDao();
+                        request.setAttribute("listaClases", claseHeroesDao.obtenerListaClases());
+                        request.setAttribute("parejasDisponibles", hDao.parejasDisponibles1(heroe.getIdHeroe()));
+                        request.setAttribute("error2", "El nivel inicial debe ser un numero entre 1 y 100");
+                        RequestDispatcher view = request.getRequestDispatcher("heroes/editarHeroe.jsp");
+                        view.forward(request, response);
+                        break;
+                    }
                 }catch(NumberFormatException e){
+                    Heroe heroe2 = hDao.obtenerHeroe(heroe.getIdHeroe());
+                    request.setAttribute("heroe", heroe2);
+                    GeneroDao generoDao = new GeneroDao();
+                    request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
+                    ClasesHeroesDao claseHeroesDao = new ClasesHeroesDao();
+                    request.setAttribute("listaClases", claseHeroesDao.obtenerListaClases());
+                    request.setAttribute("parejasDisponibles", hDao.parejasDisponibles1(heroe.getIdHeroe()));
+                    request.setAttribute("error4", "El campo ingresado debe ser un numero");
+                    RequestDispatcher view = request.getRequestDispatcher("heroes/editarHeroe.jsp");
+                    view.forward(request, response);
+                    break;
                 }
                 try{
                     //Validar ataque mayor a 0
                     heroe.setAtaque(Integer.parseInt(request.getParameter("ataque")));
+                    if(heroe.getAtaque()==0) {
+                        GeneroDao generoDao = new GeneroDao();
+                        request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
+                        ClasesHeroesDao claseHeroesDao = new ClasesHeroesDao();
+                        request.setAttribute("listaClases", claseHeroesDao.obtenerListaClases());
+                        request.setAttribute("parejasDisponibles", hDao.parejasDisponibles());
+                        request.setAttribute("error3", "El ataque debe ser un numero mayor a 0");
+                        RequestDispatcher view = request.getRequestDispatcher("heroes/editarHeroes.jsp");
+                        view.forward(request, response);
+                        break;
+                    }
                 }catch(NumberFormatException e){
+                    GeneroDao generoDao = new GeneroDao();
+                    request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
+                    ClasesHeroesDao claseHeroesDao = new ClasesHeroesDao();
+                    request.setAttribute("listaClases", claseHeroesDao.obtenerListaClases());
+                    request.setAttribute("parejasDisponibles", hDao.parejasDisponibles());
+                    request.setAttribute("error4", "El campo ingresado debe ser un numero");
+                    RequestDispatcher view = request.getRequestDispatcher("heroes/editarHeroes.jsp");
+                    view.forward(request, response);
+                    break;
                 }
                 ClaseHeroes claseHeroes1 = new ClaseHeroes();
-                try{
-                    claseHeroes1.setIdClase(Integer.parseInt(request.getParameter("idClaseHeroe")));
-                    heroe.setClaseHeroes(claseHeroes1);
-                }catch(NumberFormatException e){
-                }
+                claseHeroes1.setIdClase(Integer.parseInt(request.getParameter("idClaseHeroe")));
+                heroe.setClaseHeroes(claseHeroes1);
+
                 Heroe pareja1 = new Heroe();
-                try{
-                    pareja1.setIdHeroe(Integer.parseInt(request.getParameter("idPareja")));
-                    heroe.setPareja(pareja1);
-                }catch(NumberFormatException e){
-                }
+                pareja1.setIdHeroe(Integer.parseInt(request.getParameter("idPareja")));
+                heroe.setPareja(pareja1);
+
                 ExperienciaDao experienciaDao = new ExperienciaDao();
                 heroe.setPuntosExperiencia(experienciaDao.calcularExperiencia(heroe.getNivelInicial()));
 

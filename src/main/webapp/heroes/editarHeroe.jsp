@@ -15,6 +15,10 @@
 <jsp:useBean type="java.util.ArrayList<com.magenta.lab8_magenta.model.beans.Genero>" scope="request" id="listaGeneros"/>
 <jsp:useBean type="java.util.ArrayList<com.magenta.lab8_magenta.model.beans.ClaseHeroes>" scope="request" id="listaClases"/>
 <jsp:useBean type="java.util.ArrayList<com.magenta.lab8_magenta.model.beans.Heroe>" scope="request" id="parejasDisponibles"/>
+<%String error1 = (String) request.getAttribute("error1");%>
+<%String error2 = (String) request.getAttribute("error2");%>
+<%String error3 = (String) request.getAttribute("error3");%>
+<%String error4 = (String) request.getAttribute("error4");%>
 
 <html>
     <head>
@@ -177,8 +181,18 @@
                                             </div>
                                             <div class="col-md">
                                                 <div class="form-floating" style="margin-bottom: 15px;">
-                                                    <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid4" value="<%= heroe.getEdad()%>" placeholder="Edad" name="edad">
+                                                    <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error1!=null?"is-invalid":""%> <%=error4!=null?"is-invalid":""%>"  id="floatingInputGrid4" value="<%= heroe.getEdad()%>" placeholder="Edad" name="edad">
                                                     <label style="color: white" for="floatingInputGrid4" class="label-form-flujousuario">Edad</label>
+                                                    <%if(error1!=null){%>
+                                                    <div id="validationServer" class="invalid-tooltip">
+                                                        <%=error1%>
+                                                    </div>
+                                                    <%}%>
+                                                    <%if(error4!=null){%>
+                                                    <div id="validationServer" class="invalid-tooltip">
+                                                        <%=error4%>
+                                                    </div>
+                                                    <%}%>
                                                 </div>
                                             </div>
                                         </div>
@@ -244,8 +258,18 @@
                                             <div class="col-md">
                                                 <div class="form-floating" style="margin-bottom: 15px;">
                                                     <div class="form-floating" style="margin-bottom: 15px;">
-                                                        <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid12" value="<%= heroe.getNivelInicial()%>" placeholder="Nivel Inicial" name="nivelInicial">
+                                                        <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error2!=null?"is-invalid":""%> <%=error4!=null?"is-invalid":""%>" id="floatingInputGrid12" value="<%= heroe.getNivelInicial()%>" placeholder="Nivel Inicial" name="nivelInicial">
                                                         <label style="color: white" for="floatingInputGrid12" class="label-form-flujousuario">Nivel Inicial</label>
+                                                        <%if(error2!=null){%>
+                                                        <div id="validationServer" class="invalid-tooltip">
+                                                            <%=error2%>
+                                                        </div>
+                                                        <%}%>
+                                                        <%if(error4!=null){%>
+                                                        <div id="validationServer" class="invalid-tooltip">
+                                                            <%=error4%>
+                                                        </div>
+                                                        <%}%>
                                                     </div>
                                                 </div>
                                             </div>
@@ -258,8 +282,18 @@
                                             </div>
                                             <div class="col-md">
                                                 <div class="form-floating" style="margin-bottom: 15px;">
-                                                    <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid20" value="<%= heroe.getAtaque()%>" placeholder="Ataque" name="ataque">
+                                                    <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error3!=null?"is-invalid":""%> <%=error4!=null?"is-invalid":""%>" id="floatingInputGrid20" value="<%= heroe.getAtaque()%>" placeholder="Ataque" name="ataque">
                                                     <label style="color: white" for="floatingInputGrid20" class="label-form-flujousuario">Ataque</label>
+                                                    <%if(error3!=null){%>
+                                                    <div id="validationServer" class="invalid-tooltip">
+                                                        <%=error3%>
+                                                    </div>
+                                                    <%}%>
+                                                    <%if(error4!=null){%>
+                                                    <div id="validationServer" class="invalid-tooltip">
+                                                        <%=error4%>
+                                                    </div>
+                                                    <%}%>
                                                 </div>
                                             </div>
                                         </div>
