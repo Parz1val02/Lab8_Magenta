@@ -9,13 +9,15 @@ import com.magenta.lab8_magenta.model.daos.ClasesEnemigosDao;
 import com.magenta.lab8_magenta.model.daos.EnemigoDao;
 import com.magenta.lab8_magenta.model.daos.GeneroDao;
 import com.magenta.lab8_magenta.model.daos.ObjetoDao;
-    
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
+
+
 
 @WebServlet(name = "EnemigoServlet", value = "/EnemigoServlet")
 public class EnemigoServlet extends HttpServlet {
