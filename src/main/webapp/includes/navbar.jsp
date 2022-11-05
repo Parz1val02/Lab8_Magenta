@@ -6,7 +6,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark">
-    <a class="navbar-brand" href="<%=request.getContextPath()%>/MainServlet" style="font-size: 32px;font-weight: bold">La Ultima Fantasia</a>
+    <a class="navbar-brand" href="<%=request.getContextPath()%>/Wiki?action=MenuPrincipal" style="font-size: 32px;font-weight: bold">La Ultima Fantasia</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>

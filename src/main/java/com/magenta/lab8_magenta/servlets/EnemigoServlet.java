@@ -2,19 +2,22 @@ package com.magenta.lab8_magenta.servlets;
 
 
 import com.magenta.lab8_magenta.model.beans.ClaseEnemigo;
+import com.magenta.lab8_magenta.model.beans.Enemigo;
 import com.magenta.lab8_magenta.model.beans.Genero;
 import com.magenta.lab8_magenta.model.beans.Objeto;
 import com.magenta.lab8_magenta.model.daos.ClasesEnemigosDao;
+import com.magenta.lab8_magenta.model.daos.EnemigoDao;
 import com.magenta.lab8_magenta.model.daos.GeneroDao;
-
-
-import com.magenta.lab8_magenta.model.beans.Enemigo;
+import com.magenta.lab8_magenta.model.daos.ObjetoDao;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
+
+
 
 @WebServlet(name = "EnemigoServlet", value = "/EnemigoServlet")
 public class EnemigoServlet extends HttpServlet {
@@ -24,9 +27,9 @@ public class EnemigoServlet extends HttpServlet {
         String action = request.getParameter("action") == null ? "listaEnemigos" : request.getParameter("action");
 
         RequestDispatcher view;
-        com.magenta.lab8_magenta.model.daos.EnemigoDao enemigoDao = new com.magenta.lab8_magenta.model.daos.EnemigoDao();
+        EnemigoDao enemigoDao = new EnemigoDao();
         GeneroDao generoDao = new GeneroDao();
-        com.magenta.lab8_magenta.model.daos.ObjetoDao objetoDao = new com.magenta.lab8_magenta.model.daos.ObjetoDao();
+        ObjetoDao objetoDao = new ObjetoDao();
         ClasesEnemigosDao claseEnemigoDao = new ClasesEnemigosDao();
 
 
@@ -100,7 +103,7 @@ public class EnemigoServlet extends HttpServlet {
         String action = request.getParameter("action") == null ? "lista" : request.getParameter("action");
 
         Enemigo enemigo;
-        com.magenta.lab8_magenta.model.daos.EnemigoDao enemigoDao = new com.magenta.lab8_magenta.model.daos.EnemigoDao();
+        EnemigoDao enemigoDao = new EnemigoDao();
 
         switch (action) {
             case "guardarEnemigo":
@@ -154,7 +157,7 @@ public class EnemigoServlet extends HttpServlet {
                 claseEnemigo2.setIdClaseEnemigo(Integer.parseInt(request.getParameter("idClaseEnemigo")));
                 enemigo.setClaseEnemigo(claseEnemigo2);
 
-                enemigoDao.guardarEnemigo(enemigo);
+                enemigoDao.actualizarEnemigo(enemigo);
 
                 response.sendRedirect(request.getContextPath() + "/EnemigoServlet?action=listaEnemigos");
 

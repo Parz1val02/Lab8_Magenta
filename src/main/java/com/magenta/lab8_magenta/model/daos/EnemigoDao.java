@@ -5,7 +5,7 @@ import com.magenta.lab8_magenta.model.beans.ClaseEnemigo;
 import com.magenta.lab8_magenta.model.beans.Enemigo;
 import com.magenta.lab8_magenta.model.beans.Genero;
 import com.magenta.lab8_magenta.model.beans.Objeto;
-import com.magenta.lab8_magenta.model.daos.BaseDao;
+
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -127,15 +127,15 @@ public class EnemigoDao extends BaseDao {
             pstmt.setInt(2, enemigo.getAtaque());
             pstmt.setInt(3, enemigo.getExperienciaDerrotado());
             pstmt.setFloat(4, enemigo.getProbDejarObjeto());
-            pstmt.setInt(5, enemigo.getGenero().getIdGenero());
+            pstmt.setInt(6, enemigo.getObjeto().getIdObjeto());
 
             pstmt.setInt(7, enemigo.getClaseEnemigo().getIdClaseEnemigo());
 
 
             if(enemigo.getGenero().getIdGenero() == 0){
-                pstmt.setNull(6,Types.INTEGER);
+                pstmt.setNull(5,Types.INTEGER);
             }else{
-                pstmt.setInt(6, enemigo.getGenero().getIdGenero());
+                pstmt.setInt(5, enemigo.getGenero().getIdGenero());
             }
             pstmt.setInt(8, enemigo.getBorradoLogico());
 
@@ -152,15 +152,14 @@ public class EnemigoDao extends BaseDao {
     public void actualizarEnemigo(Enemigo enemigo) {
 
 
-        String sql = "UPDATE enemigos "
-                + "SET nombreEnemigo = ?, "
-                + "ataque = ?, "
-                + "experienciaDerrotado = ?, "
-                + "probabilidadDejarObjeto = ?, "
-                + "idGenero = ?, "
-                + "idObjeto = ?, "
-                + "idClaseEnemigo = ?"
-                + "WHERE idEnemigo = ?";
+        String sql = "UPDATE enemigos SET nombreEnemigo = ?, \n" +
+                "               ataque = ?, \n" +
+                "                experienciaDerrotado =?,\n" +
+                "                 probabilidadDejarObjeto = ?,\n" +
+                "                idGenero = ?, \n" +
+                "                 idObjeto = ?, \n" +
+                "                idClaseEnemigo = ?\n" +
+                "                WHERE idEnemigo = ?;";
 
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -169,14 +168,16 @@ public class EnemigoDao extends BaseDao {
             pstmt.setInt(2, enemigo.getAtaque());
             pstmt.setInt(3, enemigo.getExperienciaDerrotado());
             pstmt.setFloat(4, enemigo.getProbDejarObjeto());
-            pstmt.setInt(5, enemigo.getGenero().getIdGenero());
+            pstmt.setInt(6, enemigo.getObjeto().getIdObjeto());
             pstmt.setInt(7, enemigo.getClaseEnemigo().getIdClaseEnemigo());
+            pstmt.setInt(8, enemigo.getIdEnemigo());
 
             if(enemigo.getGenero().getIdGenero() == 0){
-                pstmt.setNull(6,Types.INTEGER);
+                pstmt.setNull(5,Types.INTEGER);
             }else{
-                pstmt.setInt(6, enemigo.getGenero().getIdGenero());
+                pstmt.setInt(5, enemigo.getGenero().getIdGenero());
             }
+
             pstmt.executeUpdate();
 
 
