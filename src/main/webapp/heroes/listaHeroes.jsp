@@ -75,9 +75,9 @@
                         <th>Ataque</th>
                         <th>Nombre de la pareja</th>
                         <th>Puntos de experiencia iniciales</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
+                        <th>Inventario</th>
+                        <th>Editar</th>
+                        <th>Borrar</th>
                     </tr>
                     </thead>
 
@@ -109,7 +109,7 @@
                         <td><%=heroe.getPuntosExperiencia()%></td>
                         <td>
                             <a type="button" class="btn btn-success"
-                               href="<%=request.getContextPath()%>/HeroeServlet?action=inventarioHeroe&id=<%=heroe.getIdHeroe()%>">
+                               href="<%=request.getContextPath()%>/InventarioServlet?action=inventarioHeroe&id=<%=heroe.getIdHeroe()%>">
                                 <i class="bi bi-cart-check-fill"></i>
                             </a>
                         </td>

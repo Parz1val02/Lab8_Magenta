@@ -86,24 +86,6 @@ public class HeroeServlet extends HttpServlet {
 
                 response.sendRedirect(request.getContextPath() + "/HeroeServlet");
                 break;
-            case "inventarioHeroe":
-                if (request.getParameter("id") != null) {
-                    String heroeIdString = request.getParameter("id");
-                    int heroeId = 0;
-                    try {
-                        heroeId = Integer.parseInt(heroeIdString);
-                    } catch (NumberFormatException ex) {
-                        response.sendRedirect(request.getContextPath() + "/HeroeServlet");
-                    }
-
-                    Heroe heroe = hDao.obtenerHeroe(heroeId);
-
-
-
-                }
-
-                response.sendRedirect(request.getContextPath() + "/HeroeServlet");
-                break;
         }
 
 

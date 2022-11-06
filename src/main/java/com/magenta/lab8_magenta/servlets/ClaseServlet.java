@@ -51,7 +51,7 @@ import java.util.ArrayList;
                             //request.setAttribute("listaElementos", elemento.obtenerListaElemento());
 
                             request.setAttribute("listaClases", claseEnemigoDao.obtenerListaClases());
-                            view = request.getRequestDispatcher("enemigos/editarPorcentajeDanio.jsp");
+                            view = request.getRequestDispatcher("clases/editarPorcentajeDanio.jsp");
                             view.forward(request, response);
                         } else {
                             response.sendRedirect(request.getContextPath() + "/ClaseServlet");
