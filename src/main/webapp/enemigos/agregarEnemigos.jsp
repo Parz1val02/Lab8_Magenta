@@ -18,9 +18,9 @@
   <link rel="shortcut icon" href="<%=request.getContextPath()%>/static/favicon2.ico" type="image/x-icon">
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-  <link rel="stylesheet" href=../css/style.min.css>
+  <link rel="stylesheet" href=css/style.min.css>
   <!-- CSS de registrar-flujo-usuarioo -->
-  <link rel="stylesheet" href="../css/form1.css">
+  <link rel="stylesheet" href="css/form1.css">
   <style>
     body {
       /*background-color: white;*/
@@ -144,10 +144,10 @@
                     <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
                 </div>
             </div-->
-            <div class="ibox-body" style="padding-top: 35px" >
+            <div class="ibox-body" style="padding-top: 20px; padding-bottom: 20px;padding-left: 15px;padding-right: 15px" >
 
 
-              <form method="post" action="<%=request.getContextPath()%>/EnemigoServlet?action=guardarEnemigo" class="was">
+              <form method="post" action="<%=request.getContextPath()%>/EnemigoServlet?action=guardarEnemigo" >
                 <!-- 1era fila -->
 
                 <div class="row g-2">
@@ -287,11 +287,11 @@
                       </select>
                       <label  style="color: white" for="floatingSelectGrid1" class="label-form-flujousuario">Objeto</label>
                     </div>
-                    <div style="color:#FF0000;"><p text-align="center;" style="margin-top: 1px;" class="font-weight-bold">Todos los campos son obligatorios.</p></div>
+
                   </div>
                 </div>
 
-
+                <div style="color:#FF0000;"><p text-align="center;" style="margin-top: 1px;" class="font-weight-bold">Todos los campos son obligatorios.</p></div>
                 <div class="form-group" style="text-align: right">
                   <button type="submit" class="btn btn-primary"> Agregar Enemigo</button>
                   <a href="<%=request.getContextPath()%>/EnemigoServlet?accion=listaEnemigos" class="btn btn-secondary">Cancelar</a>

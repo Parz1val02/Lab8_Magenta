@@ -3,6 +3,9 @@
 <jsp:useBean type="java.util.ArrayList<com.magenta.lab8_magenta.model.beans.Enemigo>" scope="request" id="listaEnemigos"/>
 
 <%
+    String claseMasComun = (String) request.getAttribute("claseMasComun");
+    String objetoMasComun = (String) request.getAttribute("objetoMasComun");
+    float enemigosSinGenero = (float) request.getAttribute("enemigosSinGenero");
     String searchText = (String) request.getAttribute("searchText");
 %>
 
@@ -42,12 +45,13 @@
     </div>
     <!--FINISH TITLE-->
 
-    <!--CREAR HEROE-->
+    <!--CREAR Enemigo-->
     <a href="<%=request.getContextPath()%>/EnemigoServlet?action=agregarEnemigos" class="btn btn-success">Añadir nuevo Enemigo</a>
-    <!--FINISH CREAR HEROE-->
+    <a href="<%=request.getContextPath()%>/ClaseServlet?action=listaClases" class="btn btn-success">Submenu Clases</a>
+    <!--FINISH CREAR enemigo-->
 
     <!--BUSCAR HEROE POR NOMBRE-->
-    <div class="row align-items-center">
+    <div class="row align-items-center" >
         <div class="col-10">
             <form class="mt-2" method="post" action="<%=request.getContextPath()%>/EnemigoServlet?action=buscarEnemigo">
                 <div class="form-floating mb-3">
@@ -134,6 +138,14 @@
         </table>
     </div>
     <!--FINISH TABLA-->
+
+    <div style="color: white; margin-top: 20px; background-color: #332d2d; padding: 10px">
+        <h2>Estadisticas destacadas <br></h2>
+        <p>Clase mas comun: <%=claseMasComun%></p>
+        <p>Objeto que se deja mas comun: <%=objetoMasComun%> </p>
+        <p>Porcentaje enemigos sin genero: <%=enemigosSinGenero%>%</p>
+
+    </div>
 
 </div>
 </div>
