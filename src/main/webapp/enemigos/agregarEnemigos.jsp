@@ -7,7 +7,7 @@
 <jsp:useBean type="java.util.ArrayList<com.magenta.lab8_magenta.model.beans.Genero>" scope="request" id="listaGeneros"/>
 <jsp:useBean type="java.util.ArrayList<com.magenta.lab8_magenta.model.beans.ClaseEnemigo>" scope="request" id="listaClases"/>
 <%String error1 = (String) request.getAttribute("error1");%>
-<%String error2 = (String) request.getAttribute("error2");
+<%String error2 = (String) request.getAttribute("error2");%>
 <%String error3 = (String) request.getAttribute("error3");%>
 
 <html>

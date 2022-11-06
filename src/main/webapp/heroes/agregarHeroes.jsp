@@ -153,7 +153,7 @@
                                         <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
                                     </div>
                                 </div-->
-                                <div class="ibox-body" style="padding-top: 35px" >
+                                <div class="ibox-body" style="padding-top: 20px; padding-bottom: 20px;padding-left: 15px;padding-right: 15px" >
 
 
                                     <form method="post" action="<%=request.getContextPath()%>/HeroeServlet?action=guardarHeroe">
