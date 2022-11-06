@@ -77,6 +77,7 @@
                         <th>Puntos de experiencia iniciales</th>
                         <th></th>
                         <th></th>
+                        <th></th>
                     </tr>
                     </thead>
 
@@ -107,7 +108,12 @@
                         <%}%>
                         <td><%=heroe.getPuntosExperiencia()%></td>
                         <td>
-
+                            <a type="button" class="btn btn-success"
+                               href="<%=request.getContextPath()%>/HeroeServlet?action=inventarioHeroe&id=<%=heroe.getIdHeroe()%>">
+                                <i class="bi bi-cart-check-fill"></i>
+                            </a>
+                        </td>
+                        <td>
                             <a type="button" class="btn btn-primary"
                                href="<%=request.getContextPath()%>/HeroeServlet?action=editarHeroe&id=<%=heroe.getIdHeroe()%>">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
