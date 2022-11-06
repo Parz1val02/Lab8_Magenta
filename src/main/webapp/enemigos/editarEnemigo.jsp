@@ -147,7 +147,7 @@
                                 <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
                             </div>
                         </div-->
-                        <div class="ibox-body" style="padding-top: 35px" >
+                        <div class="ibox-body" style="padding-top: 20px; padding-bottom: 20px;padding-left: 15px;padding-right: 15px" >
 
 
                             <form method="post" action="<%=request.getContextPath()%>/EnemigoServlet?action=actualizarEnemigo">
@@ -297,9 +297,11 @@
                                             </select>
                                             <label  style="color: white" for="floatingSelectGrid1" class="label-form-flujousuario">Objeto</label>
                                         </div>
-                                        <div style="color:#FF0000;"><p text-align="center;" style="margin-top: 1px;" class="font-weight-bold">Todos los campos son obligatorios.</p></div>
+
                                     </div>
                                 </div>
+
+                                <div style="color:#FF0000;"><p text-align="center;" style="margin-top: 1px;" class="font-weight-bold">Todos los campos son obligatorios.</p></div>
 
 
                                 <div class="form-group" style="text-align: right">

@@ -249,4 +249,98 @@ public class EnemigoDao extends BaseDao {
     }
 
 
+    public String objetoMasComun() {
+
+        // ObjetoMasComun objetoMasComun = new ObjetoMasComun();
+        String nombreObjetoMasComun = null;
+
+        try(Connection conn = getConnection();
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT o.idObjeto, nombreObjeto, count(e.idEnemigo) FROM objetos o \n" +
+                    "inner join magenta.enemigos e on e.idObjeto = o.idObjeto\n" +
+                    "group by o.nombreObjeto\n" +
+                    "order by count(e.idEnemigo) DESC;")) {
+
+            int i = 0;
+            while(rs.next() && i<1){
+                nombreObjetoMasComun=rs.getString(2);
+                i++;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return nombreObjetoMasComun;
+    }
+
+
+
+    //estadisticas
+
+    public String claseEnemigoMasComun() {
+
+        //ClaseMasComun claseMasComun = new ClaseMasComun();
+        String claseMasComun = null;
+
+        try(Connection conn = getConnection();
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT clase.idClaseEnemigo, nombreClase, count(e.idEnemigo) FROM magenta.enemigos e\n" +
+                    "inner join clases_enemigos clase on e.idClaseEnemigo = clase.idClaseEnemigo\n" +
+                    "group by clase.nombreClase\n" +
+                    "order by  count(e.idEnemigo) DESC;")) {
+
+            int i = 0;
+            while(rs.next() && i<1){
+                claseMasComun = rs.getString(2);
+                i++;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return claseMasComun;
+    }
+
+
+
+
+    public float enemigosSinGenero() {
+
+        float porcentajeSinGenero = 0.0f;
+        int nroSinGenero=0;
+        int totalEnemigos=0;
+        boolean valida = false;
+        try(Connection conn = getConnection();
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT count(e.idEnemigo) FROM magenta.enemigos e \n" +
+                    "where e.idGenero is Null;")) {
+
+            while(rs.next() ){
+                nroSinGenero = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try(Connection conn = getConnection();
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT count(idEnemigo) FROM magenta.enemigos;")) {
+
+            while(rs.next() ){
+                totalEnemigos = rs.getInt(1);
+            }
+            valida = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if(valida) {
+            porcentajeSinGenero = ((float)nroSinGenero/totalEnemigos)*100;
+        }
+
+        return porcentajeSinGenero;
+    }
+
 }
