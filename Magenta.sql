@@ -1,7 +1,7 @@
 -- Genero
 insert into genero (inicial) values ("M"), ("F"), ("O");
 -- Elementos    
-insert into elementos (nombreElemento) values ("Fuego"), ("Tierra"), ("Agua"), ("Viento"), ("Void");
+insert into elementos (nombreElemento) values ("Fuego"), ("Tierra"), ("Agua"), ("Viento"),("Hielo"), ("Void");
 -- Clases enemigos
 insert into clases_enemigos (nombreClase) values ("Dragon"), ("Fantasma"), ("Demonio"), ("Pez"), ("Humano"), ("Bestia"), ("Ave"), ("Otros");
 -- Clases heroes

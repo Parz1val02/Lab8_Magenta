@@ -40,7 +40,7 @@ public class EnemigoDao extends BaseDao {
                 objeto.setIdObjeto(rs.getInt("o.idObjeto"));
                 objeto.setNombreObjeto(rs.getString("nombreObjeto"));
                 objeto.setEfecto(rs.getString("efecto"));
-                objeto.setPeso(rs.getString("peso"));
+                objeto.setPeso(rs.getFloat("peso"));
                 enemigo.setObjeto(objeto);
 
                 ClaseEnemigo claseEnemigo = new ClaseEnemigo();
@@ -97,7 +97,7 @@ public class EnemigoDao extends BaseDao {
                     objeto.setIdObjeto(rs.getInt("o.idObjeto"));
                     objeto.setNombreObjeto(rs.getString("nombreObjeto"));
                     objeto.setEfecto(rs.getString("efecto"));
-                    objeto.setPeso(rs.getString("peso"));
+                    objeto.setPeso(rs.getFloat("peso"));
                     enemigo.setObjeto(objeto);
 
                     ClaseEnemigo claseEnemigo = new ClaseEnemigo();
@@ -235,7 +235,7 @@ public class EnemigoDao extends BaseDao {
                     objeto.setIdObjeto(rs.getInt("o.idObjeto"));
                     objeto.setNombreObjeto(rs.getString("nombreObjeto"));
                     objeto.setEfecto(rs.getString("efecto"));
-                    objeto.setPeso(rs.getString("peso"));
+                    objeto.setPeso(rs.getFloat("peso"));
                     enemigo.setObjeto(objeto);
 
                     ClaseEnemigo claseEnemigo = new ClaseEnemigo();

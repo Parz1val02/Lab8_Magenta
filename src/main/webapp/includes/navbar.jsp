@@ -22,10 +22,10 @@
                 <a class="nav-link <%=request.getParameter("page").equals("listaEnemigos")? "active": "" %>" href="<%=request.getContextPath()%>/EnemigoServlet" style="font-size: 17px">Enemigos</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <%=request.getParameter("page").equals("tpc")? "active": "" %>" href="<%=request.getContextPath()%>/HechizoServlet" style="font-size: 17px">Hechizos</a>
+                <a class="nav-link <%=request.getParameter("page").equals("listaHechizos")? "active": "" %>" href="<%=request.getContextPath()%>/HechizoServlet" style="font-size: 17px">Hechizos</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <%=request.getParameter("page").equals("canciones")? "active": "" %>" href="<%=request.getContextPath()%>/ObjetoServlet" style="font-size: 17px">Objetos</a>
+                <a class="nav-link <%=request.getParameter("page").equals("listaObjetos")? "active": "" %>" href="<%=request.getContextPath()%>/ObjetoServlet" style="font-size: 17px">Objetos</a>
             </li>
 
 
