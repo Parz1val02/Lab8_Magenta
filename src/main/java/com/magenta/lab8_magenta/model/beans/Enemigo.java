@@ -5,11 +5,11 @@ public class Enemigo {
     private String nombreEnemigo;
     private int ataque;
     private int experienciaDerrotado;
-    private float probDejarObjeto;
+    private double probDejarObjeto;
     private Genero genero;
     private Objeto objeto;
     private ClaseEnemigo claseEnemigo;
-
+    private int BorradoLogico;
 
     public int getIdEnemigo() {
         return idEnemigo;
@@ -43,11 +43,11 @@ public class Enemigo {
         this.experienciaDerrotado = experienciaDerrotado;
     }
 
-    public float getProbDejarObjeto() {
+    public double getProbDejarObjeto() {
         return probDejarObjeto;
     }
 
-    public void setProbDejarObjeto(float probDejarObjeto) {
+    public void setProbDejarObjeto(double probDejarObjeto) {
         this.probDejarObjeto = probDejarObjeto;
     }
 
@@ -73,5 +73,13 @@ public class Enemigo {
 
     public void setClaseEnemigo(ClaseEnemigo claseEnemigo) {
         this.claseEnemigo = claseEnemigo;
+    }
+
+    public int getBorradoLogico() {
+        return BorradoLogico;
+    }
+
+    public void setBorradoLogico(int borradoLogico) {
+        BorradoLogico = borradoLogico;
     }
 }

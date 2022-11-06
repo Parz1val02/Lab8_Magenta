@@ -1,11 +1,11 @@
 package com.magenta.lab8_magenta.model.daos;
 
+import com.magenta.lab8_magenta.model.beans.ClaseEnemigo;
 import com.magenta.lab8_magenta.model.beans.ClaseHeroes;
+import com.magenta.lab8_magenta.model.beans.Heroe;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 
 public class ClasesHeroesDao extends BaseDao{
 
@@ -30,4 +30,29 @@ public class ClasesHeroesDao extends BaseDao{
         }
         return claseHeroes;
     }
+
+    public ArrayList<ClaseHeroes> obtenerListaClases() {
+
+        ArrayList<ClaseHeroes> listaClases= new ArrayList<>();
+        try (Connection conn = getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("select * from clases_heroes")) {
+
+            while (rs.next()) {
+                ClaseHeroes claseHeroe = new ClaseHeroes();
+                claseHeroe.setIdClase(rs.getInt(1));
+                claseHeroe.setNombreClase(rs.getString(2));
+
+                listaClases.add(claseHeroe);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+
+        }
+        return listaClases;
+    }
+
+
+
 }

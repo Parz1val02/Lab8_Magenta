@@ -3,7 +3,12 @@
   <component name="WebContextManager">
     <option name="state">
       <map>
+<<<<<<< HEAD
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Hechizos/hechizos.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Hechizos" />
+=======
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/enemigos/agregarEnemigos.jsp" value="file://$PROJECT_DIR$/src/main/webapp/enemigos" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/heroes/agregarHeroes.jsp" value="file://$PROJECT_DIR$/src/main/webapp/heroes" />
+>>>>>>> a21b465c0718282be0e72e2c307de1994b7b534d
       </map>
     </option>
   </component>

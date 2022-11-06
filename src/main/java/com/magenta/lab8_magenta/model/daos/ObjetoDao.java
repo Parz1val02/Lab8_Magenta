@@ -52,7 +52,12 @@ public class ObjetoDao  extends BaseDao {
                 objeto.setIdObjeto(rs.getInt(1));
                 objeto.setNombreObjeto(rs.getString(2));
                 objeto.setEfecto(rs.getString(3));
+<<<<<<< HEAD
                 objeto.setPeso(rs.getFloat(4));
+=======
+                objeto.setPeso(rs.getDouble(4));
+                listaObjetos.add(objeto);
+>>>>>>> a21b465c0718282be0e72e2c307de1994b7b534d
             }
 
         } catch (SQLException e) {

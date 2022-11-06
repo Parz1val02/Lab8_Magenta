@@ -5,14 +5,13 @@ public class Heroe {
     private int idHeroe;
     private String nombre;
     private int edad;
-
     private double puntosExperiencia;
-
     private int nivelInicial;
     private int ataque;
     private Heroe pareja;
     private Genero genero;
     private ClaseHeroes claseHeroes;
+    private int BorradoLogico;
 
     public int getIdHeroe() {
         return idHeroe;
@@ -85,5 +84,13 @@ public class Heroe {
 
     public void setClaseHeroes(ClaseHeroes claseHeroes) {
         this.claseHeroes = claseHeroes;
+    }
+
+    public int getBorradoLogico() {
+        return BorradoLogico;
+    }
+
+    public void setBorradoLogico(int borradoLogico) {
+        BorradoLogico = borradoLogico;
     }
 }

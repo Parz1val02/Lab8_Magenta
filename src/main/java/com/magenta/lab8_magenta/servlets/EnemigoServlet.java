@@ -1,14 +1,10 @@
 package com.magenta.lab8_magenta.servlets;
 
-
 import com.magenta.lab8_magenta.model.beans.ClaseEnemigo;
 import com.magenta.lab8_magenta.model.beans.Enemigo;
 import com.magenta.lab8_magenta.model.beans.Genero;
 import com.magenta.lab8_magenta.model.beans.Objeto;
-import com.magenta.lab8_magenta.model.daos.ClasesEnemigosDao;
-import com.magenta.lab8_magenta.model.daos.EnemigoDao;
-import com.magenta.lab8_magenta.model.daos.GeneroDao;
-import com.magenta.lab8_magenta.model.daos.ObjetoDao;
+import com.magenta.lab8_magenta.model.daos.*;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -35,6 +31,17 @@ public class EnemigoServlet extends HttpServlet {
 
         switch (action) {
             case "listaEnemigos":
+                /*para estadisticas a mostrar en MenuEnemigo*/
+                String claseMasComun = enemigoDao.claseEnemigoMasComun();
+                request.setAttribute("claseMasComun",claseMasComun);
+
+                String objetoMasComun = enemigoDao.objetoMasComun();
+                request.setAttribute("objetoMasComun",objetoMasComun);
+
+                float enemigosSinGenero = enemigoDao.enemigosSinGenero();
+                request.setAttribute("enemigosSinGenero",enemigosSinGenero);
+                /*FINISH para estadisticas a mostrar en MenuEnemigo*/
+
                 request.setAttribute("listaEnemigos", enemigoDao.obtenerListaEnemigos());
                 view = request.getRequestDispatcher("enemigos/listaEnemigos.jsp");
                 view.forward(request, response);
@@ -53,7 +60,7 @@ public class EnemigoServlet extends HttpServlet {
                     try {
                         enemigoId = Integer.parseInt(enemigoIdString);
                     } catch (NumberFormatException ex) {
-                        response.sendRedirect(request.getContextPath() + "EnemigoServlet");
+                        response.sendRedirect(request.getContextPath() + "/EnemigoServlet");
                     }
 
                     Enemigo enemigo = enemigoDao.obtenerEnemigo(enemigoId);
@@ -110,10 +117,62 @@ public class EnemigoServlet extends HttpServlet {
 
                 enemigo = new Enemigo();
 
-                enemigo.setNombreEnemigo(request.getParameter("nombreEnemigo"));
-                enemigo.setAtaque(Integer.parseInt(request.getParameter("ataque")));
-                enemigo.setExperienciaDerrotado(Integer.parseInt(request.getParameter("experienciaDerrotado")));
-                enemigo.setProbDejarObjeto(Float.parseFloat(request.getParameter("probabilidadDejarObjeto")));
+                if(request.getParameter("nombreEnemigo").matches("[a-zA-Z]+$")) {
+                    enemigo.setNombreEnemigo(request.getParameter("nombreEnemigo"));
+                }else{
+                    ObjetoDao objetoDao = new ObjetoDao();
+                    request.setAttribute("listaObjetos", objetoDao.obtenerListaObjetos());
+                    GeneroDao generoDao = new GeneroDao();
+                    request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
+                    ClasesEnemigosDao claseEnemigoDao = new ClasesEnemigosDao();
+                    request.setAttribute("listaClases", claseEnemigoDao.obtenerListaClases());
+                    RequestDispatcher view = request.getRequestDispatcher("enemigos/agregarEnemigos.jsp");
+                    request.setAttribute("error3", "El campo ingresado solo debe contener letras");
+                    view.forward(request, response);
+                    break;
+                }
+                try {
+                    enemigo.setAtaque(Integer.parseInt(request.getParameter("ataque")));
+                }catch (NumberFormatException e){
+                    ObjetoDao objetoDao = new ObjetoDao();
+                    request.setAttribute("listaObjetos", objetoDao.obtenerListaObjetos());
+                    GeneroDao generoDao = new GeneroDao();
+                    request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
+                    ClasesEnemigosDao claseEnemigoDao = new ClasesEnemigosDao();
+                    request.setAttribute("listaClases", claseEnemigoDao.obtenerListaClases());
+                    RequestDispatcher view = request.getRequestDispatcher("enemigos/agregarEnemigos.jsp");
+                    request.setAttribute("error1", "El campo ingresado debe ser un numero entero");
+                    view.forward(request, response);
+                    break;
+                }
+                try {
+                    enemigo.setExperienciaDerrotado(Integer.parseInt(request.getParameter("experienciaDerrotado")));
+                }catch (NumberFormatException e){
+                    ObjetoDao objetoDao = new ObjetoDao();
+                    request.setAttribute("listaObjetos", objetoDao.obtenerListaObjetos());
+                    GeneroDao generoDao = new GeneroDao();
+                    request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
+                    ClasesEnemigosDao claseEnemigoDao = new ClasesEnemigosDao();
+                    request.setAttribute("listaClases", claseEnemigoDao.obtenerListaClases());
+                    RequestDispatcher view = request.getRequestDispatcher("enemigos/agregarEnemigos.jsp");
+                    request.setAttribute("error1", "El campo ingresado debe ser un numero entero");
+                    view.forward(request, response);
+                    break;
+                }
+                try {
+                    enemigo.setProbDejarObjeto(Double.parseDouble(request.getParameter("probabilidadDejarObjeto")));
+                }catch (NumberFormatException e){
+                    ObjetoDao objetoDao = new ObjetoDao();
+                    request.setAttribute("listaObjetos", objetoDao.obtenerListaObjetos());
+                    GeneroDao generoDao = new GeneroDao();
+                    request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
+                    ClasesEnemigosDao claseEnemigoDao = new ClasesEnemigosDao();
+                    request.setAttribute("listaClases", claseEnemigoDao.obtenerListaClases());
+                    RequestDispatcher view = request.getRequestDispatcher("enemigos/agregarEnemigos.jsp");
+                    request.setAttribute("error2", "El campo ingresado debe ser un numero decimal");
+                    view.forward(request, response);
+                    break;
+                }
 
 
                 Genero genero = new Genero();
@@ -128,7 +187,7 @@ public class EnemigoServlet extends HttpServlet {
                 ClaseEnemigo claseEnemigo = new ClaseEnemigo();
                 claseEnemigo.setIdClaseEnemigo(Integer.parseInt(request.getParameter("idClaseEnemigo")));
                 enemigo.setClaseEnemigo(claseEnemigo);
-
+                enemigo.setBorradoLogico(0);
                 enemigoDao.guardarEnemigo(enemigo);
 
                 response.sendRedirect(request.getContextPath() + "/EnemigoServlet?action=listaEnemigos");
@@ -138,11 +197,71 @@ public class EnemigoServlet extends HttpServlet {
 
                 enemigo.setIdEnemigo(Integer.parseInt(request.getParameter("idEnemigo"))); //debo enviar el id del enemigo especifico para poder realizar el update.
 
-                enemigo.setNombreEnemigo(request.getParameter("nombreEnemigo"));
-                enemigo.setAtaque(Integer.parseInt(request.getParameter("ataque")));
-                enemigo.setExperienciaDerrotado(Integer.parseInt(request.getParameter("experienciaDerrotado")));
-                enemigo.setProbDejarObjeto(Float.parseFloat(request.getParameter("probabilidadDejarObjeto")));
+                if(request.getParameter("nombreEnemigo").matches("[a-zA-Z]+$")) {
+                    enemigo.setNombreEnemigo(request.getParameter("nombreEnemigo"));
+                }else{
+                    Enemigo enemigo2 = enemigoDao.obtenerEnemigo(enemigo.getIdEnemigo());
+                    request.setAttribute("enemigo", enemigo2);
+                    ObjetoDao objetoDao = new ObjetoDao();
+                    request.setAttribute("listaObjetos", objetoDao.obtenerListaObjetos());
+                    GeneroDao generoDao = new GeneroDao();
+                    request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
+                    ClasesEnemigosDao claseEnemigoDao = new ClasesEnemigosDao();
+                    request.setAttribute("listaClases", claseEnemigoDao.obtenerListaClases());
+                    RequestDispatcher view = request.getRequestDispatcher("enemigos/editarEnemigo.jsp");
+                    request.setAttribute("error3", "El campo ingresado solo debe contener letras");
+                    view.forward(request, response);
+                    break;
+                }
+                try{
+                    enemigo.setAtaque(Integer.parseInt(request.getParameter("ataque")));
 
+                }catch(NumberFormatException e){
+                    Enemigo enemigo2 = enemigoDao.obtenerEnemigo(enemigo.getIdEnemigo());
+                    request.setAttribute("enemigo", enemigo2);
+                    ObjetoDao objetoDao = new ObjetoDao();
+                    request.setAttribute("listaObjetos", objetoDao.obtenerListaObjetos());
+                    GeneroDao generoDao = new GeneroDao();
+                    request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
+                    ClasesEnemigosDao claseEnemigoDao = new ClasesEnemigosDao();
+                    request.setAttribute("listaClases", claseEnemigoDao.obtenerListaClases());
+                    RequestDispatcher view = request.getRequestDispatcher("enemigos/editarEnemigo.jsp");
+                    request.setAttribute("error1", "El campo ingresado debe ser un numero entero");
+                    view.forward(request, response);
+                    break;
+                }
+                try{
+                    enemigo.setExperienciaDerrotado(Integer.parseInt(request.getParameter("experienciaDerrotado")));
+                }catch(NumberFormatException e){
+                    Enemigo enemigo2 = enemigoDao.obtenerEnemigo(enemigo.getIdEnemigo());
+                    request.setAttribute("enemigo", enemigo2);
+                    ObjetoDao objetoDao = new ObjetoDao();
+                    request.setAttribute("listaObjetos", objetoDao.obtenerListaObjetos());
+                    GeneroDao generoDao = new GeneroDao();
+                    request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
+                    ClasesEnemigosDao claseEnemigoDao = new ClasesEnemigosDao();
+                    request.setAttribute("listaClases", claseEnemigoDao.obtenerListaClases());
+                    RequestDispatcher view = request.getRequestDispatcher("enemigos/editarEnemigo.jsp");
+                    request.setAttribute("error1", "El campo ingresado debe ser un numero entero");
+                    view.forward(request, response);
+                    break;
+                }
+                try{
+                    enemigo.setProbDejarObjeto(Double.parseDouble(request.getParameter("probabilidadDejarObjeto")));
+                }catch(NumberFormatException e){
+                    Enemigo enemigo2 = enemigoDao.obtenerEnemigo(enemigo.getIdEnemigo());
+                    request.setAttribute("enemigo", enemigo2);
+                    ObjetoDao objetoDao = new ObjetoDao();
+                    request.setAttribute("listaObjetos", objetoDao.obtenerListaObjetos());
+                    GeneroDao generoDao = new GeneroDao();
+                    request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
+                    ClasesEnemigosDao claseEnemigoDao = new ClasesEnemigosDao();
+                    request.setAttribute("listaClases", claseEnemigoDao.obtenerListaClases());
+                    RequestDispatcher view = request.getRequestDispatcher("enemigos/editarEnemigo.jsp");
+                    request.setAttribute("error2", "El campo ingresado debe ser un numero decimal");
+                    view.forward(request, response);
+                    break;
+                }
 
                 Genero genero1 = new Genero();
                 genero1.setIdGenero(Integer.parseInt(request.getParameter("idGenero")));
@@ -164,6 +283,16 @@ public class EnemigoServlet extends HttpServlet {
                 break;
             case "buscarEnemigo":
                 String searchText = request.getParameter("searchText");
+
+                String claseMasComun = enemigoDao.claseEnemigoMasComun();
+                request.setAttribute("claseMasComun",claseMasComun);
+
+                String objetoMasComun = enemigoDao.objetoMasComun();
+                request.setAttribute("objetoMasComun",objetoMasComun);
+
+                float enemigosSinGenero = enemigoDao.enemigosSinGenero();
+                request.setAttribute("enemigosSinGenero",enemigosSinGenero);
+
 
                 ArrayList<Enemigo> listaEnemigosPorNombre = enemigoDao.buscarPorNombreEnemigo(searchText);
                 request.setAttribute("listaEnemigos", listaEnemigosPorNombre);

@@ -9,6 +9,9 @@
 <jsp:useBean type="java.util.ArrayList<com.magenta.lab8_magenta.model.beans.Objeto>" scope="request" id="listaObjetos"/>
 <jsp:useBean type="java.util.ArrayList<com.magenta.lab8_magenta.model.beans.Genero>" scope="request" id="listaGeneros"/>
 <jsp:useBean type="java.util.ArrayList<com.magenta.lab8_magenta.model.beans.ClaseEnemigo>" scope="request" id="listaClases"/>
+<%String error1 = (String) request.getAttribute("error1");%>
+<%String error2 = (String) request.getAttribute("error2");%>
+<%String error3 = (String) request.getAttribute("error3");%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -18,9 +21,9 @@
     <link rel="shortcut icon" href="<%=request.getContextPath()%>/static/favicon2.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href=css/style.min.css>
+    <link rel="stylesheet" href=../css/style.min.css>
     <!-- CSS de registrar-flujo-usuarioo -->
-    <link rel="stylesheet" href="css/form1.css">
+    <link rel="stylesheet" href="../css/form1.css">
     <style>
         body {
             /*background-color: white;*/
@@ -124,7 +127,7 @@
         <!--TITLE-->
         <div class="pt-4 titlecolor">
             <div class="col-lg-6">
-                <h1 class='text-dark' class='text-dark' style="color: #6f2e91 !important;font-weight: bold ">Agregar Enemigos</h1>
+                <h1 class='text-dark' class='text-dark' style="color: #6f2e91 !important;font-weight: bold ">Editar Enemigos</h1>
             </div>
         </div>
         <!--FINISH TITLE-->
@@ -144,7 +147,7 @@
                                 <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
                             </div>
                         </div-->
-                        <div class="ibox-body" style="padding-top: 35px" >
+                        <div class="ibox-body" style="padding-top: 20px; padding-bottom: 20px;padding-left: 15px;padding-right: 15px" >
 
 
                             <form method="post" action="<%=request.getContextPath()%>/EnemigoServlet?action=actualizarEnemigo">
@@ -157,8 +160,13 @@
                                     <div class="col-md">
                                         <input type="hidden" name="idEnemigo" value="<%= enemigo.getIdEnemigo()%>"/>
                                         <div class="form-floating" style="margin-bottom: 15px">
-                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid2" value="<%= enemigo.getNombreEnemigo()%>" placeholder="Nombre Enemigo" name="nombreEnemigo">
+                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error3!=null?"is-invalid":""%>" id="floatingInputGrid2" value="<%= enemigo.getNombreEnemigo()%>" placeholder="Nombre Enemigo" name="nombreEnemigo">
                                             <label style="color: white" for="floatingInputGrid2" class="label-form-flujousuario">Nombre Enemigo</label>
+                                            <%if(error3!=null){%>
+                                            <div id="validationServer" class="invalid-tooltip">
+                                                <%=error3%>
+                                            </div>
+                                            <%}%>
                                         </div>
                                     </div>
                                 </div>
@@ -169,8 +177,13 @@
                                     </div>
                                     <div class="col-md">
                                         <div class="form-floating" style="margin-bottom: 15px;">
-                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid4" value="<%= enemigo.getAtaque()%>" placeholder="Ataque" name="ataque">
+                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error1!=null?"is-invalid":""%>" id="floatingInputGrid4" value="<%= enemigo.getAtaque()%>" placeholder="Ataque" name="ataque">
                                             <label style="color: white" for="floatingInputGrid4" class="label-form-flujousuario">Ataque</label>
+                                            <%if(error1!=null){%>
+                                            <div id="validationServer" class="invalid-tooltip">
+                                                <%=error1%>
+                                            </div>
+                                            <%}%>
                                         </div>
                                     </div>
                                 </div>
@@ -183,8 +196,13 @@
                                     <div class="col-md">
                                         <div class="form-floating" style="margin-bottom: 15px;">
                                             <div class="form-floating" style="margin-bottom: 15px;">
-                                                <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid12" value="<%= enemigo.getExperienciaDerrotado()%>" placeholder="Experiencia al ser Derrotado" name="experienciaDerrotado">
+                                                <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error1!=null?"is-invalid":""%>" id="floatingInputGrid12" value="<%= enemigo.getExperienciaDerrotado()%>" placeholder="Experiencia al ser Derrotado" name="experienciaDerrotado">
                                                 <label style="color: white" for="floatingInputGrid12" class="label-form-flujousuario">Experiencia al ser Derrotado</label>
+                                                <%if(error1!=null){%>
+                                                <div id="validationServer" class="invalid-tooltip">
+                                                    <%=error1%>
+                                                </div>
+                                                <%}%>
                                             </div>
                                         </div>
                                     </div>
@@ -198,8 +216,13 @@
                                     </div>
                                     <div class="col-md">
                                         <div class="form-floating" style="margin-bottom: 15px;">
-                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid20" value="<%= enemigo.getProbDejarObjeto()%>" placeholder="Probabilidad de dejar Objeto" name="probabilidadDejarObjeto">
+                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error2!=null?"is-invalid":""%>" id="floatingInputGrid20" value="<%= enemigo.getProbDejarObjeto()%>" placeholder="Probabilidad de dejar Objeto" name="probabilidadDejarObjeto">
                                             <label style="color: white" for="floatingInputGrid20" class="label-form-flujousuario">Probabilidad de dejar Objeto</label>
+                                            <%if(error2!=null){%>
+                                            <div id="validationServer" class="invalid-tooltip">
+                                                <%=error2%>
+                                            </div>
+                                            <%}%>
                                         </div>
                                     </div>
                                 </div>
@@ -236,8 +259,20 @@
                                         <div class="form-floating " style="margin-bottom: 15px;">
                                             <select style="background-color: #4d4545;color: white" class="form-select" id="floatingSelectGrid2" name="idGenero">
                                                 <option value="0"> -- </option>
-                                                <% for (Genero genero : listaGeneros) { %>
-                                                <option value="<%=genero.getIdGenero()%>"  <%=enemigo.getGenero().getIdGenero() == genero.getIdGenero() ? "selected" : ""%>    >   <%=genero.getInicial()%>
+                                                <% String gender="";
+                                                for (Genero genero : listaGeneros) {
+                                                    switch(genero.getInicial()) {
+                                                        case "M":
+                                                            gender = "Masculino";
+                                                            break;
+                                                        case "F":
+                                                            gender = "Femenino";
+                                                            break;
+                                                        case "O":
+                                                            gender = "Otro";
+                                                            break;
+                                                    }%>
+                                                <option value="<%=genero.getIdGenero()%>"  <%=enemigo.getGenero().getIdGenero() == genero.getIdGenero() ? "selected" : ""%>><%=gender%>
                                                 </option>
                                                 <% } %>
                                             </select>
@@ -262,9 +297,11 @@
                                             </select>
                                             <label  style="color: white" for="floatingSelectGrid1" class="label-form-flujousuario">Objeto</label>
                                         </div>
-                                        <div style="color:#FF0000;"><p text-align="center;" style="margin-top: 1px;" class="font-weight-bold">Todos los campos son obligatorios.</p></div>
+
                                     </div>
                                 </div>
+
+                                <div style="color:#FF0000;"><p text-align="center;" style="margin-top: 1px;" class="font-weight-bold">Todos los campos son obligatorios.</p></div>
 
 
                                 <div class="form-group" style="text-align: right">

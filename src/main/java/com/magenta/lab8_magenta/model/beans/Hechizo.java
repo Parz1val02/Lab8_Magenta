@@ -9,6 +9,7 @@ public class Hechizo {
     private boolean desbloqueado;
     private Elemento elemento;
     private Hechizo hechizoBase;
+<<<<<<< HEAD
     private boolean borradoLogico;
 
     public boolean isBorradoLogico() {
@@ -18,6 +19,9 @@ public class Hechizo {
     public void setBorradoLogico(boolean borradoLogico) {
         this.borradoLogico = borradoLogico;
     }
+=======
+    private int BorradoLogico;
+>>>>>>> a21b465c0718282be0e72e2c307de1994b7b534d
 
     public int getIdHechizo() {
         return idHechizo;
@@ -81,5 +85,13 @@ public class Hechizo {
 
     public void setHechizoBase(Hechizo hechizoBase) {
         this.hechizoBase = hechizoBase;
+    }
+
+    public int getBorradoLogico() {
+        return BorradoLogico;
+    }
+
+    public void setBorradoLogico(int borradoLogico) {
+        BorradoLogico = borradoLogico;
     }
 }
