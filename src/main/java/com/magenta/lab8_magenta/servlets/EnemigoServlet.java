@@ -32,6 +32,20 @@ public class EnemigoServlet extends HttpServlet {
 
         switch (action) {
             case "listaEnemigos":
+
+                /*para estadisticas a mostrar en MenuEnemigo*/
+                String claseMasComun = enemigoDao.claseEnemigoMasComun();
+                request.setAttribute("claseMasComun",claseMasComun);
+
+                String objetoMasComun = enemigoDao.objetoMasComun();
+                request.setAttribute("objetoMasComun",objetoMasComun);
+
+                float enemigosSinGenero = enemigoDao.enemigosSinGenero();
+                request.setAttribute("enemigosSinGenero",enemigosSinGenero);
+                /*FINISH para estadisticas a mostrar en MenuEnemigo*/
+
+
+
                 request.setAttribute("listaEnemigos", enemigoDao.obtenerListaEnemigos());
                 view = request.getRequestDispatcher("enemigos/listaEnemigos.jsp");
                 view.forward(request, response);
@@ -137,7 +151,7 @@ public class EnemigoServlet extends HttpServlet {
                     break;
                 }
                 try {
-                    enemigo.setProbDejarObjeto(Float.parseFloat(request.getParameter("probabilidadDejarObjeto")));
+                    enemigo.setProbDejarObjeto(Double.parseDouble(request.getParameter("probabilidadDejarObjeto"))); //parseDouble
                 }catch (NumberFormatException e){
                     ObjetoDao objetoDao = new ObjetoDao();
                     request.setAttribute("listaObjetos", objetoDao.obtenerListaObjetos());
@@ -245,6 +259,15 @@ public class EnemigoServlet extends HttpServlet {
                 break;
             case "buscarEnemigo":
                 String searchText = request.getParameter("searchText");
+
+                String claseMasComun = enemigoDao.claseEnemigoMasComun();
+                request.setAttribute("claseMasComun",claseMasComun);
+
+                String objetoMasComun = enemigoDao.objetoMasComun();
+                request.setAttribute("objetoMasComun",objetoMasComun);
+
+                float enemigosSinGenero = enemigoDao.enemigosSinGenero();
+                request.setAttribute("enemigosSinGenero",enemigosSinGenero);
 
                 ArrayList<Enemigo> listaEnemigosPorNombre = enemigoDao.buscarPorNombreEnemigo(searchText);
                 request.setAttribute("listaEnemigos", listaEnemigosPorNombre);
