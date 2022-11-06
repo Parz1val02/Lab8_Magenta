@@ -11,6 +11,7 @@
 <jsp:useBean type="java.util.ArrayList<com.magenta.lab8_magenta.model.beans.ClaseEnemigo>" scope="request" id="listaClases"/>
 <%String error1 = (String) request.getAttribute("error1");%>
 <%String error2 = (String) request.getAttribute("error2");%>
+<%String error3 = (String) request.getAttribute("error3");%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -20,9 +21,9 @@
     <link rel="shortcut icon" href="<%=request.getContextPath()%>/static/favicon2.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href=css/style.min.css>
+    <link rel="stylesheet" href=../css/style.min.css>
     <!-- CSS de registrar-flujo-usuarioo -->
-    <link rel="stylesheet" href="css/form1.css">
+    <link rel="stylesheet" href="../css/form1.css">
     <style>
         body {
             /*background-color: white;*/
@@ -126,7 +127,7 @@
         <!--TITLE-->
         <div class="pt-4 titlecolor">
             <div class="col-lg-6">
-                <h1 class='text-dark' class='text-dark' style="color: #6f2e91 !important;font-weight: bold ">Agregar Enemigos</h1>
+                <h1 class='text-dark' class='text-dark' style="color: #6f2e91 !important;font-weight: bold ">Editar Enemigos</h1>
             </div>
         </div>
         <!--FINISH TITLE-->
@@ -159,8 +160,13 @@
                                     <div class="col-md">
                                         <input type="hidden" name="idEnemigo" value="<%= enemigo.getIdEnemigo()%>"/>
                                         <div class="form-floating" style="margin-bottom: 15px">
-                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid2" value="<%= enemigo.getNombreEnemigo()%>" placeholder="Nombre Enemigo" name="nombreEnemigo">
+                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error3!=null?"is-invalid":""%>" id="floatingInputGrid2" value="<%= enemigo.getNombreEnemigo()%>" placeholder="Nombre Enemigo" name="nombreEnemigo">
                                             <label style="color: white" for="floatingInputGrid2" class="label-form-flujousuario">Nombre Enemigo</label>
+                                            <%if(error3!=null){%>
+                                            <div id="validationServer" class="invalid-tooltip">
+                                                <%=error3%>
+                                            </div>
+                                            <%}%>
                                         </div>
                                     </div>
                                 </div>

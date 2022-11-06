@@ -28,7 +28,7 @@ public class EnemigoDao extends BaseDao {
                 enemigo.setNombreEnemigo(rs.getString(2));
                 enemigo.setAtaque(rs.getInt(3));
                 enemigo.setExperienciaDerrotado(rs.getInt(4));
-                enemigo.setProbDejarObjeto(rs.getFloat(5));
+                enemigo.setProbDejarObjeto(rs.getDouble(5));
 
                 Genero genero = new Genero();
                 genero.setIdGenero(rs.getInt("g.idGenero"));
@@ -81,7 +81,7 @@ public class EnemigoDao extends BaseDao {
                     enemigo.setNombreEnemigo(rs.getString(2));
                     enemigo.setAtaque(rs.getInt(3));
                     enemigo.setExperienciaDerrotado(rs.getInt(4));
-                    enemigo.setProbDejarObjeto(rs.getFloat(5));
+                    enemigo.setProbDejarObjeto(rs.getDouble(5));
 
                     Genero genero = new Genero();
                     genero.setIdGenero(rs.getInt("g.idGenero"));
@@ -218,7 +218,7 @@ public class EnemigoDao extends BaseDao {
                     enemigo.setNombreEnemigo(rs.getString(2));
                     enemigo.setAtaque(rs.getInt(3));
                     enemigo.setExperienciaDerrotado(rs.getInt(4));
-                    enemigo.setProbDejarObjeto(rs.getFloat(5));
+                    enemigo.setProbDejarObjeto(rs.getDouble(5));
 
                     Genero genero = new Genero();
                     genero.setIdGenero(rs.getInt("g.idGenero"));

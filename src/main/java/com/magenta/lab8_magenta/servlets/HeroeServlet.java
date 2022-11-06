@@ -100,7 +100,19 @@ public class HeroeServlet extends HttpServlet {
             case "guardarHeroe":
                 Heroe heroe = new Heroe();
                 //Validar una longitud maxima de 10 caracteres para el nombre client-side
-                heroe.setNombre(request.getParameter("nombreHeroe"));
+                if(request.getParameter("nombreHeroe").matches("[a-zA-Z]+$")){
+                    heroe.setNombre(request.getParameter("nombreHeroe"));
+                }else{
+                    GeneroDao generoDao = new GeneroDao();
+                    request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
+                    ClasesHeroesDao claseHeroesDao = new ClasesHeroesDao();
+                    request.setAttribute("listaClases", claseHeroesDao.obtenerListaClases());
+                    request.setAttribute("parejasDisponibles", hDao.parejasDisponibles());
+                    request.setAttribute("error5", "El campo ingresado solo debe contener letras");
+                    RequestDispatcher view = request.getRequestDispatcher("heroes/agregarHeroes.jsp");
+                    view.forward(request, response);
+                    break;
+                }
                 try{
                     //Validar el rango de edad entre 8 a 999
                     heroe.setEdad(Integer.parseInt(request.getParameter("edad")));
@@ -198,7 +210,21 @@ public class HeroeServlet extends HttpServlet {
                 heroe.setIdHeroe(Integer.parseInt(request.getParameter("idHeroe"))); //debo enviar el id del heroe especifico para poder realizar el update.
 
                 //Validar una longitud maxima de 10 caracteres para el nombre client-side
-                heroe.setNombre(request.getParameter("nombreHeroe"));
+                if(request.getParameter("nombreHeroe").matches("[a-zA-Z]+$")){
+                    heroe.setNombre(request.getParameter("nombreHeroe"));
+                }else{
+                    Heroe heroe2 = hDao.obtenerHeroe(heroe.getIdHeroe());
+                    request.setAttribute("heroe", heroe2);
+                    GeneroDao generoDao = new GeneroDao();
+                    request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
+                    ClasesHeroesDao claseHeroesDao = new ClasesHeroesDao();
+                    request.setAttribute("listaClases", claseHeroesDao.obtenerListaClases());
+                    request.setAttribute("parejasDisponibles", hDao.parejasDisponibles1(heroe.getIdHeroe()));
+                    request.setAttribute("error5", "El campo ingresaro solo debe contener letras");
+                    RequestDispatcher view = request.getRequestDispatcher("heroes/editarHeroe.jsp");
+                    view.forward(request, response);
+                    break;
+                }
                 try{
                     //Validar el rango de edad entre 8 a 999
                     heroe.setEdad(Integer.parseInt(request.getParameter("edad")));

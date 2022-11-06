@@ -107,7 +107,20 @@ public class EnemigoServlet extends HttpServlet {
 
                 enemigo = new Enemigo();
 
-                enemigo.setNombreEnemigo(request.getParameter("nombreEnemigo"));
+                if(request.getParameter("nombreEnemigo").matches("[a-zA-Z]+$")) {
+                    enemigo.setNombreEnemigo(request.getParameter("nombreEnemigo"));
+                }else{
+                    ObjetoDao objetoDao = new ObjetoDao();
+                    request.setAttribute("listaObjetos", objetoDao.obtenerListaObjetos());
+                    GeneroDao generoDao = new GeneroDao();
+                    request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
+                    ClasesEnemigosDao claseEnemigoDao = new ClasesEnemigosDao();
+                    request.setAttribute("listaClases", claseEnemigoDao.obtenerListaClases());
+                    RequestDispatcher view = request.getRequestDispatcher("enemigos/agregarEnemigos.jsp");
+                    request.setAttribute("error3", "El campo ingresado solo debe contener letras");
+                    view.forward(request, response);
+                    break;
+                }
                 try {
                     enemigo.setAtaque(Integer.parseInt(request.getParameter("ataque")));
                 }catch (NumberFormatException e){
@@ -137,7 +150,7 @@ public class EnemigoServlet extends HttpServlet {
                     break;
                 }
                 try {
-                    enemigo.setProbDejarObjeto(Float.parseFloat(request.getParameter("probabilidadDejarObjeto")));
+                    enemigo.setProbDejarObjeto(Double.parseDouble(request.getParameter("probabilidadDejarObjeto")));
                 }catch (NumberFormatException e){
                     ObjetoDao objetoDao = new ObjetoDao();
                     request.setAttribute("listaObjetos", objetoDao.obtenerListaObjetos());
@@ -174,7 +187,22 @@ public class EnemigoServlet extends HttpServlet {
 
                 enemigo.setIdEnemigo(Integer.parseInt(request.getParameter("idEnemigo"))); //debo enviar el id del enemigo especifico para poder realizar el update.
 
-                enemigo.setNombreEnemigo(request.getParameter("nombreEnemigo"));
+                if(request.getParameter("nombreEnemigo").matches("[a-zA-Z]+$")) {
+                    enemigo.setNombreEnemigo(request.getParameter("nombreEnemigo"));
+                }else{
+                    Enemigo enemigo2 = enemigoDao.obtenerEnemigo(enemigo.getIdEnemigo());
+                    request.setAttribute("enemigo", enemigo2);
+                    ObjetoDao objetoDao = new ObjetoDao();
+                    request.setAttribute("listaObjetos", objetoDao.obtenerListaObjetos());
+                    GeneroDao generoDao = new GeneroDao();
+                    request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
+                    ClasesEnemigosDao claseEnemigoDao = new ClasesEnemigosDao();
+                    request.setAttribute("listaClases", claseEnemigoDao.obtenerListaClases());
+                    RequestDispatcher view = request.getRequestDispatcher("enemigos/editarEnemigo.jsp");
+                    request.setAttribute("error3", "El campo ingresado solo debe contener letras");
+                    view.forward(request, response);
+                    break;
+                }
                 try{
                     enemigo.setAtaque(Integer.parseInt(request.getParameter("ataque")));
 
@@ -209,7 +237,7 @@ public class EnemigoServlet extends HttpServlet {
                     break;
                 }
                 try{
-                    enemigo.setProbDejarObjeto(Float.parseFloat(request.getParameter("probabilidadDejarObjeto")));
+                    enemigo.setProbDejarObjeto(Double.parseDouble(request.getParameter("probabilidadDejarObjeto")));
                 }catch(NumberFormatException e){
                     Enemigo enemigo2 = enemigoDao.obtenerEnemigo(enemigo.getIdEnemigo());
                     request.setAttribute("enemigo", enemigo2);

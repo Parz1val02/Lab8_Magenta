@@ -15,6 +15,7 @@
 <%String error2 = (String) request.getAttribute("error2");%>
 <%String error3 = (String) request.getAttribute("error3");%>
 <%String error4 = (String) request.getAttribute("error4");%>
+<%String error5 = (String) request.getAttribute("error5");%>
 
 
 <html>
@@ -164,8 +165,13 @@
                                             </div>
                                             <div class="col-md">
                                                 <div class="form-floating" style="margin-bottom: 15px">
-                                                    <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid2" placeholder="Nombre Heroe" name="nombreHeroe" required maxlength="10">
+                                                    <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error5!=null?"is-invalid":""%>" id="floatingInputGrid2" placeholder="Nombre Heroe" name="nombreHeroe" required maxlength="10">
                                                     <label style="color: white" for="floatingInputGrid2" class="label-form-flujousuario">Nombre Heroe</label>
+                                                    <%if(error5!=null){%>
+                                                    <div id="validationServer" class="invalid-tooltip">
+                                                        <%=error5%>
+                                                    </div>
+                                                    <%}%>
                                                 </div>
                                             </div>
                                         </div>
