@@ -1,13 +1,7 @@
 package com.magenta.lab8_magenta.servlets;
 
-import com.magenta.lab8_magenta.model.beans.ClaseEnemigo;
-import com.magenta.lab8_magenta.model.beans.Enemigo;
-import com.magenta.lab8_magenta.model.beans.Genero;
-import com.magenta.lab8_magenta.model.beans.Objeto;
-import com.magenta.lab8_magenta.model.daos.ClasesEnemigosDao;
-import com.magenta.lab8_magenta.model.daos.EnemigoDao;
-import com.magenta.lab8_magenta.model.daos.GeneroDao;
-import com.magenta.lab8_magenta.model.daos.ObjetoDao;
+import com.magenta.lab8_magenta.model.beans.*;
+import com.magenta.lab8_magenta.model.daos.*;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -26,7 +20,11 @@ import java.util.ArrayList;
             RequestDispatcher view;
 
             ClasesEnemigosDao claseEnemigoDao = new ClasesEnemigosDao();
-
+            DebFortDao debFortDao = new DebFortDao();
+            ArrayList<DebFort> listaDebFortPorClase;
+            ArrayList<Elemento> listaElementos;
+            ClaseEnemigo claseEnemigo;
+            ElementoDao elementoDao = new ElementoDao();
 
             switch (action) {
                 case "listaClases":
@@ -34,7 +32,7 @@ import java.util.ArrayList;
                     view = request.getRequestDispatcher("clases/listaClases.jsp");
                     view.forward(request, response);
                     break;
-                case "editarPorcentajeDanio":
+                case "listaDebFort":
                     if (request.getParameter("id") != null) {
                         String claseIdString = request.getParameter("id");
                         int claseIdInt = 0;
@@ -44,13 +42,46 @@ import java.util.ArrayList;
                             response.sendRedirect(request.getContextPath() + "ClaseServlet");
                         }
 
-                        ClaseEnemigo claseEnemigo = claseEnemigoDao.obtenerClaseEnemigo(claseIdInt);
+                        listaDebFortPorClase = debFortDao.obtenerDebFortPorClase(claseIdInt);
+                        claseEnemigo = claseEnemigoDao.obtenerClaseEnemigo(claseIdInt);
+                        listaElementos = elementoDao.listarElementos();
+                        if (listaDebFortPorClase != null) {
 
-                        if (claseEnemigo != null) {
+                            request.setAttribute("listaDebFortPorClase", listaDebFortPorClase);
                             request.setAttribute("claseEnemigo", claseEnemigo);
+                            request.setAttribute("listarElementos", listaElementos);
                             //request.setAttribute("listaElementos", elemento.obtenerListaElemento());
+                            view = request.getRequestDispatcher("clases/listaDebFort.jsp");
+                            view.forward(request, response);
+                        } else {
+                            response.sendRedirect(request.getContextPath() + "/ClaseServlet");
+                        }
 
-                            request.setAttribute("listaClases", claseEnemigoDao.obtenerListaClases());
+                    } else {
+                        response.sendRedirect(request.getContextPath() + "/ClaseServlet");
+                    }
+
+                    break;
+                case "editarPorcentajeDanio":
+                    if (request.getParameter("idElemento") != null && request.getParameter("idClase") != null) {
+                        String elementoIdString = request.getParameter("idElemento");
+                        String claseIdString = request.getParameter("idClase");
+
+                        int claseIdInt = 0;
+                        int elementoIdInt = 0;
+
+                        try {
+                            claseIdInt = Integer.parseInt(claseIdString);
+                            elementoIdInt = Integer.parseInt(elementoIdString);
+                        } catch (NumberFormatException ex) {
+                            response.sendRedirect(request.getContextPath() + "ClaseServlet");
+                        }
+
+                        DebFort DebFortPorClaseYElemento = debFortDao.obtenerDebFortPorClaseYElemento(claseIdInt,elementoIdInt);
+
+                        if (DebFortPorClaseYElemento != null) {
+                            request.setAttribute("DebFortPorClaseYElemento", DebFortPorClaseYElemento);
+                            //request.setAttribute("listaElementos", elemento.obtenerListaElemento());
                             view = request.getRequestDispatcher("clases/editarPorcentajeDanio.jsp");
                             view.forward(request, response);
                         } else {
@@ -63,44 +94,45 @@ import java.util.ArrayList;
 
                     break;
             }
-
         }
 
         @Override
         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             String action = request.getParameter("action") == null ? "lista" : request.getParameter("action");
 
-            Enemigo enemigo;
-            EnemigoDao enemigoDao = new EnemigoDao();
+            DebFort debFort;
+            DebFortDao debFortDao = new DebFortDao();
+            Elemento elemento;
+            ClaseEnemigo claseEnemigo;
 
             switch (action) {
                 case "actualizarPorcentajeDanio":
-                    enemigo = new Enemigo();
+                    elemento = new Elemento();
+                    debFort = new DebFort();
+                    claseEnemigo = new ClaseEnemigo();
 
-                    enemigo.setIdEnemigo(Integer.parseInt(request.getParameter("idEnemigo"))); //debo enviar el id del enemigo especifico para poder realizar el update.
+                    elemento.setIdElemento(Integer.parseInt(request.getParameter("idElemento")));//debo enviar el id del enemigo especifico para poder realizar el update.
+                    debFort.setElemento(elemento);
 
-                    enemigo.setNombreEnemigo(request.getParameter("nombreEnemigo"));
-                    enemigo.setAtaque(Integer.parseInt(request.getParameter("ataque")));
-                    enemigo.setExperienciaDerrotado(Integer.parseInt(request.getParameter("experienciaDerrotado")));
-                    enemigo.setProbDejarObjeto(Float.parseFloat(request.getParameter("probabilidadDejarObjeto")));
+                    claseEnemigo.setIdClaseEnemigo(Integer.parseInt(request.getParameter("idClase")));
+                    debFort.setClaseEnemigo(claseEnemigo);
+
+                    try{
+                        debFort.setPorcentajeDanio(Double.parseDouble(request.getParameter("porcentajeDanio")));
+                    }catch(NumberFormatException e){
+                        DebFort DebFortPorClaseYElemento = debFortDao.obtenerDebFortPorClaseYElemento(debFort.getClaseEnemigo().getIdClaseEnemigo(),debFort.getElemento().getIdElemento());
+                        request.setAttribute("DebFortPorClaseYElemento", DebFortPorClaseYElemento);
+                        RequestDispatcher view = request.getRequestDispatcher("clases/editarPorcentajeDanio.jsp");
+                        request.setAttribute("error2", "El campo ingresado debe ser un numero decimal");
+                        view.forward(request, response);
+                        break;
+                    }
 
 
-                    Genero genero1 = new Genero();
-                    genero1.setIdGenero(Integer.parseInt(request.getParameter("idGenero")));
-                    enemigo.setGenero(genero1);
+                    debFortDao.actualizarPorcentajeDanio(debFort);
 
+                    response.sendRedirect(request.getContextPath() + "/ClaseServlet?action=listaDebFort&id=" + debFort.getClaseEnemigo().getIdClaseEnemigo() );
 
-                    Objeto objeto2 = new Objeto();
-                    objeto2.setIdObjeto(Integer.parseInt(request.getParameter("idObjeto")));
-                    enemigo.setObjeto(objeto2);
-
-                    ClaseEnemigo claseEnemigo2 = new ClaseEnemigo();
-                    claseEnemigo2.setIdClaseEnemigo(Integer.parseInt(request.getParameter("idClaseEnemigo")));
-                    enemigo.setClaseEnemigo(claseEnemigo2);
-
-                    enemigoDao.actualizarEnemigo(enemigo);
-
-                    response.sendRedirect(request.getContextPath() + "/ClaseServlet?action=listaClases");
                     break;
             }
         }
