@@ -43,6 +43,8 @@ public class HeroesDao extends BaseDao{
                 heroe.setClaseHeroes(claseHeroes);
 
                 heroe.setBorradoLogico(rs.getInt(10));
+                ExperienciaDao expDao = new ExperienciaDao();
+                heroe.setPuntosExperiencia(expDao.calcularExperiencia(heroe.getNivelInicial()));
                 listaHeroes.add(heroe);
 
             }
@@ -89,7 +91,8 @@ public class HeroesDao extends BaseDao{
                 heroe.setClaseHeroes(claseHeroes);
 
                 heroe.setBorradoLogico(rs.getInt(10));
-
+                ExperienciaDao expDao = new ExperienciaDao();
+                heroe.setPuntosExperiencia(expDao.calcularExperiencia(heroe.getNivelInicial()));
             }
 
 
