@@ -12,6 +12,8 @@
 <jsp:useBean type="com.magenta.lab8_magenta.model.beans.Heroe" scope="request" id="heroe"/>
 <jsp:useBean type="com.magenta.lab8_magenta.model.beans.Objeto" scope="request" id="objeto"/>
 <jsp:useBean type="java.lang.Integer" scope="request" id="cantidad"/>
+<%String error1 = (String) request.getAttribute("error1");%>
+<%String error2 = (String) request.getAttribute("error2");%>
 
 <html>
     <head>
@@ -140,7 +142,7 @@
                             <!--<div class="page-heading" style="text-align: center">
                               <h1 class="page-title" style="font-size: 40px; font-weight: bold"><b>Registrar nuevo Enemigo</b></h1>
                             </div> -->
-                            <div class="ibox" style="align-content: center; color: white; background-color: transparent; border: none"> <!--class="ibox"-->
+                            <div class="ibox" style="align-content: center; color: white; background-color: #332d2d; border: none"> <!--class="ibox"-->
                                 <!--div class="ibox-head">
                                     <div class="ibox-title" style="font-size: 20px">Registrar Incidencia</div>
                                     <div class="ibox-tools">
@@ -203,8 +205,18 @@
                                             <div class="col-md">
                                                 <div class="form-floating" style="margin-bottom: 15px;">
                                                     <div class="form-floating" style="margin-bottom: 15px;">
-                                                        <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid3" value="<%=cantidad%>" placeholder="Cantidad" name="cantidad">
+                                                        <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error1!=null?"is-invalid":""%> <%=error2!=null?"is-invalid":""%>" id="floatingInputGrid3" value="<%=cantidad%>" placeholder="Cantidad" name="cantidad">
                                                         <label style="color: white" for="floatingInputGrid3" class="label-form-flujousuario">Cantidad</label>
+                                                        <%if(error1!=null){%>
+                                                        <div id="validationServer" class="invalid-tooltip">
+                                                            <%=error1%>
+                                                        </div>
+                                                        <%}%>
+                                                        <%if(error2!=null){%>
+                                                        <div id="validationServer" class="invalid-tooltip">
+                                                            <%=error2%>
+                                                        </div>
+                                                        <%}%>
                                                     </div>
                                                 </div>
                                             </div>
@@ -217,7 +229,7 @@
 
                                         <div class="form-group" style="text-align: right">
                                             <button type="submit" class="btn btn-primary"> Editar Objeto</button>
-                                            <a href="<%=request.getContextPath()%>/InventarioServlet" class="btn btn-secondary">Cancelar</a>
+                                            <a href="<%=request.getContextPath()%>/InventarioServlet?action=inventarioHeroe&id=<%=heroe.getIdHeroe()%>" class="btn btn-secondary">Cancelar</a>
                                         </div>
 
                                     </form>

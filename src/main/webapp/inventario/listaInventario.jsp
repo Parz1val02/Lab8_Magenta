@@ -46,7 +46,7 @@
 
         <!--CREAR HEROE-->
         <a href="<%=request.getContextPath()%>/HeroeServlet?action=listaHeroes" class="btn btn-success">Regresar Menu Heroes</a>
-        <a href="<%=request.getContextPath()%>/InventarioServlet?action=agregarObjeto" class="btn btn-success">Añadir objeto</a>
+        <a href="<%=request.getContextPath()%>/InventarioServlet?action=agregarObjeto&id=<%=heroe.getIdHeroe()%>" class="btn btn-success">Añadir objeto</a>
         <!--FINISH CREAR HEROE-->
 
 

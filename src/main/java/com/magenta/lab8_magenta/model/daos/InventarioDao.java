@@ -19,7 +19,7 @@ public class InventarioDao extends BaseDao{
 
             pstmt.setInt(1, idHeroe);
             try(ResultSet rs = pstmt.executeQuery()){
-                if(rs.next()){
+                while(rs.next()){
                     Objeto objeto = new Objeto();
                     ObjetoDao objDao = new ObjetoDao();
                     objeto = objDao.obtenerObjeto(rs.getInt(2));
@@ -41,7 +41,7 @@ public class InventarioDao extends BaseDao{
 
             pstmt.setInt(1, idHeroe);
             try(ResultSet rs = pstmt.executeQuery()){
-                if(rs.next()){
+                while(rs.next()){
                     int cantidad = rs.getInt(3);
                     cantidadObjetos.add(cantidad);
                 }
@@ -87,11 +87,47 @@ public class InventarioDao extends BaseDao{
         }
     }
 
-    public int maximoPeso(int ataque){
-        return ataque*ataque;
+    public void agregarObjetoInventario(int heroeId, int objetoId, int cantidad){
+        String sql = "insert into inventario (idHeroe, idObjeto, cantidadObjeto) \n" +
+                "values (?,?,?)";
+
+        try (Connection conn = getConnection();
+             PreparedStatement pstm = conn.prepareStatement(sql)){
+            pstm.setInt(1,heroeId);
+            pstm.setInt(2,objetoId);
+            pstm.setInt(3,cantidad);
+
+            pstm.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
+    public void borrarObjetoInventario(int heroeId, int objetoId){
+        String sql = "delete from inventario where idHeroe = ? and idObjeto = ?";
 
+        try (Connection conn = getConnection();
+             PreparedStatement pstm = conn.prepareStatement(sql)){
+            pstm.setInt(1,heroeId);
+            pstm.setInt(2,objetoId);
 
+            pstm.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public double verificarMaxPeso(ArrayList<Objeto> InventarioHeroe, ArrayList<Integer> cantidadObjetosInventario, Objeto objeto, int cantidad){
+        double peso=0;
+        for(int i=0; i<InventarioHeroe.size(); i++){
+            peso += InventarioHeroe.get(i).getPeso()*cantidadObjetosInventario.get(i);
+        }
+        peso+=objeto.getPeso()*cantidad;
+
+        return peso;
+
+    }
 
 }
