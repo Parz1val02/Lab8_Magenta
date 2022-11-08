@@ -42,7 +42,7 @@ public class EnemigoDao extends BaseDao {
 
                 objeto.setPeso(rs.getFloat("peso"));
 
-                objeto.setPeso(rs.getDouble("peso"));
+
                 enemigo.setObjeto(objeto);
 
                 ClaseEnemigo claseEnemigo = new ClaseEnemigo();
@@ -99,7 +99,7 @@ public class EnemigoDao extends BaseDao {
                     objeto.setPeso(rs.getFloat("peso"));
 
 
-                    objeto.setPeso(rs.getDouble("peso"));
+
                     enemigo.setObjeto(objeto);
 
                     ClaseEnemigo claseEnemigo = new ClaseEnemigo();
@@ -239,7 +239,7 @@ public class EnemigoDao extends BaseDao {
 
                     objeto.setPeso(rs.getFloat("peso"));
 
-                    objeto.setPeso(rs.getDouble("peso"));
+
                     enemigo.setObjeto(objeto);
 
                     ClaseEnemigo claseEnemigo = new ClaseEnemigo();

@@ -221,8 +221,8 @@
                                     </div>
                                     <div class="col-md">
                                         <div class="form-floating" style="margin-bottom: 15px;">
-                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid20" placeholder="Precision del hechizo" name="presicionHechizo" required>
-                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error1!=null?"is-invalid":""%>" id="floatingInputGrid20" placeholder="Precision del hechizo" name="presicionHechizo">
+
+                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error1!=null?"is-invalid":""%>" id="floatingInputGrid20" placeholder="Precision del hechizo" name="presicionHechizo" required>
                                             <label style="color: white" for="floatingInputGrid20" class="label-form-flujousuario">Precision del hechizo</label>
                                             <%if(error2!=null){%>
                                             <div id="validationServer" class="invalid-tooltip">
@@ -286,8 +286,8 @@
                                     </div>
                                     <div class="col-md">
                                         <div class="form-floating" style="margin-bottom: 15px;">
-                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error3!=null?"is-invalid":""%>" id="floatingInputGrid21" placeholder="Nivel de Aprendizaje" name="nivelAprendizaje">
-                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid21" placeholder="Nivel de Aprendizaje" name="nivelAprendizaje" required>
+                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error3!=null?"is-invalid":""%>" id="floatingInputGrid21" placeholder="Nivel de Aprendizaje" name="nivelAprendizaje" required>
+
                                             <label style="color: white" for="floatingInputGrid20" class="label-form-flujousuario">Nivel de Aprendizaje</label>
                                             <%if(error3!=null){%>
                                             <div id="validationServer" class="invalid-tooltip">

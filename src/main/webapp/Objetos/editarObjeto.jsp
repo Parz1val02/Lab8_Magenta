@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <% Objeto objeto = (Objeto) request.getAttribute("Objeto");%>
-
+<% boolean usado = (boolean) request.getAttribute("usado");%>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -142,24 +142,27 @@
                             <form method="post" action="<%=request.getContextPath()%>/ObjetoServlet?action=actualizarObjeto">
                                 <!-- 1era fila -->
 
+                                <%if(!usado){%>
                                 <div class="row g-2">
                                     <div class="col-md-3"  style="display: flex; justify-content: center;  flex-direction: column">
                                         <p class="campos-registrar-usuario">Nombre:</p>
                                     </div>
                                     <div class="col-md">
-                                        <input type="hidden" name="idObjeto" value="<%= objeto.getIdObjeto()%>"/>
+
                                         <div class="form-floating" style="margin-bottom: 15px">
                                             <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid2" value="<%= objeto.getNombreObjeto()%>" placeholder="Nombre Objeto" name="nombreObjeto">
                                             <label style="color: white" for="floatingInputGrid2" class="label-form-flujousuario">Nombre Objeto</label>
                                         </div>
                                     </div>
                                 </div>
+                                <%}%>
                                 <!-- 2da fila -->
                                 <div class="row g-2">
                                     <div class="col-md-3" style="display: flex; justify-content: center;  flex-direction: column">
                                         <p class="campos-registrar-usuario">Efecto:</p>
                                     </div>
                                     <div class="col-md">
+                                        <input type="hidden" name="idObjeto" value="<%= objeto.getIdObjeto()%>"/>
                                         <div class="form-floating" style="margin-bottom: 15px;">
                                             <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid4" value="<%= objeto.getEfecto()%>" placeholder="Efecto" name="efecto">
                                             <label style="color: white" for="floatingInputGrid4" class="label-form-flujousuario">Efecto</label>
@@ -168,6 +171,7 @@
                                 </div>
 
                                 <!-- 3era fila -->
+                                <%if(!usado){%>
                                 <div class="row g-2">
                                     <div class="col-md-3" style="display: flex; justify-content: center;  flex-direction: column">
                                         <p class="campos-registrar-usuario">Peso :</p>
@@ -181,7 +185,7 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                <%}%>
 
                                 <!-- 4ta fila -->
 

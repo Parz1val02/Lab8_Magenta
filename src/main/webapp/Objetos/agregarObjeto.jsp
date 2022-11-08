@@ -6,6 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<% String error1 = (String) request.getAttribute("error1");%>
+<% String error2 = (String) request.getAttribute("error2");%>
+
 
 <html>
 <head>
@@ -15,9 +18,9 @@
     <link rel="shortcut icon" href="<%=request.getContextPath()%>/static/favicon2.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href=css/style.min.css>
+    <link rel="stylesheet" href=../css/style.min.css>
     <!-- CSS de registrar-flujo-usuarioo -->
-    <link rel="stylesheet" href="css/form1.css">
+    <link rel="stylesheet" href="../css/form1.css">
     <style>
         body {
             /*background-color: white;*/
@@ -96,6 +99,8 @@
 
 <div class="fondo_imagen">
 
+
+
     <div class = 'container-fluid' style="height: 20px; background-color: #f644dd">
     </div>
     <div class = "container-fluid" style="background-color: #c40aa8  !important;">    <!--rgb(232 17 187 / 94%) -->
@@ -137,20 +142,29 @@
                         <div class="ibox-body" style="padding-top: 35px" >
 
 
-                            <form method="post" action="<%=request.getContextPath()%>/ObjetoServlet?action=guardarEnemigo">
+                            <form method="post" action="<%=request.getContextPath()%>/ObjetoServlet?action=guardarObjeto">
                                 <!-- 1era fila -->
 
-                                <div class="row g-2">
-                                    <div class="col-md-3"  style="display: flex; justify-content: center;  flex-direction: column">
-                                        <p class="campos-registrar-usuario">Nombre:</p>
-                                    </div>
-                                    <div class="col-md">
-                                        <div class="form-floating" style="margin-bottom: 15px">
-                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid2" placeholder="Nombre Objeto" name="nombreObjeto">
-                                            <label style="color: white" for="floatingInputGrid2" class="label-form-flujousuario">Nombre Objeto</label>
+
+                                    <div class="row g-2">
+                                        <div class="col-md-3"  style="display: flex; justify-content: center;  flex-direction: column">
+                                            <p class="campos-registrar-usuario">Nombre:</p>
+                                        </div>
+                                        <div class="col-md">
+                                            <div class="form-floating" style="margin-bottom: 15px">
+                                                <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error1!=null?"is-invalid":""%>" id="floatingInputGrid2" placeholder="Nombre Objeto" name="nombreObjeto">
+                                                <label style="color: white" for="floatingInputGrid2" class="label-form-flujousuario">Nombre Objeto</label>
+                                                <%if(error1!=null){%>
+                                                <div id="validationServer" class="invalid-tooltip">
+                                                    <%=error1%>
+                                                </div>
+                                                <%}%>
+
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+
+
                                 <!-- 2da fila -->
                                 <div class="row g-2">
                                     <div class="col-md-3" style="display: flex; justify-content: center;  flex-direction: column">
@@ -165,19 +179,25 @@
                                 </div>
 
                                 <!-- 3era fila -->
-                                <div class="row g-2">
-                                    <div class="col-md-3" style="display: flex; justify-content: center;  flex-direction: column">
-                                        <p class="campos-registrar-usuario">Peso:</p>
-                                    </div>
-                                    <div class="col-md">
-                                        <div class="form-floating" style="margin-bottom: 15px;">
+
+                                    <div class="row g-2">
+                                        <div class="col-md-3" style="display: flex; justify-content: center;  flex-direction: column">
+                                            <p class="campos-registrar-usuario">Peso:</p>
+                                        </div>
+                                        <div class="col-md">
                                             <div class="form-floating" style="margin-bottom: 15px;">
-                                                <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid12" placeholder="Peso" name="peso">
-                                                <label style="color: white" for="floatingInputGrid12" class="label-form-flujousuario">peso</label>
+                                                <div class="form-floating" style="margin-bottom: 15px;">
+                                                    <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error2!=null?"is-invalid":""%>" id="floatingInputGrid12" placeholder="Peso" name="peso">
+                                                    <label style="color: white" for="floatingInputGrid12" class="label-form-flujousuario">peso</label>
+                                                    <%if(error2!=null){%>
+                                                    <div id="validationServer" class="invalid-tooltip">
+                                                        <%=error2%>
+                                                    </div>
+                                                    <%}%>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
 
                                 <!-- 4ta fila -->

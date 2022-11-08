@@ -6,6 +6,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
+
 import java.io.IOException;
 
 @WebServlet(name = "ObjetoServlet", value = "/ObjetoServlet")
@@ -27,10 +28,12 @@ public class ObjetoServlet extends HttpServlet {
                 break;
             case "editarObjeto":
                 String idObjeto = request.getParameter("id");
+                boolean usado = objetoDao.isUsadoPorHeroe(Integer.parseInt(idObjeto));
 
                 Objeto objeto = objetoDao.obtenerObjeto(Integer.parseInt(idObjeto));
 
                 request.setAttribute("Objeto",objeto);
+                request.setAttribute("usado",usado);
                 view = request.getRequestDispatcher("Objetos/editarObjeto.jsp");
                 view.forward(request,response);
                 break;
@@ -60,6 +63,8 @@ public class ObjetoServlet extends HttpServlet {
 
         ObjetoDao objetoDao = new ObjetoDao();
         RequestDispatcher view;
+
+        aaa:
         switch(action){
             case "guardarObjeto":
                 Objeto objeto = new Objeto();
@@ -69,6 +74,7 @@ public class ObjetoServlet extends HttpServlet {
                     for (Objeto o : objetoDao.obtenerListaObjetos()){
                         if(request.getParameter("nombreObjeto").equalsIgnoreCase(o.getNombreObjeto())){
                             repite = true;
+                            break;
                         }
                     }
 
@@ -80,13 +86,26 @@ public class ObjetoServlet extends HttpServlet {
                         view = request.getRequestDispatcher("Objetos/agregarObjeto.jsp");
                         view.forward(request,response);
                         break;
-
-
                     }
 
 
                     objeto.setEfecto(request.getParameter("efecto"));
-                    objeto.setPeso(Float.parseFloat(request.getParameter("peso")));
+
+
+                    try {
+
+                        objeto.setPeso(Float.parseFloat(request.getParameter("peso")));
+                        if(objeto.getPeso()<0){
+                            throw new Exception();
+                        }
+
+                    }catch(Exception e){
+                        request.setAttribute("error2","El peso debe ser un numero decimal positivo");
+                        view = request.getRequestDispatcher("Objetos/agregarObjeto.jsp");
+                        view.forward(request,response);
+                        break;
+                    }
+
 
                     objetoDao.agregarObjeto(objeto);
 
@@ -96,9 +115,26 @@ public class ObjetoServlet extends HttpServlet {
             case "actualizarObjeto":
                 Objeto objeto1 = new Objeto();
                 objeto1.setIdObjeto(Integer.parseInt(request.getParameter("idObjeto")));
-                objeto1.setNombreObjeto(request.getParameter("nombreObjeto"));
+                Objeto objetoDefault = objetoDao.obtenerObjeto(objeto1.getIdObjeto());
+
+                boolean usado = objetoDao.isUsadoPorHeroe(objeto1.getIdObjeto());
+
+                if(!usado){
+                    objeto1.setNombreObjeto(request.getParameter("nombreObjeto"));
+                }else{
+                    objeto1.setNombreObjeto(objetoDefault.getNombreObjeto());
+                }
+
+
                 objeto1.setEfecto(request.getParameter("efecto"));
-                objeto1.setPeso(Float.parseFloat(request.getParameter("peso")));
+
+                if(!usado){
+                    objeto1.setPeso(Float.parseFloat(request.getParameter("peso")));
+                } else{
+                    objeto1.setPeso(objetoDefault.getPeso());
+                }
+
+
 
                 objetoDao.actualizarObjeto(objeto1);
 
