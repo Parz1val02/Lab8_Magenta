@@ -14,7 +14,7 @@ public class HechizoDao extends BaseDao{
         String sql = "select h.idHechizo, h.nombreHechizo, e.nombreElemento, h.potenciaHechizo, h.precisionHechizo, b.nombreHechizo, h.nivelAprendizaje,h.borradoLogico\n" +
                 "                from hechizos h\n" +
                 "                inner join elementos e on e.idElemento = h.idElemento\n" +
-                "                left join hechizos b on b.idHechizo = h.idHechizoBase";
+                "                left join hechizos b on b.idHechizo = h.idHechizoBase order by h.idhechizo";
 
         try(Connection conn = getConnection();
             Statement stm = conn.createStatement();

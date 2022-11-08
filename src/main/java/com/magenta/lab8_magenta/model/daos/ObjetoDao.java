@@ -14,7 +14,7 @@ public class ObjetoDao  extends BaseDao {
         ArrayList<Objeto> listaObjetos= new ArrayList<>();
         try (Connection conn = getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("select * from objetos")) {
+             ResultSet rs = stmt.executeQuery("select * from objetos order by idObjeto")) {
 
             while (rs.next()) {
                 if (!rs.getBoolean(5)) {

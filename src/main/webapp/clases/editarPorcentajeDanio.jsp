@@ -122,7 +122,7 @@
         <!--TITLE-->
         <div class="pt-4 titlecolor">
             <div class="col-lg-6">
-                <h1 class='text-dark' class='text-dark' style="color: #6f2e91 !important;font-weight: bold ">Editar Porcentaje Danio</h1>
+                <h1 class='text-dark' class='text-dark' style="color: white !important;font-weight: bold ">Editar Porcentaje Danio</h1>
             </div>
         </div>
         <!--FINISH TITLE-->

@@ -9,9 +9,9 @@ insert into clases_enemigos (nombreClase) values ("Dragon"), ("Fantasma"), ("Dem
 -- Clases heroes
 insert into clases_heroes (nombreClase) values ("Fedaykin"), ("Hechicero"), ("Explorador"), ("Tirador"), ("Centinela"), ("Paladin"), ("Berserker"), ("Jedi"), ("Netrunner"), ("Traceur"), ("Oraculo");
 -- Objetos
-insert into objetos (nombreObjeto, efecto, peso, borradoLogico) values ("Crysknife", "La mejor cuchilla del universo conocido", 0.5,0), ("Pistola Maula", "De corto alcance, extremadamente efectiva", 1.1,0),
-("Escudo personal", "De energia pura, rodea a quien lo usa", 2.0 ,0), ("Lagrima de Eincrad", "Gema de color azur, aumenta el ataque",  3.1, 0), ("Varita de sauco", "Aumenta la precision y potencia del hechizo",  2.6, 0),
-("Cubo de Zemeckis", "Retrocede el tiempo 60s", 0.2 , 0), ("Pildora roja","Libera tu mente",0.05,0);
+insert into objetos (nombreObjeto, efecto, peso, borradoLogico,usadoPorHeroe) values ("Crysknife", "La mejor cuchilla del universo conocido", 0.5,0,0), ("Pistola Maula", "De corto alcance, extremadamente efectiva", 1.1,0,0),
+("Escudo personal", "De energia pura, rodea a quien lo usa", 2.0 ,0,0), ("Lagrima de Eincrad", "Gema de color azur, aumenta el ataque",  3.1, 0,0), ("Varita de sauco", "Aumenta la precision y potencia del hechizo",  2.6, 0,0),
+("Cubo de Zemeckis", "Retrocede el tiempo 60s", 0.2 , 0,0), ("Pildora roja","Libera tu mente",0.05,0,0), ("Shimmer","Pocion que otorga buff momentaneo",1.3,0,0);
 -- Hechizos base
 insert into hechizos(nombreHechizo, potenciaHechizo, precisionHechizo, desbloqueado, nivelAprendizaje, idElemento, idHechizoBase, borradoLogico)
 values ("Combustion", 15, 20, 1, null, 1, null,0), ("Confusion", 20, 14, 1, null, 5, null,0), ("Roca afilada", 23, 9, 1, null, 2, null,0), ("Burbujas", 40, 30, 1, null, 3, null,0), ("Vendaval", 10, 34, 1, null, 4, null,0) ;
@@ -44,3 +44,4 @@ update heroes set idPareja=3 where idHeroe=2;
 update heroes set idPareja=2 where idHeroe=3;
 update heroes set idPareja=7 where idHeroe=8;
 update heroes set idPareja=8 where idHeroe=7;
+update objetos set usadoPorHeroe=1 where idObjeto in (1,2,7,4,5,6,3);

@@ -1,9 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 
-
-
-
 <html>
     <!--Colocar como value: nombre de la presente página -->
     <jsp:include page="/static/head.jsp">
@@ -11,8 +8,8 @@
     </jsp:include>
     <body>
 
-        <div class="fondo_imagen">
-
+        <div style="background-image: url('img/fondo_oscuro.jpg')">
+3
         <div class = 'container-fluid' style="height: 20px; background-color: #f644dd"></div>
 
 

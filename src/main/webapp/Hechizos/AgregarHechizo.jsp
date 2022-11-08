@@ -128,7 +128,7 @@
         <!--TITLE-->
         <div class="pt-4 titlecolor">
             <div class="col-lg-6">
-                <h1 class='text-dark' class='text-dark' style="color: #6f2e91 !important;font-weight: bold ">Agregar Hechizo</h1>
+                <h1 class='text-dark' class='text-dark' style="color: white !important;font-weight: bold ">Agregar Hechizo</h1>
             </div>
         </div>
         <!--FINISH TITLE-->
@@ -174,17 +174,18 @@
                                 <!-- 2da fila -->
                                 <div class="row g-2">
                                     <div class="col-md-3" style="display: flex; justify-content: center;  flex-direction: column">
-                                        <p class="campos-registrar-usuario">Nombre Elemento:</p>
+                                        <p class="campos-registrar-usuario">Elemento:</p>
                                     </div>
                                     <div class="col-md">
                                         <div class="form-floating" style="margin-bottom: 15px;">
-                                            <select style="background-color: #4d4545;color: white" class="form-select" id="floatingSelectGrid2" name="idElemento">
-                                                <option value="0"> -- </option>
+                                            <select style="background-color: #4d4545;color: white" class="form-select" id="floatingSelectGrid2" name="idElemento" >
                                                 <% for (Elemento elemento : listaElementos) { %>
                                                 <option value="<%=elemento.getIdElemento()%>"><%=elemento.getNombreElemento()%>
                                                 </option>
                                                 <% } %>
                                             </select>
+                                            <label style="color: white" for="floatingSelectGrid3" class="label-form-flujousuario">Hechizo Base</label>
+
                                         </div>
                                     </div>
                                 </div>
