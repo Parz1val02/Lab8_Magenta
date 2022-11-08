@@ -52,7 +52,7 @@ public class ObjetoDao  extends BaseDao {
                 objeto.setIdObjeto(rs.getInt(1));
                 objeto.setNombreObjeto(rs.getString(2));
                 objeto.setEfecto(rs.getString(3));
-                objeto.setPeso(rs.getDouble(4));
+                objeto.setPeso(rs.getFloat(4));
             }
 
         } catch (SQLException e) {
@@ -71,7 +71,7 @@ public class ObjetoDao  extends BaseDao {
              PreparedStatement pstm = conn.prepareStatement(sql)){
             pstm.setString(1,objeto.getNombreObjeto());
             pstm.setString(2,objeto.getEfecto());
-            pstm.setDouble(3,objeto.getPeso());
+            pstm.setFloat(3,objeto.getPeso());
             pstm.setBoolean(4,objeto.isBorradoLogico());
 
             pstm.executeUpdate();
@@ -103,7 +103,7 @@ public class ObjetoDao  extends BaseDao {
 
             pstmt.setString(1,objeto.getNombreObjeto());
             pstmt.setString(2,objeto.getEfecto());
-            pstmt.setDouble(3,objeto.getPeso());
+            pstmt.setFloat(3,objeto.getPeso());
             pstmt.setInt(4,objeto.getIdObjeto());
 
             pstmt.executeUpdate();
