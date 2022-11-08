@@ -151,6 +151,26 @@ public class InventarioServlet extends HttpServlet {
                 int cantidad1 = 0;
                 try{
                     cantidad1 = Integer.parseInt(request.getParameter("cantidad"));
+                    if(cantidad1==0){
+                        ArrayList<Objeto> InventarioHeroe = iDao.obtenerObjetos(heroe.getIdHeroe());
+                        ArrayList<Objeto> CatalogoObjetos = oDao.obtenerListaObjetos();
+                        ArrayList<Objeto> ObjetosNoPresentes = new ArrayList<>();
+                        boolean contiene=false;
+                        for(Objeto o : CatalogoObjetos){
+                            for(Objeto c : InventarioHeroe){
+                                contiene = o.getIdObjeto() == c.getIdObjeto();
+                            }
+                            if(!contiene){
+                                ObjetosNoPresentes.add(o);
+                            }
+                        }
+                        request.setAttribute("heroe", heroe);
+                        request.setAttribute("catalogoObjetosNo", ObjetosNoPresentes);
+                        request.setAttribute("error3", "El campo ingresado debe ser mayor que 0");
+                        RequestDispatcher view = request.getRequestDispatcher("inventario/agregarObjetoInventario.jsp");
+                        view.forward(request, response);
+                        break;
+                    }
                 }catch(NumberFormatException e){
                     ArrayList<Objeto> InventarioHeroe = iDao.obtenerObjetos(heroe.getIdHeroe());
                     ArrayList<Objeto> CatalogoObjetos = oDao.obtenerListaObjetos();
@@ -203,6 +223,16 @@ public class InventarioServlet extends HttpServlet {
                 int cantidad = 0;
                 try{
                     cantidad = Integer.parseInt(request.getParameter("cantidad"));
+                    if(cantidad==0){
+                        cantidad = iDao.obtenerCantidad(heroe.getIdHeroe(), objeto.getIdObjeto());
+                        request.setAttribute("heroe", heroe);
+                        request.setAttribute("objeto", objeto);
+                        request.setAttribute("cantidad", cantidad);
+                        request.setAttribute("error3", "El campo ingresado debe ser mayor que 0");
+                        RequestDispatcher view = request.getRequestDispatcher("inventario/editarObjetoInventario.jsp");
+                        view.forward(request, response);
+                        break;
+                    }
                 }catch (NumberFormatException e){
                     cantidad = iDao.obtenerCantidad(heroe.getIdHeroe(), objeto.getIdObjeto());
                     request.setAttribute("heroe", heroe);

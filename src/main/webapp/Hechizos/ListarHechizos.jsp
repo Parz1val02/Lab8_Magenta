@@ -63,6 +63,8 @@
           <!--<th>ID Heroe</th>-->
           <th>Id Hechizo</th>
           <th>Nombre Hechizo</th>
+          <th>Elemento</th>
+          <th>Potencia</th>
           <th>Precisión</th>
           <th>Hechizo base </th>
           <th>Nivel de Aprendizaje </th>
@@ -78,6 +80,8 @@
         <tr>
             <td><%=hechizo.getIdHechizo()%></td>
             <td><%=hechizo.getNombreHechizo()%></td>
+            <td><%=hechizo.getElemento().getNombreElemento()%></td>
+            <td><%=hechizo.getPotenciaHechizo()%></td>
             <td><%=hechizo.getPresicionHechizo()%></td>
             <%if(hechizo.getHechizoBase().getNombreHechizo()==null){%>
               <td>Este es un hechizo base</td>

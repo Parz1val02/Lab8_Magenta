@@ -14,6 +14,7 @@
 <jsp:useBean type="java.util.ArrayList<com.magenta.lab8_magenta.model.beans.Objeto>" scope="request" id="catalogoObjetosNo"/>
 <%String error1 = (String) request.getAttribute("error1");%>
 <%String error2 = (String) request.getAttribute("error2");%>
+<%String error3 = (String) request.getAttribute("error3");%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -180,7 +181,7 @@
                                             <div class="col-md">
                                                 <div class="form-floating" style="margin-bottom: 15px;">
                                                     <div class="form-floating" style="margin-bottom: 15px;">
-                                                        <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error1!=null?"is-invalid":""%> <%=error2!=null?"is-invalid":""%>" id="floatingInputGrid3" placeholder="Cantidad" name="cantidad" required>
+                                                        <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error1!=null?"is-invalid":""%> <%=error2!=null?"is-invalid":""%> <%=error3!=null?"is-invalid":""%>" id="floatingInputGrid3" placeholder="Cantidad" name="cantidad" required>
                                                         <label style="color: white" for="floatingInputGrid3" class="label-form-flujousuario">Cantidad</label>
                                                         <%if(error1!=null){%>
                                                         <div id="validationServer" class="invalid-tooltip">
@@ -191,6 +192,11 @@
                                                         <div id="validationServer" class="invalid-tooltip">
                                                             <%=error2%>
                                                         </div>
+                                                        <%}%>
+                                                        <%if(error3!=null){%>
+                                                    </div>
+                                                        <div id="validationServer" class="invalid-tooltip">
+                                                            <%=error3%>
                                                         <%}%>
                                                     </div>
                                                 </div>

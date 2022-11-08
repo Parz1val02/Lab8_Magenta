@@ -18,9 +18,9 @@
     <link rel="shortcut icon" href="<%=request.getContextPath()%>/static/favicon2.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href=css/style.min.css>
+    <link rel="stylesheet" href=../css/style.min.css>
     <!-- CSS de registrar-flujo-usuarioo -->
-    <link rel="stylesheet" href="css/form1.css">
+    <link rel="stylesheet" href="../css/form1.css">
     <style>
         body {
             /*background-color: white;*/
@@ -149,7 +149,7 @@
                                     </div>
                                     <div class="col-md">
                                         <div class="form-floating" style="margin-bottom: 15px">
-                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid2" placeholder="Nombre Hechizo" name="nombreHechizo">
+                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid2" placeholder="Nombre Hechizo" name="nombreHechizo" required maxlength="15">
                                             <label style="color: white" for="floatingInputGrid2" class="label-form-flujousuario">Nombre Hechizo</label>
                                         </div>
                                     </div>
@@ -162,12 +162,12 @@
                                     <div class="col-md">
                                         <div class="form-floating" style="margin-bottom: 15px;">
                                             <select style="background-color: #4d4545;color: white" class="form-select" id="floatingSelectGrid2" name="idElemento">
-                                                <option value="0"> -- </option>
                                                 <% for (Elemento elemento : listaElementos) { %>
                                                 <option value="<%=elemento.getIdElemento()%>"><%=elemento.getNombreElemento()%>
                                                 </option>
                                                 <% } %>
                                             </select>
+                                            <label style="color: white" for="floatingSelectGrid3" class="label-form-flujousuario">Elemento</label>
                                         </div>
                                     </div>
                                 </div>
@@ -180,7 +180,7 @@
                                     <div class="col-md">
                                         <div class="form-floating" style="margin-bottom: 15px;">
                                             <div class="form-floating" style="margin-bottom: 15px;">
-                                                <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid12" placeholder="Potencia del Hechizo" name="potenciaHechizo">
+                                                <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid12" placeholder="Potencia del Hechizo" name="potenciaHechizo" required>
                                                 <label style="color: white" for="floatingInputGrid12" class="label-form-flujousuario">Potencia del hechizo</label>
                                             </div>
                                         </div>
@@ -195,7 +195,7 @@
                                     </div>
                                     <div class="col-md">
                                         <div class="form-floating" style="margin-bottom: 15px;">
-                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid20" placeholder="Precision del hechizo" name="presicionHechizo">
+                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid20" placeholder="Precision del hechizo" name="presicionHechizo" required>
                                             <label style="color: white" for="floatingInputGrid20" class="label-form-flujousuario">Precision del hechizo</label>
                                         </div>
                                     </div>
@@ -215,7 +215,7 @@
                                                 <option value="<%=hechizoBase.getIdHechizo()%>"><%=hechizoBase.getNombreHechizo()%></option>
                                                 <% } %>
                                             </select>
-                                            <label style="color: white" for="floatingSelectGrid3" class="label-form-flujousuario">Clase</label>
+                                            <label style="color: white" for="floatingSelectGrid3" class="label-form-flujousuario">Base</label>
 
                                         </div>
                                     </div>
@@ -253,7 +253,7 @@
                                     </div>
                                     <div class="col-md">
                                         <div class="form-floating" style="margin-bottom: 15px;">
-                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid21" placeholder="Nivel de Aprendizaje" name="nivelAprendizaje">
+                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid21" placeholder="Nivel de Aprendizaje" name="nivelAprendizaje" required>
                                             <label style="color: white" for="floatingInputGrid20" class="label-form-flujousuario">Nivel de Aprendizaje</label>
                                         </div>
                                     </div>
@@ -266,7 +266,7 @@
 
                                 <div class="form-group" style="text-align: right">
                                     <button type="submit" class="btn btn-primary"> Agregar Hechizo</button>
-                                    <a href="<%=request.getContextPath()%>/EnemigoServlet?accion=listaHechizos" class="btn btn-secondary">Cancelar</a>
+                                    <a href="<%=request.getContextPath()%>/HechizoServlet?accion=listaHechizos" class="btn btn-secondary">Cancelar</a>
                                 </div>
 
                             </form>
