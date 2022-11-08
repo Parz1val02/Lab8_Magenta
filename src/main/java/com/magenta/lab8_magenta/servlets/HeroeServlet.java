@@ -86,24 +86,6 @@ public class HeroeServlet extends HttpServlet {
 
                 response.sendRedirect(request.getContextPath() + "/HeroeServlet");
                 break;
-            case "inventarioHeroe":
-                if (request.getParameter("id") != null) {
-                    String heroeIdString = request.getParameter("id");
-                    int heroeId = 0;
-                    try {
-                        heroeId = Integer.parseInt(heroeIdString);
-                    } catch (NumberFormatException ex) {
-                        response.sendRedirect(request.getContextPath() + "/HeroeServlet");
-                    }
-
-                    Heroe heroe = hDao.obtenerHeroe(heroeId);
-
-
-
-                }
-
-                response.sendRedirect(request.getContextPath() + "/HeroeServlet");
-                break;
         }
 
 
@@ -117,7 +99,7 @@ public class HeroeServlet extends HttpServlet {
         switch (action) {
             case "guardarHeroe":
                 Heroe heroe = new Heroe();
-                //Validar una longitud maxima de 10 caracteres para el nombre client-side
+                //Validar una longitud maxima de 10 caracteres para el nombre -> client-side
                 if(request.getParameter("nombreHeroe").matches("[a-zA-Z]+$")){
                     heroe.setNombre(request.getParameter("nombreHeroe"));
                 }else{

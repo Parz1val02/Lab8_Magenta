@@ -53,9 +53,10 @@ public class ObjetoDao  extends BaseDao {
                 objeto.setNombreObjeto(rs.getString(2));
                 objeto.setEfecto(rs.getString(3));
 
-                objeto.setPeso(rs.getFloat(4));
+
 
                 objeto.setPeso(rs.getFloat(4));
+
 
 
             }

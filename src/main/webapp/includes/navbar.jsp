@@ -8,7 +8,7 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark">
     <a class="navbar-brand" href="<%=request.getContextPath()%>/Wiki?action=MenuPrincipal" style="font-size: 32px;font-weight: bold">La Ultima Fantasia</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon" style="background-image: var(--mdb-navbar-toggler-icon-bg);"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
         <ul class="navbar-nav">

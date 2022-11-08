@@ -7,7 +7,10 @@ public class Objeto {
     private String efecto;
 
     private float peso;
+
     private boolean borradoLogico;
+
+
 
 
     public int getIdObjeto() {
@@ -35,9 +38,7 @@ public class Objeto {
     }
 
 
-    public float getPeso() {
-        return peso;
-    }
+
 
     public void setPeso(float peso) {
         this.peso = peso;
@@ -48,8 +49,13 @@ public class Objeto {
     }
 
     public void setBorradoLogico(boolean borradoLogico) {
-        this.borradoLogico = borradoLogico;
+        this.borradoLogico = borradoLogico;}
 
 
+    public float getPeso() {
+        return peso;
     }
+
+
+
 }

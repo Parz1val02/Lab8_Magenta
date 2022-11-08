@@ -14,6 +14,9 @@
 <% String error2 = (String) request.getAttribute("error2");%>
 <% String error3 = (String) request.getAttribute("error3");%>
 
+
+
+
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -22,9 +25,9 @@
     <link rel="shortcut icon" href="<%=request.getContextPath()%>/static/favicon2.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href=css/style.min.css>
+    <link rel="stylesheet" href=../css/style.min.css>
     <!-- CSS de registrar-flujo-usuarioo -->
-    <link rel="stylesheet" href="css/form1.css">
+    <link rel="stylesheet" href="../css/form1.css">
     <style>
         body {
             /*background-color: white;*/
@@ -157,13 +160,14 @@
                                     </div>
                                     <div class="col-md">
                                         <div class="form-floating" style="margin-bottom: 15px">
-                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid2" placeholder="Nombre Hechizo" name="nombreHechizo">
+                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid2" placeholder="Nombre Hechizo" name="nombreHechizo" required maxlength="15">
                                             <label style="color: white" for="floatingInputGrid2" class="label-form-flujousuario">Nombre Hechizo</label>
                                             <%if(error1!=null){%>
                                             <div id="validationServer" class="invalid-tooltip">
                                             <%=error1%>
                                             </div>
                                             <%}%>
+
                                         </div>
                                     </div>
                                 </div>
@@ -193,13 +197,15 @@
                                     <div class="col-md">
                                         <div class="form-floating" style="margin-bottom: 15px;">
                                             <div class="form-floating" style="margin-bottom: 15px;">
-                                                <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error2!=null?"is-invalid":""%>" id="floatingInputGrid12" placeholder="Potencia del Hechizo" name="potenciaHechizo">
+
+                                                <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error2!=null?"is-invalid":""%>" id="floatingInputGrid12" placeholder="Potencia del Hechizo" name="potenciaHechizo" required>
                                                 <label style="color: white" for="floatingInputGrid12" class="label-form-flujousuario">Potencia del hechizo</label>
                                                 <%if(error2!=null){%>
                                                 <div id="validationServer" class="invalid-tooltip">
                                                     <%=error2%>
                                                 </div>
                                                 <%}%>
+
 
 
                                             </div>
@@ -215,6 +221,7 @@
                                     </div>
                                     <div class="col-md">
                                         <div class="form-floating" style="margin-bottom: 15px;">
+                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid20" placeholder="Precision del hechizo" name="presicionHechizo" required>
                                             <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error1!=null?"is-invalid":""%>" id="floatingInputGrid20" placeholder="Precision del hechizo" name="presicionHechizo">
                                             <label style="color: white" for="floatingInputGrid20" class="label-form-flujousuario">Precision del hechizo</label>
                                             <%if(error2!=null){%>
@@ -241,7 +248,7 @@
                                                 <option value="<%=hechizoBase.getIdHechizo()%>"><%=hechizoBase.getNombreHechizo()%></option>
                                                 <% } %>
                                             </select>
-                                            <label style="color: white" for="floatingSelectGrid3" class="label-form-flujousuario">Clase</label>
+                                            <label style="color: white" for="floatingSelectGrid3" class="label-form-flujousuario">Base</label>
 
                                         </div>
                                     </div>
@@ -280,6 +287,7 @@
                                     <div class="col-md">
                                         <div class="form-floating" style="margin-bottom: 15px;">
                                             <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error3!=null?"is-invalid":""%>" id="floatingInputGrid21" placeholder="Nivel de Aprendizaje" name="nivelAprendizaje">
+                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid21" placeholder="Nivel de Aprendizaje" name="nivelAprendizaje" required>
                                             <label style="color: white" for="floatingInputGrid20" class="label-form-flujousuario">Nivel de Aprendizaje</label>
                                             <%if(error3!=null){%>
                                             <div id="validationServer" class="invalid-tooltip">
@@ -298,7 +306,7 @@
 
                                 <div class="form-group" style="text-align: right">
                                     <button type="submit" class="btn btn-primary"> Agregar Hechizo</button>
-                                    <a href="<%=request.getContextPath()%>/EnemigoServlet?accion=listaHechizos" class="btn btn-secondary">Cancelar</a>
+                                    <a href="<%=request.getContextPath()%>/HechizoServlet?accion=listaHechizos" class="btn btn-secondary">Cancelar</a>
                                 </div>
 
                             </form>
