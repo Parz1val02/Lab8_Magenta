@@ -10,8 +10,15 @@ public class Objeto {
 
     private boolean borradoLogico;
 
+    private boolean usadoPorHeroe;
 
+    public boolean isUsadoPorHeroe() {
+        return usadoPorHeroe;
+    }
 
+    public void setUsadoPorHeroe(boolean usadoPorHeroe) {
+        this.usadoPorHeroe = usadoPorHeroe;
+    }
 
     public int getIdObjeto() {
         return idObjeto;

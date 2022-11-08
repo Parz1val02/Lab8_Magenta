@@ -61,7 +61,7 @@
                         <th>Nombre Objeto</th>
                         <th>Efecto</th>
                         <th>Peso (Kg) </th>
-
+                        <th>¿Es usado por algun Heroe?</th>
 
                         <th></th>
                         <th></th>
@@ -78,8 +78,11 @@
                             <td><%=objeto.getNombreObjeto()%></td>
                             <td><%=objeto.getEfecto()%></td>
                             <td><%=objeto.getPeso()%></td>
-
-
+                            <%if(objeto.isUsadoPorHeroe()){%>
+                                <td>Si</td>
+                            <%} else{%>
+                                <td>No</td>
+                            <%}%>
                             <td>
                                 <a type="button" class="btn btn-primary"
                                    href="<%=request.getContextPath()%>/ObjetoServlet?action=editarObjeto&id=<%=objeto.getIdObjeto()%>">
