@@ -124,9 +124,10 @@ public class HechizoDao extends BaseDao{
 
     public void eliminarHechizo (int idHechizo){
         try (Connection conn = getConnection();
-             PreparedStatement pstmt = conn.prepareStatement("UPDATE hechizos SET borradoLogico = 1  WHERE idHechizo = ?")) {
+             PreparedStatement pstmt = conn.prepareStatement("UPDATE hechizos SET borradoLogico = 1  WHERE idHechizo = ? or idHechizoBase = ?")) {
 
             pstmt.setInt(1, idHechizo);
+            pstmt.setInt(2, idHechizo);
             pstmt.executeUpdate();
 
         } catch (SQLException ex) {

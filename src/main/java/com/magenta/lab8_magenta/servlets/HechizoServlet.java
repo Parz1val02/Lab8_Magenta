@@ -33,6 +33,7 @@ public class HechizoServlet extends HttpServlet {
             case "agregarHechizos":
                 request.setAttribute("listaHechizosBase", hechizoDao.listarHechizosBase());
                 request.setAttribute("listaElementos", elementoDao.listarElementos());
+
                 view = request.getRequestDispatcher("Hechizos/AgregarHechizo.jsp");
                 view.forward(request, response);
                 break;
@@ -52,7 +53,9 @@ public class HechizoServlet extends HttpServlet {
 
 
         String action = request.getParameter("action");
+        RequestDispatcher view;
 
+        aaa:
         if(action.equals("guardarHechizo")){
             Hechizo hechizo = new Hechizo();
             Elemento elemento = new Elemento();
@@ -60,16 +63,55 @@ public class HechizoServlet extends HttpServlet {
             Hechizo hechizoBase = new Hechizo();
             HechizoDao hechizoDao = new HechizoDao();
 
-            hechizo.setNombreHechizo(request.getParameter("nombreHechizo"));
+
             elemento = elementoDao.obtenerElemento(Integer.parseInt(request.getParameter("idElemento")));
 
-            hechizo.setPotenciaHechizo(Integer.parseInt(request.getParameter("potenciaHechizo")));
-            hechizo.setPresicionHechizo(Integer.parseInt(request.getParameter("presicionHechizo")));
+            if(request.getParameter("nombreHechizo").length()<=15){
+                hechizo.setNombreHechizo(request.getParameter("nombreHechizo"));
+            }else{
+                request.setAttribute("listaHechizosBase", hechizoDao.listarHechizosBase());
+                request.setAttribute("listaElementos", elementoDao.listarElementos());
+                request.setAttribute("error1","El nombre no puede tener mas de 15 caracteres");
+                view = request.getRequestDispatcher("Hechizos/AgregarHechizo.jsp");
+                view.forward(request, response);
+                break aaa;
+            }
+
+
+
+
+            try {
+                hechizo.setPotenciaHechizo(Integer.parseInt(request.getParameter("potenciaHechizo")));
+                hechizo.setPresicionHechizo(Integer.parseInt(request.getParameter("presicionHechizo")));
+            }catch(NumberFormatException e){
+                request.setAttribute("listaHechizosBase", hechizoDao.listarHechizosBase());
+                request.setAttribute("listaElementos", elementoDao.listarElementos());
+                request.setAttribute("error2","La potencia y la presición deben ser numeros enteros");
+                view = request.getRequestDispatcher("Hechizos/AgregarHechizo.jsp");
+                view.forward(request, response);
+                break aaa;
+            }
             hechizoBase.setIdHechizo(Integer.parseInt(request.getParameter("idBase")));
             hechizo.setHechizoBase(hechizoBase);
 
-            hechizo.setDesbloqueado(Boolean.parseBoolean(request.getParameter("Desbloqueado")));
-            hechizo.setNivelAprendizaje(Integer.parseInt(request.getParameter("nivelAprendizaje")));
+            hechizo.setDesbloqueado(false);
+
+
+
+
+            if(Integer.parseInt(request.getParameter("nivelAprendizaje"))<=10){
+
+                hechizo.setNivelAprendizaje(Integer.parseInt(request.getParameter("nivelAprendizaje")));
+
+
+            }else{
+                request.setAttribute("listaHechizosBase", hechizoDao.listarHechizosBase());
+                request.setAttribute("listaElementos", elementoDao.listarElementos());
+                request.setAttribute("error3","El maximo nivel de aprendizaje es 10");
+                view = request.getRequestDispatcher("Hechizos/AgregarHechizo.jsp");
+                view.forward(request, response);
+                break aaa;
+            }
 
             hechizoDao.agregarHechizo(hechizo,elemento);
             response.sendRedirect(request.getContextPath()+"/HechizoServlet");

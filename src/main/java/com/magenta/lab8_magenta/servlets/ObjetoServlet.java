@@ -59,11 +59,32 @@ public class ObjetoServlet extends HttpServlet {
         String action = request.getParameter("action");
 
         ObjetoDao objetoDao = new ObjetoDao();
+        RequestDispatcher view;
         switch(action){
-            case "guardarEnemigo":
+            case "guardarObjeto":
                 Objeto objeto = new Objeto();
 
-                    objeto.setNombreObjeto(request.getParameter("nombreObjeto"));
+                    boolean repite = false;
+
+                    for (Objeto o : objetoDao.obtenerListaObjetos()){
+                        if(request.getParameter("nombreObjeto").equalsIgnoreCase(o.getNombreObjeto())){
+                            repite = true;
+                        }
+                    }
+
+                    if(!repite){
+                        objeto.setNombreObjeto(request.getParameter("nombreObjeto"));
+                    }else{
+
+                        request.setAttribute("error1","El nombre del objeto no se puede repetir");
+                        view = request.getRequestDispatcher("Objetos/agregarObjeto.jsp");
+                        view.forward(request,response);
+                        break;
+
+
+                    }
+
+
                     objeto.setEfecto(request.getParameter("efecto"));
                     objeto.setPeso(Float.parseFloat(request.getParameter("peso")));
 
