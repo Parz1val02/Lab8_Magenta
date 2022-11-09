@@ -291,24 +291,28 @@ public class HeroeServlet extends HttpServlet {
                     //Validar ataque mayor a 0
                     heroe.setAtaque(Integer.parseInt(request.getParameter("ataque")));
                     if(heroe.getAtaque()==0) {
+                        Heroe heroe2 = hDao.obtenerHeroe(heroe.getIdHeroe());
+                        request.setAttribute("heroe", heroe2);
                         GeneroDao generoDao = new GeneroDao();
                         request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
                         ClasesHeroesDao claseHeroesDao = new ClasesHeroesDao();
                         request.setAttribute("listaClases", claseHeroesDao.obtenerListaClases());
                         request.setAttribute("parejasDisponibles", hDao.parejasDisponibles());
                         request.setAttribute("error3", "El ataque debe ser un numero mayor a 0");
-                        RequestDispatcher view = request.getRequestDispatcher("heroes/editarHeroes.jsp");
+                        RequestDispatcher view = request.getRequestDispatcher("heroes/editarHeroe.jsp");
                         view.forward(request, response);
                         break;
                     }
                 }catch(NumberFormatException e){
+                    Heroe heroe2 = hDao.obtenerHeroe(heroe.getIdHeroe());
+                    request.setAttribute("heroe", heroe2);
                     GeneroDao generoDao = new GeneroDao();
                     request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
                     ClasesHeroesDao claseHeroesDao = new ClasesHeroesDao();
                     request.setAttribute("listaClases", claseHeroesDao.obtenerListaClases());
                     request.setAttribute("parejasDisponibles", hDao.parejasDisponibles());
                     request.setAttribute("error4", "El campo ingresado debe ser un numero");
-                    RequestDispatcher view = request.getRequestDispatcher("heroes/editarHeroes.jsp");
+                    RequestDispatcher view = request.getRequestDispatcher("heroes/editarHeroe.jsp");
                     view.forward(request, response);
                     break;
                 }

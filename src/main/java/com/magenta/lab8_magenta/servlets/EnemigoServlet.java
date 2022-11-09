@@ -126,13 +126,25 @@ public class EnemigoServlet extends HttpServlet {
                     request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
                     ClasesEnemigosDao claseEnemigoDao = new ClasesEnemigosDao();
                     request.setAttribute("listaClases", claseEnemigoDao.obtenerListaClases());
-                    RequestDispatcher view = request.getRequestDispatcher("enemigos/agregarEnemigos.jsp");
                     request.setAttribute("error3", "El campo ingresado solo debe contener letras");
+                    RequestDispatcher view = request.getRequestDispatcher("enemigos/agregarEnemigos.jsp");
                     view.forward(request, response);
                     break;
                 }
                 try {
                     enemigo.setAtaque(Integer.parseInt(request.getParameter("ataque")));
+                    if(enemigo.getAtaque()==0){
+                        ObjetoDao objetoDao = new ObjetoDao();
+                        request.setAttribute("listaObjetos", objetoDao.obtenerListaObjetos());
+                        GeneroDao generoDao = new GeneroDao();
+                        request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
+                        ClasesEnemigosDao claseEnemigoDao = new ClasesEnemigosDao();
+                        request.setAttribute("listaClases", claseEnemigoDao.obtenerListaClases());
+                        request.setAttribute("error4", "El campo ingresado debe ser mayor que cero");
+                        RequestDispatcher view = request.getRequestDispatcher("enemigos/agregarEnemigos.jsp");
+                        view.forward(request, response);
+                        break;
+                    }
                 }catch (NumberFormatException e){
                     ObjetoDao objetoDao = new ObjetoDao();
                     request.setAttribute("listaObjetos", objetoDao.obtenerListaObjetos());
@@ -140,13 +152,25 @@ public class EnemigoServlet extends HttpServlet {
                     request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
                     ClasesEnemigosDao claseEnemigoDao = new ClasesEnemigosDao();
                     request.setAttribute("listaClases", claseEnemigoDao.obtenerListaClases());
-                    RequestDispatcher view = request.getRequestDispatcher("enemigos/agregarEnemigos.jsp");
                     request.setAttribute("error1", "El campo ingresado debe ser un numero entero");
+                    RequestDispatcher view = request.getRequestDispatcher("enemigos/agregarEnemigos.jsp");
                     view.forward(request, response);
                     break;
                 }
                 try {
                     enemigo.setExperienciaDerrotado(Integer.parseInt(request.getParameter("experienciaDerrotado")));
+                    if(enemigo.getExperienciaDerrotado()==0){
+                        ObjetoDao objetoDao = new ObjetoDao();
+                        request.setAttribute("listaObjetos", objetoDao.obtenerListaObjetos());
+                        GeneroDao generoDao = new GeneroDao();
+                        request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
+                        ClasesEnemigosDao claseEnemigoDao = new ClasesEnemigosDao();
+                        request.setAttribute("listaClases", claseEnemigoDao.obtenerListaClases());
+                        request.setAttribute("error4", "El campo ingresado debe ser mayor que cero");
+                        RequestDispatcher view = request.getRequestDispatcher("enemigos/agregarEnemigos.jsp");
+                        view.forward(request, response);
+                        break;
+                    }
                 }catch (NumberFormatException e){
                     ObjetoDao objetoDao = new ObjetoDao();
                     request.setAttribute("listaObjetos", objetoDao.obtenerListaObjetos());
@@ -154,13 +178,37 @@ public class EnemigoServlet extends HttpServlet {
                     request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
                     ClasesEnemigosDao claseEnemigoDao = new ClasesEnemigosDao();
                     request.setAttribute("listaClases", claseEnemigoDao.obtenerListaClases());
-                    RequestDispatcher view = request.getRequestDispatcher("enemigos/agregarEnemigos.jsp");
                     request.setAttribute("error1", "El campo ingresado debe ser un numero entero");
+                    RequestDispatcher view = request.getRequestDispatcher("enemigos/agregarEnemigos.jsp");
                     view.forward(request, response);
                     break;
                 }
                 try {
                     enemigo.setProbDejarObjeto(Double.parseDouble(request.getParameter("probabilidadDejarObjeto")));
+                    if(enemigo.getProbDejarObjeto()==0){
+                        ObjetoDao objetoDao = new ObjetoDao();
+                        request.setAttribute("listaObjetos", objetoDao.obtenerListaObjetos());
+                        GeneroDao generoDao = new GeneroDao();
+                        request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
+                        ClasesEnemigosDao claseEnemigoDao = new ClasesEnemigosDao();
+                        request.setAttribute("listaClases", claseEnemigoDao.obtenerListaClases());
+                        request.setAttribute("error4", "El campo ingresado debe ser mayor que cero");
+                        RequestDispatcher view = request.getRequestDispatcher("enemigos/agregarEnemigos.jsp");
+                        view.forward(request, response);
+                        break;
+                    }
+                    if(enemigo.getProbDejarObjeto()>=1){
+                        ObjetoDao objetoDao = new ObjetoDao();
+                        request.setAttribute("listaObjetos", objetoDao.obtenerListaObjetos());
+                        GeneroDao generoDao = new GeneroDao();
+                        request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
+                        ClasesEnemigosDao claseEnemigoDao = new ClasesEnemigosDao();
+                        request.setAttribute("listaClases", claseEnemigoDao.obtenerListaClases());
+                        request.setAttribute("error5", "El campo ingresado debe ser menor que uno");
+                        RequestDispatcher view = request.getRequestDispatcher("enemigos/agregarEnemigos.jsp");
+                        view.forward(request, response);
+                        break;
+                    }
                 }catch (NumberFormatException e){
                     ObjetoDao objetoDao = new ObjetoDao();
                     request.setAttribute("listaObjetos", objetoDao.obtenerListaObjetos());
@@ -168,8 +216,8 @@ public class EnemigoServlet extends HttpServlet {
                     request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
                     ClasesEnemigosDao claseEnemigoDao = new ClasesEnemigosDao();
                     request.setAttribute("listaClases", claseEnemigoDao.obtenerListaClases());
-                    RequestDispatcher view = request.getRequestDispatcher("enemigos/agregarEnemigos.jsp");
                     request.setAttribute("error2", "El campo ingresado debe ser un numero decimal");
+                    RequestDispatcher view = request.getRequestDispatcher("enemigos/agregarEnemigos.jsp");
                     view.forward(request, response);
                     break;
                 }
@@ -208,14 +256,27 @@ public class EnemigoServlet extends HttpServlet {
                     request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
                     ClasesEnemigosDao claseEnemigoDao = new ClasesEnemigosDao();
                     request.setAttribute("listaClases", claseEnemigoDao.obtenerListaClases());
-                    RequestDispatcher view = request.getRequestDispatcher("enemigos/editarEnemigo.jsp");
                     request.setAttribute("error3", "El campo ingresado solo debe contener letras");
+                    RequestDispatcher view = request.getRequestDispatcher("enemigos/editarEnemigo.jsp");
                     view.forward(request, response);
                     break;
                 }
                 try{
                     enemigo.setAtaque(Integer.parseInt(request.getParameter("ataque")));
-
+                    if(enemigo.getAtaque()==0){
+                        Enemigo enemigo2 = enemigoDao.obtenerEnemigo(enemigo.getIdEnemigo());
+                        request.setAttribute("enemigo", enemigo2);
+                        ObjetoDao objetoDao = new ObjetoDao();
+                        request.setAttribute("listaObjetos", objetoDao.obtenerListaObjetos());
+                        GeneroDao generoDao = new GeneroDao();
+                        request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
+                        ClasesEnemigosDao claseEnemigoDao = new ClasesEnemigosDao();
+                        request.setAttribute("listaClases", claseEnemigoDao.obtenerListaClases());
+                        request.setAttribute("error4", "El campo ingresado debe ser mayor a 0");
+                        RequestDispatcher view = request.getRequestDispatcher("enemigos/editarEnemigo.jsp");
+                        view.forward(request, response);
+                        break;
+                    }
                 }catch(NumberFormatException e){
                     Enemigo enemigo2 = enemigoDao.obtenerEnemigo(enemigo.getIdEnemigo());
                     request.setAttribute("enemigo", enemigo2);
@@ -225,14 +286,28 @@ public class EnemigoServlet extends HttpServlet {
                     request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
                     ClasesEnemigosDao claseEnemigoDao = new ClasesEnemigosDao();
                     request.setAttribute("listaClases", claseEnemigoDao.obtenerListaClases());
-                    RequestDispatcher view = request.getRequestDispatcher("enemigos/editarEnemigo.jsp");
                     request.setAttribute("error1", "El campo ingresado debe ser un numero entero");
+                    RequestDispatcher view = request.getRequestDispatcher("enemigos/editarEnemigo.jsp");
                     view.forward(request, response);
                     break;
                 }
                 try{
                     enemigo.setExperienciaDerrotado(Integer.parseInt(request.getParameter("experienciaDerrotado")));
-                }catch(NumberFormatException e){
+                    if(enemigo.getExperienciaDerrotado()==0) {
+                        Enemigo enemigo2 = enemigoDao.obtenerEnemigo(enemigo.getIdEnemigo());
+                        request.setAttribute("enemigo", enemigo2);
+                        ObjetoDao objetoDao = new ObjetoDao();
+                        request.setAttribute("listaObjetos", objetoDao.obtenerListaObjetos());
+                        GeneroDao generoDao = new GeneroDao();
+                        request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
+                        ClasesEnemigosDao claseEnemigoDao = new ClasesEnemigosDao();
+                        request.setAttribute("listaClases", claseEnemigoDao.obtenerListaClases());
+                        request.setAttribute("error4", "El campo ingresado debe ser mayor a 0");
+                        RequestDispatcher view = request.getRequestDispatcher("enemigos/editarEnemigo.jsp");
+                        view.forward(request, response);
+                        break;
+                        }
+                    }catch(NumberFormatException e){
                     Enemigo enemigo2 = enemigoDao.obtenerEnemigo(enemigo.getIdEnemigo());
                     request.setAttribute("enemigo", enemigo2);
                     ObjetoDao objetoDao = new ObjetoDao();
@@ -241,13 +316,41 @@ public class EnemigoServlet extends HttpServlet {
                     request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
                     ClasesEnemigosDao claseEnemigoDao = new ClasesEnemigosDao();
                     request.setAttribute("listaClases", claseEnemigoDao.obtenerListaClases());
-                    RequestDispatcher view = request.getRequestDispatcher("enemigos/editarEnemigo.jsp");
                     request.setAttribute("error1", "El campo ingresado debe ser un numero entero");
+                    RequestDispatcher view = request.getRequestDispatcher("enemigos/editarEnemigo.jsp");
                     view.forward(request, response);
                     break;
                 }
                 try{
                     enemigo.setProbDejarObjeto(Double.parseDouble(request.getParameter("probabilidadDejarObjeto")));
+                    if(enemigo.getProbDejarObjeto()==0){
+                        Enemigo enemigo2 = enemigoDao.obtenerEnemigo(enemigo.getIdEnemigo());
+                        request.setAttribute("enemigo", enemigo2);
+                        ObjetoDao objetoDao = new ObjetoDao();
+                        request.setAttribute("listaObjetos", objetoDao.obtenerListaObjetos());
+                        GeneroDao generoDao = new GeneroDao();
+                        request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
+                        ClasesEnemigosDao claseEnemigoDao = new ClasesEnemigosDao();
+                        request.setAttribute("listaClases", claseEnemigoDao.obtenerListaClases());
+                        request.setAttribute("error4", "El campo ingresado debe ser mayor a 0");
+                        RequestDispatcher view = request.getRequestDispatcher("enemigos/editarEnemigo.jsp");
+                        view.forward(request, response);
+                        break;
+                    }
+                    if(enemigo.getProbDejarObjeto()>=1){
+                        Enemigo enemigo2 = enemigoDao.obtenerEnemigo(enemigo.getIdEnemigo());
+                        request.setAttribute("enemigo", enemigo2);
+                        ObjetoDao objetoDao = new ObjetoDao();
+                        request.setAttribute("listaObjetos", objetoDao.obtenerListaObjetos());
+                        GeneroDao generoDao = new GeneroDao();
+                        request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
+                        ClasesEnemigosDao claseEnemigoDao = new ClasesEnemigosDao();
+                        request.setAttribute("listaClases", claseEnemigoDao.obtenerListaClases());
+                        request.setAttribute("error5", "El campo ingresado debe ser menor a 1");
+                        RequestDispatcher view = request.getRequestDispatcher("enemigos/editarEnemigo.jsp");
+                        view.forward(request, response);
+                        break;
+                    }
                 }catch(NumberFormatException e){
                     Enemigo enemigo2 = enemigoDao.obtenerEnemigo(enemigo.getIdEnemigo());
                     request.setAttribute("enemigo", enemigo2);
@@ -257,8 +360,8 @@ public class EnemigoServlet extends HttpServlet {
                     request.setAttribute("listaGeneros", generoDao.obtenerListaGeneros());
                     ClasesEnemigosDao claseEnemigoDao = new ClasesEnemigosDao();
                     request.setAttribute("listaClases", claseEnemigoDao.obtenerListaClases());
-                    RequestDispatcher view = request.getRequestDispatcher("enemigos/editarEnemigo.jsp");
                     request.setAttribute("error2", "El campo ingresado debe ser un numero decimal");
+                    RequestDispatcher view = request.getRequestDispatcher("enemigos/editarEnemigo.jsp");
                     view.forward(request, response);
                     break;
                 }

@@ -10,17 +10,20 @@
 
 <% Objeto objeto = (Objeto) request.getAttribute("Objeto");%>
 <% boolean usado = (boolean) request.getAttribute("usado");%>
+<% String error1 = (String) request.getAttribute("error1");%>
+<% String error2 = (String) request.getAttribute("error2");%>
+<% String error3 = (String) request.getAttribute("error3");%>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title> editarEnemigos </title>
+    <title> editarObjetos </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="shortcut icon" href="<%=request.getContextPath()%>/static/favicon2.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href=css/style.min.css>
+    <link rel="stylesheet" href=../css/style.min.css>
     <!-- CSS de registrar-flujo-usuarioo -->
-    <link rel="stylesheet" href="css/form1.css">
+    <link rel="stylesheet" href="../css/form1.css">
     <style>
         body {
             /*background-color: white;*/
@@ -116,7 +119,7 @@
         <!--TITLE-->
         <div class="pt-4 titlecolor">
             <div class="col-lg-6">
-                <h1 class='text-dark' class='text-dark' style="color: white !important;font-weight: bold ">Agregar Enemigos</h1>
+                <h1 class='text-dark' class='text-dark' style="color: white !important;font-weight: bold ">Editar Objetos</h1>
             </div>
         </div>
         <!--FINISH TITLE-->
@@ -148,10 +151,15 @@
                                         <p class="campos-registrar-usuario">Nombre:</p>
                                     </div>
                                     <div class="col-md">
-
+                                        <input type="hidden" name="id" value="<%= objeto.getIdObjeto()%>"/>
                                         <div class="form-floating" style="margin-bottom: 15px">
-                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid2" value="<%= objeto.getNombreObjeto()%>" placeholder="Nombre Objeto" name="nombreObjeto">
+                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error3!=null?"is-invalid":""%>" id="floatingInputGrid2" value="<%= objeto.getNombreObjeto()%>" placeholder="Nombre Objeto" name="nombreObjeto">
                                             <label style="color: white" for="floatingInputGrid2" class="label-form-flujousuario">Nombre Objeto</label>
+                                            <%if(error3!=null){%>
+                                            <div id="validationServer" class="invalid-tooltip">
+                                                <%=error3%>
+                                            </div>
+                                            <%}%>
                                         </div>
                                     </div>
                                 </div>
@@ -179,8 +187,18 @@
                                     <div class="col-md">
                                         <div class="form-floating" style="margin-bottom: 15px;">
                                             <div class="form-floating" style="margin-bottom: 15px;">
-                                                <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid12" value="<%= objeto.getPeso()%>" placeholder="Peso" name="peso">
+                                                <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error1!=null?"is-invalid":""%> <%=error2!=null?"is-invalid":""%>" id="floatingInputGrid12" value="<%= objeto.getPeso()%>" placeholder="Peso" name="peso">
                                                 <label style="color: white" for="floatingInputGrid12" class="label-form-flujousuario">Peso</label>
+                                                <%if(error1!=null){%>
+                                                <div id="validationServer" class="invalid-tooltip">
+                                                    <%=error1%>
+                                                </div>
+                                                <%}%>
+                                                <%if(error2!=null){%>
+                                                <div id="validationServer" class="invalid-tooltip">
+                                                    <%=error2%>
+                                                </div>
+                                                <%}%>
                                             </div>
                                         </div>
                                     </div>

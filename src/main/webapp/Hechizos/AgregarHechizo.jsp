@@ -13,6 +13,7 @@
 <% String error1 = (String) request.getAttribute("error1");%>
 <% String error2 = (String) request.getAttribute("error2");%>
 <% String error3 = (String) request.getAttribute("error3");%>
+<% String error4 = (String) request.getAttribute("error4");%>
 
 
 
@@ -160,7 +161,7 @@
                                     </div>
                                     <div class="col-md">
                                         <div class="form-floating" style="margin-bottom: 15px">
-                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid2" placeholder="Nombre Hechizo" name="nombreHechizo" required maxlength="15">
+                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error1!=null?"is-invalid":""%>" id="floatingInputGrid2" placeholder="Nombre Hechizo" name="nombreHechizo" required maxlength="15">
                                             <label style="color: white" for="floatingInputGrid2" class="label-form-flujousuario">Nombre Hechizo</label>
                                             <%if(error1!=null){%>
                                             <div id="validationServer" class="invalid-tooltip">
@@ -178,7 +179,7 @@
                                     </div>
                                     <div class="col-md">
                                         <div class="form-floating" style="margin-bottom: 15px;">
-                                            <select style="background-color: #4d4545;color: white" class="form-select" id="floatingSelectGrid2" name="idElemento" >
+                                            <select style="background-color: #4d4545;color: white" class="form-select" id="floatingSelectGrid2" name="idElemento">
                                                 <% for (Elemento elemento : listaElementos) { %>
                                                 <option value="<%=elemento.getIdElemento()%>"><%=elemento.getNombreElemento()%>
                                                 </option>
@@ -199,14 +200,18 @@
                                         <div class="form-floating" style="margin-bottom: 15px;">
                                             <div class="form-floating" style="margin-bottom: 15px;">
 
-                                                <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error2!=null?"is-invalid":""%>" id="floatingInputGrid12" placeholder="Potencia del Hechizo" name="potenciaHechizo" required>
+                                                <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error2!=null?"is-invalid":""%> <%=error4!=null?"is-invalid":""%>" id="floatingInputGrid12" placeholder="Potencia del Hechizo" name="potenciaHechizo" required>
                                                 <label style="color: white" for="floatingInputGrid12" class="label-form-flujousuario">Potencia del hechizo</label>
                                                 <%if(error2!=null){%>
                                                 <div id="validationServer" class="invalid-tooltip">
                                                     <%=error2%>
                                                 </div>
                                                 <%}%>
-
+                                                <%if(error4!=null){%>
+                                                <div id="validationServer" class="invalid-tooltip">
+                                                    <%=error4%>
+                                                </div>
+                                                <%}%>
 
 
                                             </div>
@@ -223,14 +228,18 @@
                                     <div class="col-md">
                                         <div class="form-floating" style="margin-bottom: 15px;">
 
-                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error1!=null?"is-invalid":""%>" id="floatingInputGrid20" placeholder="Precision del hechizo" name="presicionHechizo" required>
+                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error2!=null?"is-invalid":""%> <%=error4!=null?"is-invalid":""%>" id="floatingInputGrid20" placeholder="Precision del hechizo" name="presicionHechizo" required>
                                             <label style="color: white" for="floatingInputGrid20" class="label-form-flujousuario">Precision del hechizo</label>
                                             <%if(error2!=null){%>
                                             <div id="validationServer" class="invalid-tooltip">
                                                 <%=error2%>
                                             </div>
                                             <%}%>
-
+                                            <%if(error4!=null){%>
+                                            <div id="validationServer" class="invalid-tooltip">
+                                                <%=error4%>
+                                            </div>
+                                            <%}%>
                                         </div>
                                     </div>
                                 </div>

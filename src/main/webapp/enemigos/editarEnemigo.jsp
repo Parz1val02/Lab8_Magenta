@@ -12,6 +12,8 @@
 <%String error1 = (String) request.getAttribute("error1");%>
 <%String error2 = (String) request.getAttribute("error2");%>
 <%String error3 = (String) request.getAttribute("error3");%>
+<%String error4 = (String) request.getAttribute("error4");%>
+<%String error5 = (String) request.getAttribute("error5");%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -177,11 +179,16 @@
                                     </div>
                                     <div class="col-md">
                                         <div class="form-floating" style="margin-bottom: 15px;">
-                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error1!=null?"is-invalid":""%>" id="floatingInputGrid4" value="<%= enemigo.getAtaque()%>" placeholder="Ataque" name="ataque">
+                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error1!=null?"is-invalid":""%> <%=error4!=null?"is-invalid":""%>" id="floatingInputGrid4" value="<%= enemigo.getAtaque()%>" placeholder="Ataque" name="ataque">
                                             <label style="color: white" for="floatingInputGrid4" class="label-form-flujousuario">Ataque</label>
                                             <%if(error1!=null){%>
                                             <div id="validationServer" class="invalid-tooltip">
                                                 <%=error1%>
+                                            </div>
+                                            <%}%>
+                                            <%if(error4!=null){%>
+                                            <div id="validationServer" class="invalid-tooltip">
+                                                <%=error4%>
                                             </div>
                                             <%}%>
                                         </div>
@@ -196,11 +203,16 @@
                                     <div class="col-md">
                                         <div class="form-floating" style="margin-bottom: 15px;">
                                             <div class="form-floating" style="margin-bottom: 15px;">
-                                                <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error1!=null?"is-invalid":""%>" id="floatingInputGrid12" value="<%= enemigo.getExperienciaDerrotado()%>" placeholder="Experiencia al ser Derrotado" name="experienciaDerrotado">
+                                                <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error1!=null?"is-invalid":""%> <%=error4!=null?"is-invalid":""%>" id="floatingInputGrid12" value="<%= enemigo.getExperienciaDerrotado()%>" placeholder="Experiencia al ser Derrotado" name="experienciaDerrotado">
                                                 <label style="color: white" for="floatingInputGrid12" class="label-form-flujousuario">Experiencia al ser Derrotado</label>
                                                 <%if(error1!=null){%>
                                                 <div id="validationServer" class="invalid-tooltip">
                                                     <%=error1%>
+                                                </div>
+                                                <%}%>
+                                                <%if(error4!=null){%>
+                                                <div id="validationServer" class="invalid-tooltip">
+                                                    <%=error4%>
                                                 </div>
                                                 <%}%>
                                             </div>
@@ -216,11 +228,21 @@
                                     </div>
                                     <div class="col-md">
                                         <div class="form-floating" style="margin-bottom: 15px;">
-                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error2!=null?"is-invalid":""%>" id="floatingInputGrid20" value="<%= enemigo.getProbDejarObjeto()%>" placeholder="Probabilidad de dejar Objeto" name="probabilidadDejarObjeto">
+                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error2!=null?"is-invalid":""%> <%=error4!=null?"is-invalid":""%> <%=error5!=null?"is-invalid":""%>" id="floatingInputGrid20" value="<%= enemigo.getProbDejarObjeto()%>" placeholder="Probabilidad de dejar Objeto" name="probabilidadDejarObjeto">
                                             <label style="color: white" for="floatingInputGrid20" class="label-form-flujousuario">Probabilidad de dejar Objeto</label>
                                             <%if(error2!=null){%>
                                             <div id="validationServer" class="invalid-tooltip">
                                                 <%=error2%>
+                                            </div>
+                                            <%}%>
+                                            <%if(error4!=null){%>
+                                            <div id="validationServer" class="invalid-tooltip">
+                                                <%=error4%>
+                                            </div>
+                                            <%}%>
+                                            <%if(error5!=null){%>
+                                            <div id="validationServer" class="invalid-tooltip">
+                                                <%=error5%>
                                             </div>
                                             <%}%>
                                         </div>

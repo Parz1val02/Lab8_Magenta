@@ -257,7 +257,7 @@ public class EnemigoDao extends BaseDao {
         try(Connection conn = getConnection();
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT o.idObjeto, nombreObjeto, count(e.idEnemigo) FROM objetos o \n" +
-                    "inner join magenta.enemigos e on e.idObjeto = o.idObjeto\n" +
+                    "inner join magenta.enemigos e on e.idObjeto = o.idObjeto where o.borradoLogico=0 and e.borradoLogico=0\n" +
                     "group by o.nombreObjeto\n" +
                     "order by count(e.idEnemigo) DESC;")) {
 
@@ -286,7 +286,7 @@ public class EnemigoDao extends BaseDao {
         try(Connection conn = getConnection();
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT clase.idClaseEnemigo, nombreClase, count(e.idEnemigo) FROM magenta.enemigos e\n" +
-                    "inner join clases_enemigos clase on e.idClaseEnemigo = clase.idClaseEnemigo\n" +
+                    "inner join clases_enemigos clase on e.idClaseEnemigo = clase.idClaseEnemigo where e.borradoLogico=0\n" +
                     "group by clase.nombreClase\n" +
                     "order by  count(e.idEnemigo) DESC;")) {
 
@@ -315,7 +315,7 @@ public class EnemigoDao extends BaseDao {
         try(Connection conn = getConnection();
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT count(e.idEnemigo) FROM magenta.enemigos e \n" +
-                    "where e.idGenero is Null;")) {
+                    "where e.idGenero is Null and e.borradoLogico=0;")) {
 
             while(rs.next() ){
                 nroSinGenero = rs.getInt(1);
@@ -326,7 +326,7 @@ public class EnemigoDao extends BaseDao {
 
         try(Connection conn = getConnection();
             Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT count(idEnemigo) FROM magenta.enemigos;")) {
+            ResultSet rs = st.executeQuery("SELECT count(idEnemigo) FROM magenta.enemigos where borradoLogico=0;")) {
 
             while(rs.next() ){
                 totalEnemigos = rs.getInt(1);

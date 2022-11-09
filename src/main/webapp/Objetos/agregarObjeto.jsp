@@ -8,6 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% String error1 = (String) request.getAttribute("error1");%>
 <% String error2 = (String) request.getAttribute("error2");%>
+<% String error3 = (String) request.getAttribute("error3");%>
+<% String error4 = (String) request.getAttribute("error4");%>
 
 
 <html>
@@ -152,8 +154,13 @@
                                         </div>
                                         <div class="col-md">
                                             <div class="form-floating" style="margin-bottom: 15px">
-                                                <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error1!=null?"is-invalid":""%>" id="floatingInputGrid2" placeholder="Nombre Objeto" name="nombreObjeto">
+                                                <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error1!=null?"is-invalid":""%> <%=error3!=null?"is-invalid":""%>" id="floatingInputGrid2" placeholder="Nombre Objeto" name="nombreObjeto" required>
                                                 <label style="color: white" for="floatingInputGrid2" class="label-form-flujousuario">Nombre Objeto</label>
+                                                <%if(error3!=null){%>
+                                                <div id="validationServer" class="invalid-tooltip">
+                                                    <%=error3%>
+                                                </div>
+                                                <%}%>
                                                 <%if(error1!=null){%>
                                                 <div id="validationServer" class="invalid-tooltip">
                                                     <%=error1%>
@@ -172,7 +179,7 @@
                                     </div>
                                     <div class="col-md">
                                         <div class="form-floating" style="margin-bottom: 15px;">
-                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid4" placeholder="Efecto" name="efecto">
+                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid4" placeholder="Efecto" name="efecto" required>
                                             <label style="color: white" for="floatingInputGrid4" class="label-form-flujousuario">Efecto</label>
                                         </div>
                                     </div>
@@ -187,11 +194,16 @@
                                         <div class="col-md">
                                             <div class="form-floating" style="margin-bottom: 15px;">
                                                 <div class="form-floating" style="margin-bottom: 15px;">
-                                                    <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error2!=null?"is-invalid":""%>" id="floatingInputGrid12" placeholder="Peso" name="peso">
+                                                    <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error2!=null?"is-invalid":""%> <%=error4!=null?"is-invalid":""%>" id="floatingInputGrid12" placeholder="Peso" name="peso" required>
                                                     <label style="color: white" for="floatingInputGrid12" class="label-form-flujousuario">Peso (kg)</label>
                                                     <%if(error2!=null){%>
                                                     <div id="validationServer" class="invalid-tooltip">
                                                         <%=error2%>
+                                                    </div>
+                                                    <%}%>
+                                                    <%if(error4!=null){%>
+                                                    <div id="validationServer" class="invalid-tooltip">
+                                                        <%=error4%>
                                                     </div>
                                                     <%}%>
                                                 </div>

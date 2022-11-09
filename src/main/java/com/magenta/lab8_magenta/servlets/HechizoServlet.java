@@ -66,23 +66,28 @@ public class HechizoServlet extends HttpServlet {
 
             elemento = elementoDao.obtenerElemento(Integer.parseInt(request.getParameter("idElemento")));
 
-            if(request.getParameter("nombreHechizo").length()<=15){
+            if(request.getParameter("nombreHechizo").matches("[a-zA-Z]+$")){
                 hechizo.setNombreHechizo(request.getParameter("nombreHechizo"));
             }else{
                 request.setAttribute("listaHechizosBase", hechizoDao.listarHechizosBase());
                 request.setAttribute("listaElementos", elementoDao.listarElementos());
-                request.setAttribute("error1","El nombre no puede tener mas de 15 caracteres");
+                request.setAttribute("error1","El nombre del hechizo solo debe contener letras");
                 view = request.getRequestDispatcher("Hechizos/AgregarHechizo.jsp");
                 view.forward(request, response);
                 break aaa;
             }
 
-
-
-
             try {
                 hechizo.setPotenciaHechizo(Integer.parseInt(request.getParameter("potenciaHechizo")));
                 hechizo.setPresicionHechizo(Integer.parseInt(request.getParameter("presicionHechizo")));
+                if(hechizo.getPotenciaHechizo()==0 | hechizo.getPotenciaHechizo()==0){
+                    request.setAttribute("listaHechizosBase", hechizoDao.listarHechizosBase());
+                    request.setAttribute("listaElementos", elementoDao.listarElementos());
+                    request.setAttribute("error4","La potencia y la presición deben ser mayores a 0");
+                    view = request.getRequestDispatcher("Hechizos/AgregarHechizo.jsp");
+                    view.forward(request, response);
+                    break aaa;
+                }
             }catch(NumberFormatException e){
                 request.setAttribute("listaHechizosBase", hechizoDao.listarHechizosBase());
                 request.setAttribute("listaElementos", elementoDao.listarElementos());

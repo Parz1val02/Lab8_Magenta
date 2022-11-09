@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean type="com.magenta.lab8_magenta.model.beans.DebFort" scope="request" id="DebFortPorClaseYElemento"/>
 <%String error2 = (String) request.getAttribute("error2");%>
+<%String error1 = (String) request.getAttribute("error1");%>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -149,18 +150,38 @@
                                 <!-- 1era fila -->
 
                                 <div class="row g-2">
-                                    <div class="col-md-3"  style="display: flex; justify-content: center;  flex-direction: column">
-                                        <p class="campos-registrar-usuario">Porcentaje de Danio:</p>
+                                    <div class="col-md-3" style="display: flex; justify-content: center;  flex-direction: column">
+                                        <p class="campos-registrar-usuario">Elemento: </p>
                                     </div>
                                     <div class="col-md">
                                         <input type="hidden" name="idElemento" value="<%= DebFortPorClaseYElemento.getElemento().getIdElemento()%>"/>
                                         <input type="hidden" name="idClase" value="<%= DebFortPorClaseYElemento.getClaseEnemigo().getIdClaseEnemigo()%>"/>
+                                        <div class="form-floating" style="margin-bottom: 15px;">
+                                            <div class="form-floating" style="margin-bottom: 15px;">
+                                                <input style="background-color: #4d4545;color: white" type="text" class="form-control" id="floatingInputGrid1" value="<%= DebFortPorClaseYElemento.getElemento().getNombreElemento()%>" placeholder="nombreElemento" name="nombreElemento" disabled>
+                                                <label style="color: white" for="floatingInputGrid1" class="label-form-flujousuario">Elemento</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row g-2">
+                                    <div class="col-md-3"  style="display: flex; justify-content: center;  flex-direction: column">
+                                        <p class="campos-registrar-usuario">Porcentaje de Danio:</p>
+                                    </div>
+                                    <div class="col-md">
                                         <div class="form-floating" style="margin-bottom: 15px">
-                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error2!=null?"is-invalid":""%>" id="floatingInputGrid2" value="<%= DebFortPorClaseYElemento.getPorcentajeDanio()%>" placeholder="Porcentaje Danio" name="porcentajeDanio">
+                                            <input style="background-color: #4d4545;color: white" type="text" class="form-control <%=error1!=null?"is-invalid":""%> <%=error2!=null?"is-invalid":""%>" id="floatingInputGrid2" value="<%= DebFortPorClaseYElemento.getPorcentajeDanio()%>" placeholder="Porcentaje Danio" name="porcentajeDanio">
                                             <label style="color: white" for="floatingInputGrid2" class="label-form-flujousuario">Porcentaje Danio</label>
                                             <%if(error2!=null){%>
                                             <div id="validationServer" class="invalid-tooltip">
                                                 <%=error2%>
+                                            </div>
+                                            <%}%>
+                                            <%if(error1!=null){%>
+                                            <div id="validationServer" class="invalid-tooltip">
+                                                <%=error1%>
                                             </div>
                                             <%}%>
                                         </div>

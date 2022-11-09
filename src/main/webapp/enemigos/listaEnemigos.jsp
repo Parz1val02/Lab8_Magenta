@@ -77,7 +77,7 @@
                 <th>Nombre Enemigo</th>
                 <th>Clase</th>
                 <th>Ataque</th>
-                <th>Experiencia </th>
+                <th>Exp. derrotado</th>
                 <th>Objeto drop</th>
                 <th>Probabilidad Objeto</th>
                 <th>Genero</th>

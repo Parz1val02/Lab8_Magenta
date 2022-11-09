@@ -8,8 +8,8 @@
     </jsp:include>
     <body>
 
-        <div style="background-image: url('img/fondo_oscuro.jpg')">
-3
+        <div class="fondo_imagen">
+
         <div class = 'container-fluid' style="height: 20px; background-color: #f644dd"></div>
 
 

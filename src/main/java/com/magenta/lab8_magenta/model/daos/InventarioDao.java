@@ -13,7 +13,7 @@ public class InventarioDao extends BaseDao{
     public ArrayList<Objeto> obtenerObjetos (int idHeroe){
         ArrayList<Objeto> Inventario = new ArrayList<>();
 
-        String sql = "SELECT * FROM magenta.inventario where idHeroe= ?";
+        String sql = "SELECT * FROM magenta.inventario i inner join magenta.objetos o on (i.idObjeto=o.idObjeto) where i.idHeroe= ? and o.borradoLogico=0";
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -35,7 +35,7 @@ public class InventarioDao extends BaseDao{
     public ArrayList<Integer> obtenerCantidadObjetos (int idHeroe){
         ArrayList<Integer> cantidadObjetos = new ArrayList<>();
 
-        String sql = "SELECT * FROM magenta.inventario where idHeroe= ?";
+        String sql = "SELECT * FROM magenta.inventario i inner join magenta.objetos o on (i.idObjeto=o.idObjeto) where i.idHeroe= ? and o.borradoLogico=0";
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -54,7 +54,7 @@ public class InventarioDao extends BaseDao{
 
     public int obtenerCantidad(int idHeroe, int idObjeto){
         int cantidad=0;
-        String sql = "SELECT cantidadObjeto FROM magenta.inventario where idHeroe= ? and idObjeto= ?";
+        String sql = "SELECT cantidadObjeto FROM magenta.inventario i inner join magenta.objetos o on (i.idObjeto=o.idObjeto) where i.idHeroe= ? and i.idObjeto= ? and o.borradoLogico=0;";
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -102,6 +102,17 @@ public class InventarioDao extends BaseDao{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        sql = "UPDATE objetos set usadoPorHeroe = ? where idObjeto = ?";
+
+        try (Connection conn = getConnection();
+             PreparedStatement pstm = conn.prepareStatement(sql)){
+            pstm.setBoolean(1,true);
+            pstm.setInt(2,objetoId);
+            pstm.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void borrarObjetoInventario(int heroeId, int objetoId){
@@ -117,6 +128,31 @@ public class InventarioDao extends BaseDao{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        if(usadoPorOtros(objetoId)){
+            sql = "UPDATE objetos set usadoPorHeroe = ? where idObjeto = ?";
+
+            try (Connection conn = getConnection();
+                 PreparedStatement pstm = conn.prepareStatement(sql)){
+                pstm.setBoolean(1,true);
+                pstm.setInt(2,objetoId);
+                pstm.executeUpdate();
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }else{
+            sql = "UPDATE objetos set usadoPorHeroe = ? where idObjeto = ?";
+
+            try (Connection conn = getConnection();
+                 PreparedStatement pstm = conn.prepareStatement(sql)){
+                pstm.setBoolean(1,false);
+                pstm.setInt(2,objetoId);
+                pstm.executeUpdate();
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     public double verificarMaxPeso(ArrayList<Objeto> InventarioHeroe, ArrayList<Integer> cantidadObjetosInventario, Objeto objeto, int cantidad){
@@ -130,4 +166,21 @@ public class InventarioDao extends BaseDao{
 
     }
 
+    public boolean usadoPorOtros(int idObjeto){
+        boolean usado = false;
+        try(Connection conn = getConnection();
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT idObjeto FROM magenta.inventario;")) {
+
+            while(rs.next()){
+                if(rs.getInt(1)==idObjeto){
+                    usado = true;
+                    break;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return usado;
+    }
 }

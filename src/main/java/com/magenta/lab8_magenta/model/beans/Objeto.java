@@ -6,7 +6,7 @@ public class Objeto {
     private String nombreObjeto;
     private String efecto;
 
-    private float peso;
+    private double peso;
 
     private boolean borradoLogico;
 
@@ -47,7 +47,7 @@ public class Objeto {
 
 
 
-    public void setPeso(float peso) {
+    public void setPeso(double peso) {
         this.peso = peso;
     }
 
@@ -59,7 +59,7 @@ public class Objeto {
         this.borradoLogico = borradoLogico;}
 
 
-    public float getPeso() {
+    public double getPeso() {
         return peso;
     }
 

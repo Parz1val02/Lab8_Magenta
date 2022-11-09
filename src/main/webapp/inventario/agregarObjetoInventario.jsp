@@ -194,10 +194,10 @@
                                                         </div>
                                                         <%}%>
                                                         <%if(error3!=null){%>
-                                                    </div>
                                                         <div id="validationServer" class="invalid-tooltip">
                                                             <%=error3%>
                                                         <%}%>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

@@ -88,6 +88,12 @@ public class ObjetoServlet extends HttpServlet {
                         break;
                     }
 
+                if(!objeto.getNombreObjeto().matches("[a-zA-Z]+$")){
+                    request.setAttribute("error3","El nombre del objeto solo puede contener letras");
+                    view = request.getRequestDispatcher("Objetos/agregarObjeto.jsp");
+                    view.forward(request,response);
+                    break;
+                }
 
                     objeto.setEfecto(request.getParameter("efecto"));
 
@@ -95,12 +101,15 @@ public class ObjetoServlet extends HttpServlet {
                     try {
 
                         objeto.setPeso(Float.parseFloat(request.getParameter("peso")));
-                        if(objeto.getPeso()<0){
-                            throw new Exception();
+                        if(objeto.getPeso()==0){
+                            request.setAttribute("error4","El peso debe ser un numero decimal mayor que 0");
+                            view = request.getRequestDispatcher("Objetos/agregarObjeto.jsp");
+                            view.forward(request,response);
+                            break;
                         }
 
                     }catch(Exception e){
-                        request.setAttribute("error2","El peso debe ser un numero decimal positivo");
+                        request.setAttribute("error2","El peso debe ser un numero decimal");
                         view = request.getRequestDispatcher("Objetos/agregarObjeto.jsp");
                         view.forward(request,response);
                         break;
@@ -121,21 +130,58 @@ public class ObjetoServlet extends HttpServlet {
 
                 if(!usado){
                     objeto1.setNombreObjeto(request.getParameter("nombreObjeto"));
+                    if(!objeto1.getNombreObjeto().matches("[a-zA-Z]+$")){
+                        String idObjeto = request.getParameter("id");
+                        usado = objetoDao.isUsadoPorHeroe(Integer.parseInt(idObjeto));
+                        objeto = objetoDao.obtenerObjeto(Integer.parseInt(idObjeto));
+
+                        request.setAttribute("Objeto",objeto);
+                        request.setAttribute("usado",usado);
+                        request.setAttribute("error3","El nombre del objeto solo puede contener letras");
+                        view = request.getRequestDispatcher("Objetos/editarObjeto.jsp");
+                        view.forward(request,response);
+                        break;
+                    }
                 }else{
                     objeto1.setNombreObjeto(objetoDefault.getNombreObjeto());
                 }
 
-
                 objeto1.setEfecto(request.getParameter("efecto"));
 
                 if(!usado){
-                    objeto1.setPeso(Float.parseFloat(request.getParameter("peso")));
+                    try{
+                        objeto1.setPeso(Float.parseFloat(request.getParameter("peso")));
+                        if(objeto1.getPeso()==0){
+                            String idObjeto = request.getParameter("id");
+                            usado = objetoDao.isUsadoPorHeroe(Integer.parseInt(idObjeto));
+                            objeto = objetoDao.obtenerObjeto(Integer.parseInt(idObjeto));
+
+                            request.setAttribute("Objeto",objeto);
+                            request.setAttribute("usado",usado);
+                            request.setAttribute("error2","El peso debe ser un numero decimal mayor que 0");
+                            view = request.getRequestDispatcher("Objetos/editarObjeto.jsp");
+                            view.forward(request,response);
+                            break;
+                        }
+
+                    }catch(Exception e){
+                        String idObjeto = request.getParameter("id");
+                        usado = objetoDao.isUsadoPorHeroe(Integer.parseInt(idObjeto));
+                        objeto = objetoDao.obtenerObjeto(Integer.parseInt(idObjeto));
+
+                        request.setAttribute("Objeto",objeto);
+                        request.setAttribute("usado",usado);
+                        request.setAttribute("error1","El peso debe ser un numero decimal");
+                        view = request.getRequestDispatcher("Objetos/editarObjeto.jsp");
+                        view.forward(request,response);
+                        break;
+                    }
                 } else{
                     objeto1.setPeso(objetoDefault.getPeso());
                 }
 
 
-
+                objeto1.setUsadoPorHeroe(objetoDao.isUsadoPorHeroe(objeto1.getIdObjeto()));
                 objetoDao.actualizarObjeto(objeto1);
 
                 response.sendRedirect(request.getContextPath() + "/ObjetoServlet");

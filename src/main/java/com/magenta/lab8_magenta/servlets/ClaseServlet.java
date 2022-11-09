@@ -119,6 +119,14 @@ import java.util.ArrayList;
 
                     try{
                         debFort.setPorcentajeDanio(Double.parseDouble(request.getParameter("porcentajeDanio")));
+                        if(debFort.getPorcentajeDanio()==0){
+                            DebFort DebFortPorClaseYElemento = debFortDao.obtenerDebFortPorClaseYElemento(debFort.getClaseEnemigo().getIdClaseEnemigo(),debFort.getElemento().getIdElemento());
+                            request.setAttribute("DebFortPorClaseYElemento", DebFortPorClaseYElemento);
+                            RequestDispatcher view = request.getRequestDispatcher("clases/editarPorcentajeDanio.jsp");
+                            request.setAttribute("error1", "El campo ingresado debe ser mayor a 0");
+                            view.forward(request, response);
+                            break;
+                        }
                     }catch(NumberFormatException e){
                         DebFort DebFortPorClaseYElemento = debFortDao.obtenerDebFortPorClaseYElemento(debFort.getClaseEnemigo().getIdClaseEnemigo(),debFort.getElemento().getIdElemento());
                         request.setAttribute("DebFortPorClaseYElemento", DebFortPorClaseYElemento);
